@@ -10,8 +10,8 @@ import flavordb from "../data/flavordb.json";
 import moleculesData from "../data/molecules.json";
 
 const IngredientPage = ({ingredient}) => {
-    const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient.entityID}.jpg`;
-    // const imageURL = `/images/${ingredient.entityID}.jpg`;
+    // const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient.entityID}.jpg`;
+    const imageURL = `/images/${ingredient.entityID}.jpg`;
     const [ingredientData, setIngredientData] = useState(null);
     const [sharedMoleculeCounts, setSharedMoleculeCounts] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');

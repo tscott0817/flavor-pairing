@@ -5,8 +5,8 @@ import {
 } from "../../colors";
 
 const IngredientThumbnail = ({ ingredient_name, ingredient_id, font_size }) => {
-    const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient_id}.jpg`;
-    // const imageURL = `/images/${ingredient_id}.jpg`;
+    // const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient_id}.jpg`;
+    const imageURL = `/images/${ingredient_id}.jpg`;
     const capitalizeWords = (str) => str.replace(/\b\w/g, (char) => char.toUpperCase());
 
     return (
