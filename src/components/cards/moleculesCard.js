@@ -7,8 +7,7 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
     const [moleculeInfo, setMoleculeInfo] = useState(null);
     const [moleculeImage, setMoleculeImage] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
-    const [loading, setLoading] = useState(true);
-    console.log("Molly data: ", moleculeData);
+    console.log("Molecules Card");
 
     const handleMoleculeClick = async (selected) => {
         try {
@@ -32,7 +31,6 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
 
                 // Set molecule info state
                 setMoleculeInfo(moleculeInfo);
-                console.log("Molecule Info:", moleculeInfo);
 
                 // Fetch molecule image directly
                 const imageUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selected.pubchemID}/PNG`;
@@ -40,7 +38,6 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
 
                 // Start fading out and then update the selected molecule and start fading in
                 setIsVisible(false);
-                console.log("Selected Molecule:", selected);
                 setTimeout(() => {
                     setSelectedMolecule(selected);
                     setIsVisible(true);

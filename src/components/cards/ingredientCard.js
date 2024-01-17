@@ -12,10 +12,8 @@ const IngredientCard = ({ingredient}) => {
             try {
                 // Find the flavor information for the given entity_id
                 const flavorData = flavordb.find(item => item.entityID === entity_id);
-                console.log('flavorData', flavorData);
 
                 if (flavorData) {
-                    console.log(flavorData);
                     setIngredientData(flavorData);
                 } else {
                     setErrorMessage('Ingredient not found');
@@ -77,14 +75,6 @@ const IngredientCard = ({ingredient}) => {
                             {ingredientData.category.replace(/\b\w/g, (char) => char.toUpperCase())}
                         </div>
                     </div>
-                    {/*<hr*/}
-                    {/*    className="separator"*/}
-                    {/*    style={{*/}
-                    {/*        margin: '1%',*/}
-                    {/*        border: 'none',*/}
-                    {/*        borderTop: '1px solid #ccc',*/}
-                    {/*    }}*/}
-                    {/*/>*/}
                 </div>
             )}
         </div>

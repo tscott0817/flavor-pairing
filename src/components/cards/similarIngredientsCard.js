@@ -3,6 +3,7 @@ import {sectionItemColor} from "../../colors";
 
 
 const SimilarIngredientsCard = ({sharedMoleculeCounts}) => {
+    console.log("Similar Ingredients Card");
     return (
         <div
             style={{

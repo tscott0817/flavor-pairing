@@ -34,17 +34,9 @@ const CompareIngredientsPage = ({ingredient1, ingredient2}) => {
                 const ingredient2MoleculesSet = new Set(ingredient2Molecules ? ingredient2Molecules.split(',').map(Number) : []);
                 const sharedMoleculesSet = new Set([...ingredient1MoleculesSet].filter(x => ingredient2MoleculesSet.has(x)));
                 const sharedMolecules = [...sharedMoleculesSet];
-                console.log('sharedMolecules', sharedMolecules)
 
                 // Get the details for each molecule
                 const sharedMoleculesDetails = sharedMolecules.map(pubchemID => moleculesData.find(molecule => molecule.pubchemID === pubchemID));
-                console.log('sharedMoleculesDetails', sharedMoleculesDetails)
-
-                // // The molecules are the pubhchemID's in moleculesData, fill a list with all data row matching a pubchemID
-                // const ingredient1MoleculesData = ingredient1Molecules ? ingredient1Molecules.split(',').map(Number).map(pubchemID => moleculesData.find(molecule => molecule.pubchemID === pubchemID)) : [];
-                // const ingredient2MoleculesData = ingredient2Molecules ? ingredient2Molecules.split(',').map(Number).map(pubchemID => moleculesData.find(molecule => molecule.pubchemID === pubchemID)) : [];
-                // console.log('ingredient1MoleculesData', ingredient1MoleculesData)
-                // console.log('ingredient2MoleculesData', ingredient2MoleculesData)
 
                 setSharedMolecules(sharedMoleculesDetails);
             } catch (error) {
@@ -58,7 +50,6 @@ const CompareIngredientsPage = ({ingredient1, ingredient2}) => {
         fetchData(); // Call fetchData when the component mounts
     }, [ingredient1, ingredient2, setFadeIn, setSharedMolecules]);
 
-    console.log('Shared Molecules: ', sharedMolecules)
     return (
         <div style={{
             fontFamily: 'Roboto, sans-serif',

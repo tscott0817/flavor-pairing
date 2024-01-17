@@ -7,7 +7,6 @@ import {buttonColor, pageSectionColor, sectionItemColor} from "../../colors";
 // [1] = molecule ID, [1] = molecule name, [2] = common name
 // const SharedMoleculesCardSingle = ({ingredientName, moleculeData}) => {
 const SharedMoleculesCardSingle = ({moleculeData}) => {
-    console.log('moleculeData', moleculeData)
 
 
     const [selectedMolecule, setSelectedMolecule] = useState(null);
@@ -37,7 +36,6 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
 
                 // Set molecule info state
                 setMoleculeInfo(moleculeInfo);
-                console.log("Molecule Info:", moleculeInfo);
 
                 // Fetch molecule image directly
                 const imageUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selected.pubchemID}/PNG`;
@@ -45,7 +43,6 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
 
                 // Start fading out and then update the selected molecule and start fading in
                 setIsVisible(false);
-                console.log("Selected Molecule:", selected);
                 setTimeout(() => {
                     setSelectedMolecule(selected);
                     setIsVisible(true);

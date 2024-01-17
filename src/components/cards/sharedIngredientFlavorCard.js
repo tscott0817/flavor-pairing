@@ -64,8 +64,13 @@ const SharedIngredientFlavorCard = ({sharedMolecules}) => {
 
     const getAllFlavors = () => {
         return sharedMolecules
-            .flatMap((molecule) => molecule.flavorProfile.split(',').map((profile) => profile.trim()))
-            .filter((flavor) => flavor); // Remove any undefined or empty values
+            .flatMap((molecule) => {
+                // Use regex to extract flavors from the string representation of a set
+                const flavorMatches = molecule.flavorProfile.match(/'([^']*)'/g);
+
+                // Check if there are matches and return the array of flavors
+                return flavorMatches ? flavorMatches.map((match) => match.replace(/'/g, '').trim()) : [];
+            });
     };
 
     const getRadarChartData = () => {

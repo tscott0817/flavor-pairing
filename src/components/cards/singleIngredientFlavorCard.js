@@ -17,25 +17,15 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     const [isFullScreen, setIsFullScreen] = useState(false);
     const chartContainerRef = useRef(null);
     const [showAllFlavors, setShowAllFlavors] = useState(false); // New state for the checkbox
+    console.log("Flavor Card");
 
     useEffect(() => {
         const fetchData = () => {
             try {
-                // Access data using entity_id
                 const entityData = flavordbData.find((item) => item.entityID === entity_id);
-                console.log("entityData", entityData);
-                console.log("entityData.molecules", entityData.molecules);
-
-                // Loop over entityData.molecules and get the molecule names
                 const moleculeNames = entityData.molecules.match(/\{([^}]+)\}/)?.[1].replace(/'/g, '');
-                console.log("moleculeNames", moleculeNames);
-                // Use the data in moleculeNames as as the pubchemID for moleculesData
                 const moleculeData = moleculesData.filter((item) => moleculeNames.includes(item.pubchemID.toString()));
-                console.log("moleculeData", moleculeData);
-                // Loop over moleculeDate.flavorProfile to generate the list of flavor profiles
                 const flavorProfiles = moleculeData.map((item) => item.flavorProfile);
-                console.log("flavorProfiles", flavorProfiles);
-
 
                 setFlavorData(flavorProfiles);
             } catch (error) {
@@ -62,11 +52,6 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     );
 
     flavorListData.sort((a, b) => b.count - a.count);
-    const topFlavors = flavorListData.slice(0, 25);
-    const radarChartData = topFlavors.map(({flavorProfile, count}) => ({
-        flavor: flavorProfile,
-        Occurrences: count,
-    }));
 
     // TODO: Not sure I even like having this (especially since i think it is browser specific)
     const toggleFullScreen = () => {
@@ -211,7 +196,6 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
 };
 
 const countFlavorProfiles = (flavorProfiles) => {
-    console.log("flavorProfiles from counts", flavorProfiles);
     const flavorCounts = {};
 
     flavorProfiles.forEach((item) => {

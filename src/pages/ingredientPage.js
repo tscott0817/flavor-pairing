@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useIngredientContext} from "../stateManager/IngredientContext";
 import {buttonColor, pageColor, randomTempColor} from "../colors";
 import CollapsibleComponent from '../components/collapsibleComponent';
@@ -10,8 +10,8 @@ import flavordb from "../data/flavordb.json";
 import moleculesData from "../data/molecules.json";
 
 const IngredientPage = ({ingredient}) => {
-    // const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient.entityID}.jpg`;
-    const imageURL = `/images/${ingredient.entityID}.jpg`;
+    const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient.entityID}.jpg`;
+    // const imageURL = `/images/${ingredient.entityID}.jpg`;
     const [ingredientData, setIngredientData] = useState(null);
     const [sharedMoleculeCounts, setSharedMoleculeCounts] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
@@ -49,13 +49,11 @@ const IngredientPage = ({ingredient}) => {
 
             // Fetch all molecules data directly from molecules.json
             const molecules_list_str = flavorData.molecules;
-            console.log("Molecules list: ", molecules_list_str);
 
             // Extract pubchemIDs using regular expression
             const molecules_list = molecules_list_str.match(/\d+/g);
 
             const moleculesDataFiltered = moleculesData.filter(item => molecules_list.includes(item.pubchemID.toString()));
-            console.log("Filtered molecules data: ", moleculesDataFiltered);
 
             const moleculesDataFormatted = moleculesDataFiltered.map(item => ({
                 pubchemID: item.pubchemID,
@@ -239,21 +237,27 @@ const IngredientPage = ({ingredient}) => {
                             isCollapsed={isMoleculeCardCollapsed}
                             onToggle={() => setMoleculeCardCollapsed(!isMoleculeCardCollapsed)}
                         >
-                            <MoleculesCard ingredientName={"Temp"} moleculeData={allMolecules}/>
+                            {!isMoleculeCardCollapsed && (
+                                <MoleculesCard ingredientName={"Temp"} moleculeData={allMolecules}/>
+                            )}
                         </CollapsibleComponent>
                         <CollapsibleComponent
                             title="Flavor Profiles"
                             isCollapsed={isFlavorCardCollapsed}
                             onToggle={() => setFlavorCardCollapsed(!isFlavorCardCollapsed)}
                         >
-                            <SingleIngredientFlavorCard entity_id={ingredient.entityID}/>
+                            {!isFlavorCardCollapsed && (
+                                <SingleIngredientFlavorCard entity_id={ingredient.entityID}/>
+                            )}
                         </CollapsibleComponent>
                         <CollapsibleComponent
                             title="Ingredients With Shared Molecules (Name: Count)"
                             isCollapsed={isSuggestedCardCollapsed}
                             onToggle={() => setSuggestedCardCollapsed(!isSuggestedCardCollapsed)}
                         >
-                            <SimilarIngredientsCard sharedMoleculeCounts={sharedMoleculeCounts}/>
+                            {!isSuggestedCardCollapsed && (
+                                <SimilarIngredientsCard sharedMoleculeCounts={sharedMoleculeCounts}/>
+                            )}
                         </CollapsibleComponent>
                     </div>
                 </div>
