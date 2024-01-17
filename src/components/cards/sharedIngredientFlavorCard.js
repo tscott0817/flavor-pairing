@@ -4,6 +4,7 @@ import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
 import {buttonBackgroundColor, sectionItemColor} from "../../colors";
 
 const SharedIngredientFlavorCard = ({sharedMolecules}) => {
+    console.log("Shared Flavor Card")
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [showTop25, setShowTop25] = useState(true);
     const chartContainerRef = useRef(null);

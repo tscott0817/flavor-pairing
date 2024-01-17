@@ -7,7 +7,7 @@ import {buttonColor, pageSectionColor, sectionItemColor} from "../../colors";
 // [1] = molecule ID, [1] = molecule name, [2] = common name
 // const SharedMoleculesCardSingle = ({ingredientName, moleculeData}) => {
 const SharedMoleculesCardSingle = ({moleculeData}) => {
-
+    console.log('Shared Molecules Card');
 
     const [selectedMolecule, setSelectedMolecule] = useState(null);
     const [moleculeInfo, setMoleculeInfo] = useState(null);

@@ -10,6 +10,7 @@ import {FaArrowRight} from "react-icons/fa";
 //  - but are passed from the parent component, through this one, and into IngredientCard.
 //  - Causes too tight of a coupling between these 4 components
 const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
+    console.log("Results Card");
     const ingredient1MoleculeCount = getMoleculesCount({ingredient: ingredient1});
     const ingredient2MoleculeCount = getMoleculesCount({ingredient: ingredient2});
     const moleculesCount = ingredient1MoleculeCount + ingredient2MoleculeCount;

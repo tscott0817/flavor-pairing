@@ -106,14 +106,18 @@ const CompareIngredientsPage = ({ingredient1, ingredient2}) => {
                     isCollapsed={isMoleculeCardCollapsed}
                     onToggle={() => setMoleculeCardCollapsed(!isMoleculeCardCollapsed)}
                 >
-                    <SharedMoleculesCardSingle moleculeData={sharedMolecules}/>
+                    {!isMoleculeCardCollapsed && (
+                        <SharedMoleculesCardSingle moleculeData={sharedMolecules}/>
+                    )}
                 </CollapsibleComponent>
                 <CollapsibleComponent
                     title="Associated Flavor Profiles"
                     isCollapsed={isFlavorCardCollapsed}
                     onToggle={() => setFlavorCardCollapsed(!isFlavorCardCollapsed)}
                 >
-                    <SharedIngredientFlavorCard sharedMolecules={sharedMolecules}/>
+                    {!isFlavorCardCollapsed && (
+                        <SharedIngredientFlavorCard ingredientData={ingredient1}/>
+                    )}
                 </CollapsibleComponent>
             </div>
         </div>

@@ -22,68 +22,67 @@ const IngredientPage = ({ingredient}) => {
     const [allMolecules, setAllMolecules] = useState(null);
     const [fadeIn, setFadeIn] = useState(false);
 
-    useEffect(() => {
-        if (ingredient) {
-            fetchIngredientData();
-        }
-    }, [ingredient]);
-
     const handleAddToComparison = () => {
         if (!selectedIngredients.includes(ingredient)) {
             selectIngredient(ingredient);
         }
     };
 
+    useEffect(() => {
+        const fetchIngredientData = async () => {
+            const entity_id = ingredient.entityID;
 
-    const fetchIngredientData = async () => {
-        const entity_id = ingredient.entityID;
-
-        try {
-            const flavorData = flavordb.find(item => item.entityID === entity_id);
-            if (flavorData) {
-                setIngredientData(flavorData);
-            } else {
-                setErrorMessage('Ingredient not found');
-                return;
-            }
-
-            // Fetch all molecules data directly from molecules.json
-            const molecules_list_str = flavorData.molecules;
-
-            // Extract pubchemIDs using regular expression
-            const molecules_list = molecules_list_str.match(/\d+/g);
-
-            const moleculesDataFiltered = moleculesData.filter(item => molecules_list.includes(item.pubchemID.toString()));
-
-            const moleculesDataFormatted = moleculesDataFiltered.map(item => ({
-                pubchemID: item.pubchemID,
-                commonName: item.commonName,
-                flavorProfile: Array.from(new Set(item.flavorProfile.match(/\w+/g))) // Extract words and convert to an array
-            }));
-
-            setAllMolecules({entityID: entity_id, molecules: moleculesDataFormatted});
-
-            // Calculate shared molecule counts directly in the frontend
-            const molecules_entity_id = new Set(molecules_list);
-            const shared_molecule_count_dict = {};
-
-            flavordb.forEach(({alias: alias_row, molecules: molecules_row}) => {
-                if (alias_row === flavorData.alias) {
-                    return;  // Skip the current row
+            try {
+                const flavorData = flavordb.find(item => item.entityID === entity_id);
+                if (flavorData) {
+                    setIngredientData(flavorData);
+                } else {
+                    setErrorMessage('Ingredient not found');
+                    return;
                 }
-                const shared_molecule_count = Array.from(new Set([...molecules_entity_id].filter(x => molecules_row.includes(x)))).length;
-                shared_molecule_count_dict[alias_row] = shared_molecule_count;
-            });
 
-            const sortedEntries = Object.entries(shared_molecule_count_dict).sort(([, countA], [, countB]) => countB - countA);
-            setSharedMoleculeCounts(sortedEntries);
+                // Fetch all molecules data directly from molecules.json
+                const molecules_list_str = flavorData.molecules;
 
-        } catch (error) {
-            console.error('Error fetching or parsing data:', error);
-            setErrorMessage('Error fetching data');
-        }
-        setFadeIn(true);
-    };
+                // Extract pubchemIDs using regular expression
+                const molecules_list = molecules_list_str.match(/\d+/g);
+
+                const moleculesDataFiltered = moleculesData.filter(item => molecules_list.includes(item.pubchemID.toString()));
+
+                const moleculesDataFormatted = moleculesDataFiltered.map(item => ({
+                    pubchemID: item.pubchemID,
+                    commonName: item.commonName,
+                    flavorProfile: Array.from(new Set(item.flavorProfile.match(/\w+/g))) // Extract words and convert to an array
+                }));
+
+                setAllMolecules({entityID: entity_id, molecules: moleculesDataFormatted});
+
+                // Calculate shared molecule counts directly in the frontend
+                const molecules_entity_id = new Set(molecules_list);
+                const shared_molecule_count_dict = {};
+
+                flavordb.forEach(({alias: alias_row, molecules: molecules_row}) => {
+                    if (alias_row === flavorData.alias) {
+                        return;  // Skip the current row
+                    }
+                    const shared_molecule_count = Array.from(new Set([...molecules_entity_id].filter(x => molecules_row.includes(x)))).length;
+                    shared_molecule_count_dict[alias_row] = shared_molecule_count;
+                });
+
+                const sortedEntries = Object.entries(shared_molecule_count_dict).sort(([, countA], [, countB]) => countB - countA);
+                setSharedMoleculeCounts(sortedEntries);
+
+            } catch (error) {
+                console.error('Error fetching or parsing data:', error);
+                setErrorMessage('Error fetching data');
+            }
+            setFadeIn(true);
+        };
+        fetchIngredientData().then(() => {
+        }).catch(error => {
+            console.error('Error in useEffect:', error);
+        });
+    }, [ingredient]);
 
     return (
         <div style={{
@@ -173,9 +172,10 @@ const IngredientPage = ({ingredient}) => {
                                 // backgroundColor: 'yellow',
                                 // width: '50%'
                             }}>
-                                {ingredientData.scientificName !== null && (
-                                    ingredientData.scientificName.replace(/\b\w/g, (char) => char.toUpperCase())
-                                )}
+                                {ingredientData.scientificName !== null
+                                    ? ingredientData.scientificName.replace(/\b\w/g, (char) => char.toUpperCase())
+                                    : 'N/A'
+                                }
                             </div>
                             <div className="category" style={{
                                 fontSize: '0.8em',
@@ -183,7 +183,10 @@ const IngredientPage = ({ingredient}) => {
                                 // backgroundColor: 'yellow',
                                 // width: '50%'
                             }}>
-                                {ingredientData.category.replace(/\b\w/g, (char) => char.toUpperCase())}
+                                {ingredientData.category !== null
+                                    ? ingredientData.category.replace(/\b\w/g, (char) => char.toUpperCase())
+                                    : 'N/A'
+                                }
                             </div>
                         </div>
                         <div
