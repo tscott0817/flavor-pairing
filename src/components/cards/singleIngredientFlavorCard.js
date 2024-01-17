@@ -9,6 +9,8 @@ import {
 } from "../../colors";
 import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
 import {buttonBackgroundColor} from "../../colors";
+import flavordbData from "../../data/flavordb.json"; // Replace with the correct path
+import moleculesData from "../../data/molecules.json"; // Replace with the correct path
 
 const SingleIngredientFlavorCard = ({entity_id}) => {
     const [flavorData, setFlavorData] = useState(null);
@@ -17,11 +19,31 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     const [showAllFlavors, setShowAllFlavors] = useState(false); // New state for the checkbox
 
     useEffect(() => {
-        // Fetch data from the API endpoint
-        fetch(`http://localhost:5000/api/get_flavor_info/${entity_id}`)
-            .then((response) => response.json())
-            .then((data) => setFlavorData(data))
-            .catch((error) => console.error("Error fetching flavor data:", error));
+        const fetchData = () => {
+            try {
+                // Access data using entity_id
+                const entityData = flavordbData.find((item) => item.entityID === entity_id);
+                console.log("entityData", entityData);
+                console.log("entityData.molecules", entityData.molecules);
+
+                // Loop over entityData.molecules and get the molecule names
+                const moleculeNames = entityData.molecules.match(/\{([^}]+)\}/)?.[1].replace(/'/g, '');
+                console.log("moleculeNames", moleculeNames);
+                // Use the data in moleculeNames as as the pubchemID for moleculesData
+                const moleculeData = moleculesData.filter((item) => moleculeNames.includes(item.pubchemID.toString()));
+                console.log("moleculeData", moleculeData);
+                // Loop over moleculeDate.flavorProfile to generate the list of flavor profiles
+                const flavorProfiles = moleculeData.map((item) => item.flavorProfile);
+                console.log("flavorProfiles", flavorProfiles);
+
+
+                setFlavorData(flavorProfiles);
+            } catch (error) {
+                console.error("Error processing data:", error);
+            }
+        };
+
+        fetchData();
     }, [entity_id]);
 
     if (!flavorData) {
@@ -29,7 +51,7 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     }
 
     // Count the occurrences of each flavor
-    const flavorCounts = countFlavorProfiles(flavorData.all_flavor_profiles);
+    const flavorCounts = countFlavorProfiles(flavorData);
 
     // Convert the counts into an array of objects for sorting
     const flavorListData = Object.entries(flavorCounts).map(
@@ -82,7 +104,7 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     };
 
     const getRadarChartData = () => {
-        const flavorCounts = countFlavorProfiles(flavorData.all_flavor_profiles);
+        const flavorCounts = countFlavorProfiles(flavorData);
         const flavorListData = Object.entries(flavorCounts).map(
             ([flavorProfile, count]) => ({
                 flavorProfile,
@@ -184,73 +206,23 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                     motionConfig="wobbly"
                 />
             </div>
-            {/*<div*/}
-            {/*    style={{*/}
-            {/*        fontFamily: "Roboto, sans-serif",*/}
-            {/*        // backgroundColor: 'blue',*/}
-            {/*        position: "relative",*/}
-            {/*        minWidth: "25vw",*/}
-            {/*        width: "50%",*/}
-            {/*        height: "50vh",*/}
-            {/*        margin: "1%",*/}
-            {/*        // padding: "2%",*/}
-            {/*        borderRadius: "8px",*/}
-            {/*        overflow: "auto",*/}
-            {/*    }}*/}
-            {/*>*/}
-            {/*    <div style={{*/}
-            {/*        // backgroundColor: 'green'*/}
-            {/*        // gridColumn: "1 / -1"*/}
-            {/*    }}>*/}
-            {/*        <h2*/}
-            {/*            style={{*/}
-            {/*                borderBottom: "1px solid #999",*/}
-            {/*                // paddingBottom: "0.5em",*/}
-            {/*                marginLeft: "5%",*/}
-            {/*                width: "90%",*/}
-            {/*                marginBottom: "0.5em",*/}
-            {/*            }}*/}
-            {/*        >*/}
-            {/*            Top Flavor Profiles*/}
-            {/*        </h2>*/}
-            {/*    </div>*/}
-            {/*    <div style={{*/}
-            {/*        // backgroundColor: 'red',*/}
-            {/*        height: '75%',*/}
-            {/*        overflow: "auto",*/}
-            {/*        fontSize: "1em",*/}
-            {/*        display: "grid",*/}
-            {/*        gridTemplateColumns:*/}
-            {/*            "repeat(auto-fill, minmax(125px, 1fr))", // Adjust the column width as needed*/}
-            {/*        // gridGap: "1em",*/}
-            {/*    }}>*/}
-            {/*        {radarChartData.length > 0 ? (*/}
-            {/*            radarChartData.map((profile, index) => (*/}
-            {/*                <div key={index} style={{textAlign: "center"}}>*/}
-            {/*                    <p>*/}
-            {/*                        {profile.flavor}: {profile.count}*/}
-            {/*                    </p>*/}
-            {/*                </div>*/}
-            {/*            ))*/}
-            {/*        ) : (*/}
-            {/*            <p>No Flavor Profiles</p>*/}
-            {/*        )}*/}
-            {/*    </div>*/}
-            {/*</div>*/}
         </div>
     );
 };
 
 const countFlavorProfiles = (flavorProfiles) => {
+    console.log("flavorProfiles from counts", flavorProfiles);
     const flavorCounts = {};
 
     flavorProfiles.forEach((item) => {
-        item.flavorProfile.forEach((profile) => {
-            const cleanedProfile = profile.replace(/'/g, ""); // Remove single quotes
-            if (flavorCounts[cleanedProfile]) {
-                flavorCounts[cleanedProfile]++;
+        // Assuming each item in flavorProfiles is a string representation of a set
+        const profilesArray = item.replace(/[{}']/g, '').split(',').map(profile => profile.trim());
+
+        profilesArray.forEach((profile) => {
+            if (flavorCounts[profile]) {
+                flavorCounts[profile]++;
             } else {
-                flavorCounts[cleanedProfile] = 1;
+                flavorCounts[profile] = 1;
             }
         });
     });

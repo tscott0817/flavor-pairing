@@ -10,48 +10,6 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
     const [loading, setLoading] = useState(true);
     console.log("Molly data: ", moleculeData);
 
-    // const handleMoleculeClick = async (selected) => {
-    //     try {
-    //         const response = await fetch(`https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selected.pubchemID}/json`);
-    //         const data = await response.json();
-    //
-    //         console.log("Retrieved Data:", data); // Log the entire data object
-    //
-    //         if (response.status === 200) {
-    //             const result = data['PC_Compounds'][0];
-    //             const properties = result.props || [];
-    //
-    //             const moleculeInfo = {
-    //                 'PubChemID': selected.pubchemID,
-    //                 'Properties': Object.fromEntries(properties.map(prop => [prop.urn.label, prop.value])),
-    //             };
-    //
-    //             // Log the molecule info for testing purposes
-    //             console.log("Molecule Info:", moleculeInfo);
-    //
-    //             // Return the same structure as Flask route
-    //             return {
-    //                 'molecule_info': moleculeInfo,
-    //                 'error': null, // In case you want to match the structure even in error cases
-    //             };
-    //         } else {
-    //             // Handle error responses
-    //             console.error(`Error retrieving data for PubChem ID ${selected.pubchemID}`);
-    //             return {
-    //                 'molecule_info': null,
-    //                 'error': `Error retrieving data for PubChem ID ${selected.pubchemID}`,
-    //             };
-    //         }
-    //     } catch (error) {
-    //         // Handle general errors
-    //         console.error(error);
-    //         return {
-    //             'molecule_info': null,
-    //             'error': String(error),
-    //         };
-    //     }
-    // };
-
     const handleMoleculeClick = async (selected) => {
         try {
             // Fetch molecule info directly
