@@ -12,6 +12,7 @@ const IngredientCard = ({ingredient}) => {
             try {
                 // Find the flavor information for the given entity_id
                 const flavorData = flavordb.find(item => item.entityID === entity_id);
+                console.log('flavorData', flavorData);
 
                 if (flavorData) {
                     console.log(flavorData);
@@ -59,12 +60,11 @@ const IngredientCard = ({ingredient}) => {
                         <div
                             className="scientific-name"
                             style={{
-                                // fontSize: '0.8vw',
                                 fontSize: '0.8em',
                                 color: '#555'
                             }}
                         >
-                            {ingredientData.scientificName.replace(/\b\w/g, (char) => char.toUpperCase())}
+                            {ingredientData.scientificName ? ingredientData.scientificName.replace(/\b\w/g, (char) => char.toUpperCase()) : "NA"}
                         </div>
                         <div
                             className="category"

@@ -7,6 +7,7 @@ import {buttonColor, pageSectionColor, sectionItemColor} from "../../colors";
 // [1] = molecule ID, [1] = molecule name, [2] = common name
 // const SharedMoleculesCardSingle = ({ingredientName, moleculeData}) => {
 const SharedMoleculesCardSingle = ({moleculeData}) => {
+    console.log('moleculeData', moleculeData)
 
 
     const [selectedMolecule, setSelectedMolecule] = useState(null);
@@ -15,20 +16,48 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
     const [isVisible, setIsVisible] = useState(true);
 
     const handleMoleculeClick = async (selected) => {
-        const response = await fetch(`http://localhost:5000/api/get_molecule_info/${selected[1]}`);
-        const data = await response.json();
+        try {
+            // Fetch molecule info directly
+            const infoUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selected.pubchemID}/json`;
+            const infoResponse = await fetch(infoUrl);
+            const infoData = await infoResponse.json();
 
-        setIsVisible(false); // Start fading out
+            if (infoResponse.status === 200) {
+                const properties = infoData['PC_Compounds'][0].props;
 
-        const moleculeResponse = await fetch(`http://localhost:5000/api/get_molecule_image/${selected[1]}`);
-        // console.log("Molecule Image URL:", moleculeResponse.url); // Log the URL
-        setMoleculeImage(moleculeResponse.url);
+                const moleculeInfo = {
+                    'PubChemID': selected.pubchemID,
+                    'Properties': {}
+                };
 
-        setTimeout(() => {
-            setSelectedMolecule(selected);
-            setMoleculeInfo(data.molecule_info);
-            setIsVisible(true); // Start fading in
-        }, 500);
+                // Extract all properties from the 'props' field
+                properties.forEach(prop => {
+                    moleculeInfo.Properties[prop['urn']['label']] = prop['value'];
+                });
+
+                // Set molecule info state
+                setMoleculeInfo(moleculeInfo);
+                console.log("Molecule Info:", moleculeInfo);
+
+                // Fetch molecule image directly
+                const imageUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selected.pubchemID}/PNG`;
+                setMoleculeImage(imageUrl);
+
+                // Start fading out and then update the selected molecule and start fading in
+                setIsVisible(false);
+                console.log("Selected Molecule:", selected);
+                setTimeout(() => {
+                    setSelectedMolecule(selected);
+                    setIsVisible(true);
+                }, 500);
+            } else {
+                // Handle error responses for molecule info
+                console.error(`Error retrieving data for PubChem ID ${selected.pubchemID}`);
+            }
+        } catch (error) {
+            // Handle general errors
+            console.error(error);
+        }
     };
     if (moleculeData === null) {
         return <div>No molecule data available.</div>;
@@ -108,7 +137,7 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
                         moleculeData.map((detail, index) => (
                             <div key={index} onClick={() => handleMoleculeClick(detail)}
                                  style={{cursor: 'pointer', marginBottom: '10px', textAlign: 'center'}}>
-                                <p>{detail[2]}</p>
+                                <p>{detail.commonName}</p>
                             </div>
                         ))
                     ) : (
@@ -150,7 +179,7 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
                                 width: "98%",
                             }}
                         >
-                            {selectedMolecule[2]}
+                            {selectedMolecule.commonName}
                         </h2>
                         <div style={{
                             display: 'flex',
@@ -202,7 +231,7 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
                                 </div>
                                 <div style={{marginTop: '5%'}}>
                                     <strong>Flavor Profiles:</strong>
-                                    {selectedMolecule[3]
+                                    {selectedMolecule.flavorProfile
                                         .slice(1, -1)
                                         .split(',')
                                         .map((flavor, index) => (
@@ -228,7 +257,7 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
                                 {moleculeImage && (
                                     <img
                                         src={moleculeImage}
-                                        alt={`Molecule: ${selectedMolecule[2]}`}
+                                        alt={`Molecule: ${selectedMolecule.commonName}`}
                                         style={{
                                             width: '225px',
                                             height: '225px',

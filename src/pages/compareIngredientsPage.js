@@ -24,22 +24,27 @@ const CompareIngredientsPage = ({ingredient1, ingredient2}) => {
             const entityID2 = ingredient2.entityID || '';
 
             try {
-                // Retrieve molecules for entityID1
-                const molecules1 = moleculesData.find(item => item.indexPos === entityID1)?.flavorProfile || [];
 
-                // Retrieve molecules for entityID2
-                const molecules2 = moleculesData.find(item => item.indexPos === entityID2)?.flavorProfile || [];
+                // Use the entityID to get the molecules for each ingredient
+                const ingredient1Molecules = ingredient1.molecules.match(/\{([^}]+)\}/)?.[1].replace(/'/g, '');
+                const ingredient2Molecules = ingredient2.molecules.match(/\{([^}]+)\}/)?.[1].replace(/'/g, '');
 
-                // Find the intersection of molecule sets
-                const sharedMolecules = new Set([...molecules1].filter(value => molecules2.includes(value)));
+                // Get the intersection of the two sets of molecules
+                const ingredient1MoleculesSet = new Set(ingredient1Molecules ? ingredient1Molecules.split(',').map(Number) : []);
+                const ingredient2MoleculesSet = new Set(ingredient2Molecules ? ingredient2Molecules.split(',').map(Number) : []);
+                const sharedMoleculesSet = new Set([...ingredient1MoleculesSet].filter(x => ingredient2MoleculesSet.has(x)));
+                const sharedMolecules = [...sharedMoleculesSet];
+                console.log('sharedMolecules', sharedMolecules)
 
-                if (sharedMolecules.size === 0) {
-                    console.error("No shared molecules found.");
-                    return;
-                }
+                // Get the details for each molecule
+                const sharedMoleculesDetails = sharedMolecules.map(pubchemID => moleculesData.find(molecule => molecule.pubchemID === pubchemID));
+                console.log('sharedMoleculesDetails', sharedMoleculesDetails)
 
-                // Filter details of shared molecules from the molecules.json file
-                const sharedMoleculesDetails = moleculesData.filter(item => sharedMolecules.has(item.flavorProfile));
+                // // The molecules are the pubhchemID's in moleculesData, fill a list with all data row matching a pubchemID
+                // const ingredient1MoleculesData = ingredient1Molecules ? ingredient1Molecules.split(',').map(Number).map(pubchemID => moleculesData.find(molecule => molecule.pubchemID === pubchemID)) : [];
+                // const ingredient2MoleculesData = ingredient2Molecules ? ingredient2Molecules.split(',').map(Number).map(pubchemID => moleculesData.find(molecule => molecule.pubchemID === pubchemID)) : [];
+                // console.log('ingredient1MoleculesData', ingredient1MoleculesData)
+                // console.log('ingredient2MoleculesData', ingredient2MoleculesData)
 
                 setSharedMolecules(sharedMoleculesDetails);
             } catch (error) {
