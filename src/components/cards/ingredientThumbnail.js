@@ -3,8 +3,9 @@ import {
     thumbNailColor,
     thumbNailColorText
 } from "../../colors";
+import {useEffect, useState} from "react";
 
-const IngredientThumbnail = ({ ingredient_name, ingredient_id, font_size }) => {
+const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
     // const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient_id}.jpg`;
     const imageURL = `/images/${ingredient_id}.jpg`;
     const capitalizeWords = (str) => str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -27,19 +28,30 @@ const IngredientThumbnail = ({ ingredient_name, ingredient_id, font_size }) => {
                 boxShadow: defaultPageNeonColor,
             }}
         >
-            <img
-                src={imageURL}
-                alt={`Ingredient ${ingredient_name}`}
-                loading='lazy'
+            <div
                 style={{
-                    width: '100%', // Adjust the width as needed
-                    height: '90%', // Adjust the height as needed
-                    objectFit: 'cover', // Maintain aspect ratio
-                    // borderRadius: '8px',
+                    // backgroundColor: 'blue',
+                    width: '100%',
+                    height: '100%',
+                    position: 'relative',
+                    overflow: 'hidden',
                     borderRadius: '8px 8px 0 0',
-
                 }}
-            />
+            >
+                <img
+                    src={imageURL}
+                    alt={`Ingredient ${ingredient_name}`}
+                    loading='lazy'
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+                    }}
+                />
+            </div>
             <div
                 style={{
                     padding: '1%',
@@ -47,7 +59,10 @@ const IngredientThumbnail = ({ ingredient_name, ingredient_id, font_size }) => {
                     marginTop: '3%',
                     // backgroundColor: randomTempColor,
                     // fontFamily: 'Crimson Text, serif', fontStyle: 'italic', fontWeight: 'bold',
-                    fontFamily: 'Lora, serif', fontStyle: 'italic', fontSize: font_size || '1.2em', color: thumbNailColorText,
+                    fontFamily: 'Lora, serif',
+                    fontStyle: 'italic',
+                    fontSize: font_size || '1.2em',
+                    color: thumbNailColorText,
                 }}
             >
                 {capitalizeWords(ingredient_name)}
