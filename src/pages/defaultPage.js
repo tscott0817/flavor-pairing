@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, memo} from "react";
 import IngredientThumbnail from "../components/cards/ingredientThumbnail";
 import {useIngredientContext} from "../stateManager/IngredientContext";
 import {
@@ -13,8 +13,10 @@ import {
 import {FaPlus} from "react-icons/fa";
 import flavordb from "../data/flavordb.json";
 
+// const IngredientThumbnailMemoized = memo(IngredientThumbnail);
 
 const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQuery, selectedFilters}) => {
+    console.log('DefaultPage rendered');
     const [flavors, setFlavors] = useState([]);
     const containerRef = useRef(null);
     const [isHovered, setIsHovered] = useState(null);
@@ -34,7 +36,10 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
             }
         };
 
-        fetchData();
+        fetchData().then(() => {
+        }).catch(error => {
+            console.error('Error in useEffect:', error);
+        });
     }, [selectedFilters, forceUpdate]);
 
     const handleThumbnailClick = (ingredient) => {
@@ -183,6 +188,12 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                                 ingredient_id={flavor.entityID}
                                 clickable={!isButtonHovered} // Pass clickable prop to IngredientThumbnail
                             />
+                            {/*<IngredientThumbnailMemoized*/}
+                            {/*    ingredient={flavor}*/}
+                            {/*    ingredient_name={flavor.alias}*/}
+                            {/*    ingredient_id={flavor.entityID}*/}
+                            {/*    clickable={!isButtonHovered}*/}
+                            {/*/>*/}
                             <div
                                 style={{
                                     // backgroundColor: 'red',

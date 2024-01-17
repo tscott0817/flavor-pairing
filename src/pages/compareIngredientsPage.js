@@ -116,7 +116,7 @@ const CompareIngredientsPage = ({ingredient1, ingredient2}) => {
                     onToggle={() => setFlavorCardCollapsed(!isFlavorCardCollapsed)}
                 >
                     {!isFlavorCardCollapsed && (
-                        <SharedIngredientFlavorCard ingredientData={ingredient1}/>
+                        <SharedIngredientFlavorCard sharedMolecules={sharedMolecules}/>
                     )}
                 </CollapsibleComponent>
             </div>
