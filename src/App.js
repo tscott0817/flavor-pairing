@@ -14,19 +14,12 @@ import {
     ingredientBackgroundColor,
     mainAppColor,
     navBarColor,
-    pageSectionColor,
-    randomTempColor,
-    randomTempColor2,
-    leftColumnColor,
-    sectionItemColor,
     buttonBackgroundColor,
-    defaultPageNeonColor,
     searchBarColor,
     buttonColorArrow, selectionColor, buttonColor
 } from "./colors";
 import './animations.css';
-import {FaBars, FaChevronLeft, FaChevronRight} from 'react-icons/fa';
-import {FaSearch} from 'react-icons/fa';
+import {FaChevronLeft, FaChevronRight} from 'react-icons/fa';
 import FiltersCard from "./components/cards/filtersCard";
 
 function App() {
