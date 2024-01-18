@@ -33,6 +33,7 @@ function App() {
     const [comparisonVisible, setComparisonVisible] = useState(false);
     const [selectedFilters, setSelectedFilters] = useState([]);
     const [isIngredientSelected, setIsIngredientSelected] = useState(false);
+    const [showTooltip, setShowTooltip] = useState(false);
 
     // TODO: Apparently callback better? Not sure why, see if need to implement for other functions
     const handleDisplayIngredient = useCallback((displayIngredient) => {
@@ -40,7 +41,18 @@ function App() {
     }, [setDisplayIngredient]);
 
     const handleShowSelectedIngredients = () => {
-        setComparisonVisible(true);
+        if (!selectedIngredients || !selectedIngredients[0] || !selectedIngredients[1]) {
+            // Display tooltip
+            setShowTooltip(true);
+
+            // Hide tooltip after a short delay (adjust as needed)
+            setTimeout(() => {
+                setShowTooltip(false);
+            }, 3000);
+        } else {
+            // Continue with your logic if ingredients are selected
+            setComparisonVisible(true);
+        }
     };
 
     const handleRemoveIngredient = (index) => {
@@ -374,27 +386,45 @@ function App() {
                             padding: '1%',
                             // backgroundColor: 'green'
                         }}>
-                            <button onClick={handleShowSelectedIngredients} style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                whiteSpace: 'pre-line',
-                                width: '90%',
-                                marginTop: '5%',
-                                marginBottom: '5%',
-                                marginLeft: '5%',
-                                padding: '10px', // Add padding for better aesthetics
-                                backgroundColor: buttonColor, // Set background color
-                                color: '#f4f3f2', // Set text color
-                                border: 'none', // Remove default button border
-                                borderRadius: '5px', // Add border-radius for rounded corners
-                                cursor: 'pointer', // Add pointer cursor on hover
-                                // boxShadow: '0 0 8px rgba(0, 0, 0, 0.3)',
-                            }}>
+                            <button
+                                onClick={handleShowSelectedIngredients}
+                                // disabled={!selectedIngredients || !selectedIngredients[0] || !selectedIngredients[1]}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    whiteSpace: 'pre-line',
+                                    width: '90%',
+                                    marginTop: '5%',
+                                    marginBottom: '5%',
+                                    marginLeft: '5%',
+                                    padding: '10px', // Add padding for better aesthetics
+                                    backgroundColor: buttonColor, // Set background color
+                                    color: '#f4f3f2', // Set text color
+                                    border: 'none', // Remove default button border
+                                    borderRadius: '5px', // Add border-radius for rounded corners
+                                    cursor: 'pointer', // Add pointer cursor on hover
+                                    // boxShadow: '0 0 8px rgba(0, 0, 0, 0.3)',
+                                }}>
                                 {/*<FaChartLine style={{marginRight: '10px'}}/> Compare Ingredients*/}
                                 <FaRegChartBar style={{marginRight: '10px'}}/> Compare Ingredients
 
                             </button>
+                            {showTooltip && (
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '100%',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    backgroundColor: '#ffcc00', // Adjust background color
+                                    padding: '8px',
+                                    borderRadius: '5px',
+                                    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+                                    zIndex: 1,
+                                }}>
+                                    Please Select 2 Ingredients
+                                </div>
+                            )}
                         </div>
                         <div style={{
                             // backgroundColor: 'blue',

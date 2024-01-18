@@ -145,18 +145,16 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                     backgroundColor: defaultPageColor,
                 }}
             >
-                {filteredFlavors.length === 0 ? (
+                {searchQuery && filteredFlavors.length === 0 ? (
                     <div style={{
                         textAlign: 'center',
                         width: '100%',
-                        padding: '20px'
+                        padding: '20px',
                     }}>
                         {selectedFilters.length === 0 ? (
                             <p>No results found for "{searchQuery}"</p>
                         ) : (
                             <div style={{
-                                // position: 'sticky',
-                                // marginRight: '1vw',
                                 marginTop: '40vh'
                             }}>
                                 <p>No results found for "{searchQuery}" in categories: </p>
