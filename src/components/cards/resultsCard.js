@@ -34,13 +34,13 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
     if (jaccardFinalScore <= 0) {
         resultText = 'These ingredients may contrast too much';
     } else if (jaccardFinalScore > 0 && jaccardFinalScore < 10) {
-        resultText = 'These ingredients may be good as accents';
+        resultText = 'These ingredients may be good as accents flavors';
     } else if (jaccardFinalScore >= 10 && jaccardFinalScore < 25) {
-        resultText = 'These ingredients may be good as sides';
+        resultText = 'These ingredients may be good in small amounts (like sides)';
     } else if (jaccardFinalScore >= 25 && jaccardFinalScore < 75) {
-        resultText = 'These ingredients may work well in large amounts';
+        resultText = 'These ingredients may work well in moderate to large amounts';
     } else if (jaccardFinalScore >= 75 && jaccardFinalScore < 100) {
-        resultText = 'These ingredients may be too similar and bland together';
+        resultText = 'These ingredients are very similar, but may be good in small amounts';
     } else {
         resultText = "These ingredients are either identical or there is a lack of data";
     }
@@ -56,9 +56,7 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
                 // backgroundColor: 'purple',
                 borderRadius: '8px',
                 padding: '2%',
-                // marginLeft: '2%',
-                // marginTop: '1%',
-                // marginBottom: '1%',
+
                 width: '100%',
                 height: '400px',
                 minHeight: '350px',
@@ -70,12 +68,7 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
                     minWidth: '25vw',
                     width: '100%',
                     height: '100%',
-                    // margin: '1%',
-                    // marginLeft: '1%',
                     borderRadius: '8px',
-                    // border: '1px solid #000',
-                    // boxShadow: '0 0 8px rgba(0, 0, 0, 0.5)',
-                    // boxSizing: 'border-box',
                     position: 'relative',
                     display: 'flex',
                     flexDirection: 'column',
@@ -150,15 +143,15 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
                         <p style={{fontSize: '1.25em'}}>{jaccardFinalScore}%</p>
                         {/*<p style={{fontSize: '.75em'}}>Similar</p>*/}
                     </div>
-                    {/*<div style={{position: 'absolute', top: 10, right: 0, color: '#777'}}>*/}
-                    {/*    <a href="https://en.wikipedia.org/wiki/Jaccard_index" target="_blank"*/}
-                    {/*       style={{*/}
-                    {/*        textDecoration: 'none',*/}
-                    {/*        fontSize: '.8em',*/}
-                    {/*    }}>*/}
-                    {/*        How is this calculated <FaArrowRight/>*/}
-                    {/*    </a>*/}
-                    {/*</div>*/}
+                    <div style={{position: 'absolute', top: 10, right: 0, color: '#777'}}>
+                        <a href="https://en.wikipedia.org/wiki/Jaccard_index" target="_blank"
+                           style={{
+                            textDecoration: 'none',
+                            fontSize: '.8em',
+                        }}>
+                            How is this calculated? <FaArrowRight/>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div style={{
