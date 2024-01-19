@@ -128,24 +128,24 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                     overflow: 'visible',
                 }}
             >
-                <button
-                    onClick={toggleFullScreen}
-                    style={{
-                        position: "absolute",
-                        top: "15px",
-                        left: "20px",
-                        zIndex: 1,
-                        borderRadius: "8px",
-                        background: buttonBackgroundColor,
-                        border: "none",
-                    }}
-                >
-                    {isFullScreen ? (
-                        <MdFullscreenExit size={30}/>
-                    ) : (
-                        <MdFullscreen size={30}/>
-                    )}
-                </button>
+                {/*<button*/}
+                {/*    onClick={toggleFullScreen}*/}
+                {/*    style={{*/}
+                {/*        position: "absolute",*/}
+                {/*        top: "15px",*/}
+                {/*        left: "20px",*/}
+                {/*        zIndex: 1,*/}
+                {/*        borderRadius: "8px",*/}
+                {/*        background: buttonBackgroundColor,*/}
+                {/*        border: "none",*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    {isFullScreen ? (*/}
+                {/*        <MdFullscreenExit size={30}/>*/}
+                {/*    ) : (*/}
+                {/*        <MdFullscreen size={30}/>*/}
+                {/*    )}*/}
+                {/*</button>*/}
                 <div style={{
                     position: "absolute",
                     top: 20,

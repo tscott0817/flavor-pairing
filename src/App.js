@@ -481,7 +481,7 @@ function App() {
                     }}
                          onClick={(e) => {
                              // Check if the target is the highest parent div
-                             if (e.target === e.currentTarget) {
+                             if (e.currentTarget === e.target) {
                                  setDisplayIngredient(false);
                              }
                          }}>
@@ -529,7 +529,7 @@ function App() {
                         }}
                         onClick={(e) => {
                             // Check if the target is the highest parent div
-                            if (e.target === e.currentTarget) {
+                            if (e.currentTarget === e.target) {
                                 setComparisonVisible(false);
                             }
                         }}

@@ -32,17 +32,17 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
 
     let resultText;
     if (jaccardFinalScore <= 0) {
-        resultText = 'These ingredients may contrast too much';
+        resultText = 'These ingredients may contrast too much or there is a lack of data';
     } else if (jaccardFinalScore > 0 && jaccardFinalScore < 10) {
         resultText = 'These ingredients may be good as accents flavors';
     } else if (jaccardFinalScore >= 10 && jaccardFinalScore < 25) {
-        resultText = 'These ingredients may be good in small amounts (like sides)';
+        resultText = 'These ingredients may be good in small amounts';
     } else if (jaccardFinalScore >= 25 && jaccardFinalScore < 75) {
         resultText = 'These ingredients may work well in moderate to large amounts';
     } else if (jaccardFinalScore >= 75 && jaccardFinalScore < 100) {
         resultText = 'These ingredients are very similar, but may be good in small amounts';
     } else {
-        resultText = "These ingredients are either identical or there is a lack of data";
+        resultText = "These ingredients are either too similar or there is a lack of data";
     }
 
     return (
@@ -56,7 +56,6 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
                 // backgroundColor: 'purple',
                 borderRadius: '8px',
                 padding: '2%',
-
                 width: '100%',
                 height: '400px',
                 minHeight: '350px',
@@ -80,21 +79,21 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
                             {
                                 id: '',
                                 data: [{
-                                    x: ingredient1.alias.replace(/\b\w/g, (char) => char.toUpperCase()) + ' Flavor Molecules',
+                                    x: ingredient1.alias.replace(/\b\w/g, (char) => char.toUpperCase()),
                                     y: ingredient1MoleculeCount
                                 }],
                             },
                             {
                                 id: ' ',
                                 data: [{
-                                    x: ingredient2.alias.replace(/\b\w/g, (char) => char.toUpperCase()) + ' Flavor Molecules',
+                                    x: ingredient2.alias.replace(/\b\w/g, (char) => char.toUpperCase()),
                                     y: ingredient2MoleculeCount
                                 }],
                             },
                             {
                                 id: '  ',
                                 data: [{
-                                    x: 'Shared flavor molecules',
+                                    x: 'Shared',
                                     y: sharedMolecules.length
                                 }],
                             },
@@ -115,13 +114,13 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
                         circularAxisOuter={{tickSize: 5, tickPadding: 12, tickRotation: 0}}
                         legends={[
                             {
-                                anchor: 'top-left',
+                                anchor: 'top-right',
                                 direction: 'column',
                                 justify: false,
-                                translateX: 25,
+                                translateX: 0,
                                 translateY: -25,
                                 itemsSpacing: 6,
-                                itemDirection: 'left-to-right',
+                                itemDirection: 'right-to-left',
                                 itemWidth: 100,
                                 itemHeight: 18,
                                 itemTextColor: '#999',
@@ -143,15 +142,36 @@ const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
                         <p style={{fontSize: '1.25em'}}>{jaccardFinalScore}%</p>
                         {/*<p style={{fontSize: '.75em'}}>Similar</p>*/}
                     </div>
-                    <div style={{position: 'absolute', top: 10, right: 0, color: '#777'}}>
-                        <a href="https://en.wikipedia.org/wiki/Jaccard_index" target="_blank"
-                           style={{
-                            textDecoration: 'none',
-                            fontSize: '.8em',
-                        }}>
-                            How is this calculated? <FaArrowRight/>
-                        </a>
+                    <div style={{
+                        position: 'absolute',
+                        top: 50,
+                        left: 0,
+                        transform: 'translateY(-50%)',
+                        color: '#777',
+                        textAlign: 'left'
+                    }}>
+                        <p style={{fontSize: '0.8em', marginBottom: '10px'}}>
+                            <strong>{ingredient1MoleculeCount}</strong> Flavor Molecules Found
+                            In <strong>{ingredient1.alias.replace(/\b\w/g, (char) => char.toUpperCase())}</strong></p>
+                        <p style={{fontSize: '0.8em', marginBottom: '10px'}}>
+                            <strong>{ingredient2MoleculeCount}</strong> Flavor Molecules Found
+                            In <strong>{ingredient2.alias.replace(/\b\w/g, (char) => char.toUpperCase())}</strong></p>
+                        {/*<p style={{fontSize: '0.8em', marginBottom: '10px'}}>*/}
+                        {/*    <strong>{ingredient1MoleculeCount + ingredient2MoleculeCount}</strong> Total Flavor*/}
+                        {/*    Molecules</p>*/}
+                        <p style={{fontSize: '0.8em', marginBottom: '10px'}}><strong>{intersectionSize}</strong> Flavor
+                            Molecules Are Shared</p>
+                        {/*<p style={{fontSize: '.75em'}}>Similar</p>*/}
                     </div>
+                    {/*<div style={{position: 'absolute', top: 10, right: 0, color: '#777'}}>*/}
+                    {/*    <a href="https://en.wikipedia.org/wiki/Jaccard_index" target="_blank"*/}
+                    {/*       style={{*/}
+                    {/*        textDecoration: 'none',*/}
+                    {/*        fontSize: '.8em',*/}
+                    {/*    }}>*/}
+                    {/*        How is this calculated? <FaArrowRight/>*/}
+                    {/*    </a>*/}
+                    {/*</div>*/}
                 </div>
             </div>
             <div style={{
