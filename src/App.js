@@ -3,11 +3,7 @@ import './App.css';
 import CompareIngredientsPage from "./pages/compareIngredientsPage";
 import IngredientPage from "./pages/ingredientPage";
 import DefaultPage from "./pages/defaultPage";
-import {useIngredientContext} from "./stateManager/IngredientContext";
-import IngredientThumbnail from "./components/cards/ingredientThumbnail";
-import {FaTimes} from 'react-icons/fa';
 import {FaArrowLeft} from "react-icons/fa";
-import {FaRegChartBar} from "react-icons/fa";
 import {
     ingredientBackgroundColor,
     mainAppColor,
@@ -18,7 +14,6 @@ import {
 } from "./colors";
 import './animations.css';
 import {FaChevronLeft, FaChevronRight} from 'react-icons/fa';
-import FiltersCard from "./components/cards/filtersCard";
 import NavBar from "./components/navBar";
 import LeftColumn from "./components/leftColumn";
 
@@ -26,7 +21,6 @@ function App() {
     const [key, setKey] = useState(0); // Add a key state
     const [selectedIngredientRef, setSelectedIngredientRef] = useState(null);  // Pretending this is like a pointer
     const [displayIngredient, setDisplayIngredient] = useState(false);
-    const {selectedIngredients, unselectIngredient} = useIngredientContext();
     const [searchQuery, setSearchQuery] = useState('');
     const [leftColumnVisible, setLeftColumnVisible] = useState(false);
     const [comparisonVisible, setComparisonVisible] = useState(false);

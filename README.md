@@ -1,3 +1,3 @@
 # Some Info 
 
-Link: flavorpear.net
+Link: https://www.flavorpear.net/
