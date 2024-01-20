@@ -13,8 +13,6 @@ import {
 import {FaPlus} from "react-icons/fa";
 import flavordb from "../data/flavordb.json";
 
-// const IngredientThumbnailMemoized = memo(IngredientThumbnail);
-
 const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQuery, selectedFilters}) => {
     console.log('DefaultPage rendered');
     const [flavors, setFlavors] = useState([]);
@@ -25,7 +23,6 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch data from the imported JSON file
                 const sortedFlavors = flavordb.sort((a, b) => a.alias.localeCompare(b.alias));
                 setFlavors(sortedFlavors);
             } catch (error) {

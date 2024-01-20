@@ -41,7 +41,6 @@ const SimilarIngredientsCard = ({sharedMoleculeCounts}) => {
                                     marginBottom: '10px',
                                     textAlign: 'left',
                                 }}>
-                                    {/*<strong>{alias}:</strong> {count}*/}
                                     <strong>{alias.replace(/\b\w/g, (char) => char.toUpperCase())}</strong>: {count}
                                 </div>
                             ))}

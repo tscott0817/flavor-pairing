@@ -41,14 +41,9 @@ const IngredientPage = ({ingredient}) => {
                     return;
                 }
 
-                // Fetch all molecules data directly from molecules.json
                 const molecules_list_str = flavorData.molecules;
-
-                // Extract pubchemIDs using regular expression
                 const molecules_list = molecules_list_str.match(/\d+/g);
-
                 const moleculesDataFiltered = moleculesData.filter(item => molecules_list.includes(item.pubchemID.toString()));
-
                 const moleculesDataFormatted = moleculesDataFiltered.map(item => ({
                     pubchemID: item.pubchemID,
                     commonName: item.commonName,
@@ -57,7 +52,6 @@ const IngredientPage = ({ingredient}) => {
 
                 setAllMolecules({entityID: entity_id, molecules: moleculesDataFormatted});
 
-                // Calculate shared molecule counts directly in the frontend
                 const molecules_entity_id = new Set(molecules_list);
                 const shared_molecule_count_dict = {};
 
@@ -92,12 +86,9 @@ const IngredientPage = ({ingredient}) => {
             width: '100%',
             height: '100%',
             margin: '0 auto',
-            // padding: '20px',
-            // paddingTop: '20px',
             paddingLeft: '20px',
             paddingRight: '20px',
             borderRadius: '8px',
-            // overflowY: 'auto',
             opacity: fadeIn ? 1 : 0,
             transition: 'opacity .3s ease-in-out',
         }}>
@@ -114,15 +105,12 @@ const IngredientPage = ({ingredient}) => {
                 }}>
                     <div style={{
                         display: 'flex',
-                        flexDirection: 'row', // Stack items vertically
+                        flexDirection: 'row',
                         // backgroundColor: 'red',
                         justifyContent: 'center',
-                        // paddingBottom: '1%',
                         // boxShadow: '0 0 8px rgba(0, 0, 0, 0.2)',
                     }}>
-                        {/* Image on the left */}
                         <div style={{
-                            // marginLeft: '30%',
                             // backgroundColor: 'pink',
                             marginTop: '5px',
                             width: '75px',
@@ -133,20 +121,16 @@ const IngredientPage = ({ingredient}) => {
                                 src={imageURL}
                                 alt={`Ingredient ${ingredient.alias}`}
                                 style={{
-                                    width: '100%', // Adjust the width as needed
-                                    height: '100%', // Adjust the height as needed
-                                    // marginTop: '10%',
-                                    objectFit: 'cover', // Maintain aspect ratio
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
                                     // boxShadow: '0 0 8px rgba(0, 0, 0, 0.2)',
                                     // borderRadius: '8px',
                                     // borderRadius: '8px 8px 0 0',
                                 }}
                             />
                         </div>
-
-                        {/* Data in the middle */}
                         <div style={{
-                            // flex: 1,
                             textAlign: 'center',
                             marginTop: '1%',
                             marginBottom: '1%',
@@ -162,7 +146,6 @@ const IngredientPage = ({ingredient}) => {
                                 fontSize: '1.5em',
                                 marginBottom: '5%',
                                 // backgroundColor: 'yellow',
-                                // width: '50%'
                             }}>
                                 {ingredientData.alias.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                             </div>
@@ -170,7 +153,6 @@ const IngredientPage = ({ingredient}) => {
                                 fontSize: '0.8em',
                                 color: '#555',
                                 // backgroundColor: 'yellow',
-                                // width: '50%'
                             }}>
                                 {ingredientData.scientificName !== null
                                     ? ingredientData.scientificName.replace(/\b\w/g, (char) => char.toUpperCase())
@@ -181,7 +163,6 @@ const IngredientPage = ({ingredient}) => {
                                 fontSize: '0.8em',
                                 color: '#555',
                                 // backgroundColor: 'yellow',
-                                // width: '50%'
                             }}>
                                 {ingredientData.category !== null
                                     ? ingredientData.category.replace(/\b\w/g, (char) => char.toUpperCase())
@@ -191,7 +172,6 @@ const IngredientPage = ({ingredient}) => {
                         </div>
                         <div
                             style={{
-                                // marginRight: '30%',
                                 // backgroundColor: 'green',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -205,25 +185,22 @@ const IngredientPage = ({ingredient}) => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    width: '40px', // Set the width for a circle
-                                    height: '40px', // Set the height for a circle
-                                    borderRadius: '50%', // Make it circular
-                                    backgroundColor: buttonColor, // Add your desired background color
-                                    color: 'white', // Set the text color
-                                    border: 'none', // Remove border for a cleaner look
-                                    cursor: 'pointer', // Change cursor on hover
+                                    width: '40px',
+                                    height: '40px',
+                                    borderRadius: '50%',
+                                    backgroundColor: buttonColor,
+                                    color: 'white',
+                                    border: 'none',
+                                    cursor: 'pointer',
                                 }}
                             >
                                 <FaPlus/>
                             </button>
                         </div>
                     </div>
-
-                    {/* Separator at the bottom */}
                     <hr
                         className="separator"
                         style={{
-                            // margin: '10px 0',
                             border: 'none',
                             borderTop: '1px solid #ccc',
                             width: '100%',

@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {buttonColor, sectionItemColor} from "../../colors";
 
-
 const MoleculesCard = ({ingredientName, moleculeData}) => {
     const [selectedMolecule, setSelectedMolecule] = useState(null);
     const [moleculeInfo, setMoleculeInfo] = useState(null);
@@ -24,30 +23,23 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                     'Properties': {}
                 };
 
-                // Extract all properties from the 'props' field
                 properties.forEach(prop => {
                     moleculeInfo.Properties[prop['urn']['label']] = prop['value'];
                 });
-
-                // Set molecule info state
                 setMoleculeInfo(moleculeInfo);
 
-                // Fetch molecule image directly
                 const imageUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selected.pubchemID}/PNG`;
                 setMoleculeImage(imageUrl);
 
-                // Start fading out and then update the selected molecule and start fading in
                 setIsVisible(false);
                 setTimeout(() => {
                     setSelectedMolecule(selected);
                     setIsVisible(true);
                 }, 500);
             } else {
-                // Handle error responses for molecule info
                 console.error(`Error retrieving data for PubChem ID ${selected.pubchemID}`);
             }
         } catch (error) {
-            // Handle general errors
             console.error(error);
         }
     };
@@ -68,7 +60,6 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                 // border: '1px solid #000',
                 // boxShadow: '0 0 8px rgba(0, 0, 0, 0.5)',
                 // boxSizing: 'border-box',
-                // marginTop: '1%',
                 marginBottom: '1%',
             }}
         >
@@ -79,14 +70,11 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                     minWidth: '250px',
                     maxWidth: '20vw',
                     height: '400px',
-                    // minHeight: '400px',
                     borderTopLeftRadius: '8px',
                     borderBottomLeftRadius: '8px',
-                    // margin: '1%',
                     marginTop: '1%',
                     marginBottom: '1%',
                     marginLeft: '1%',
-                    // padding: '1%',
                     overflow: 'hidden',
                     fontSize: '1em',
                     // border: '1px solid #000',
@@ -100,15 +88,12 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
             >
                 <div style={{
                     // backgroundColor: 'blue',
-                    // marginTop: '30px',
-                    // marginTop: '5%',
                 }}>
                     <h2
                         style={{
                             borderBottom: '1px solid #999',
                             marginLeft: '2.5%',
                             width: '95%',
-                            // marginBottom: '10px',
                             textAlign: 'center',
                             // backgroundColor: 'red'
                         }}
@@ -121,10 +106,7 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                     overflow: 'auto',
                     // height: '93%',
                     height: '370px',
-                    // paddingTop: '10px',
                     padding: '5%',
-                    // borderRight: '1px solid #232b2b',
-                    // paddingBottom: '50px',
                 }}>
                     {moleculeData.molecules.length > 0 ? (
                         moleculeData.molecules.map((detail, index) => (
@@ -149,11 +131,9 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                     minHeight: '400px',
                     borderTopRightRadius: '8px',
                     borderBottomRightRadius: '8px',
-                    // margin: "1%",
                     marginTop: '1%',
                     marginBottom: '1%',
                     marginRight: '1%',
-                    // overflow: "auto",
                     overflow: "hidden",
                     fontSize: "1em",
                     // borderLeft: '1px solid #232b2b',
@@ -192,14 +172,12 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                                 // boxShadow: '0 0 8px rgba(0, 0, 0, 0.5)',
                                 marginLeft: '8%',
                                 marginTop: '10px',
-                                // marginTop: '3%',
                             }}>
                                 <div style={{
-                                    // marginTop: '1%',
+                                    // backgroundColor: 'blue',
                                 }}>
                                     <strong>PubChemID:</strong> {moleculeInfo.PubChemID}
                                 </div>
-                                {/*<div><strong>Molecular Formula:</strong> {moleculeInfo.Properties["Molecular Formula"].sval}</div>*/}
                                 <div style={{
                                     marginTop: '5%',
                                 }}>
@@ -241,11 +219,10 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                                 marginTop: '15px',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                flexDirection: 'column',  // Stack the items vertically
+                                flexDirection: 'column',
                                 opacity: isVisible ? 1 : 0,
                                 transition: "opacity 0.5s ease",
                             }}>
-                                {/* Display the image */}
                                 {moleculeImage && (
                                     <img
                                         src={moleculeImage}
@@ -258,8 +235,6 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                                         }}
                                     />
                                 )}
-
-                                {/* Link under the image */}
                                 <div style={{marginTop: '10px'}}>
                                     <button
                                         style={{

@@ -1,8 +1,6 @@
 import React from "react";
 import {ResponsiveRadialBar} from '@nivo/radial-bar';
-import {windowColor, pageColor, pageSectionColor, sectionItemColor, mainAppColor, randomTempColor2} from "../../colors";
 import NumberLine from "../charts/numberLine";
-import {FaArrowRight} from "react-icons/fa";
 import {useIngredientContext} from "../../stateManager/IngredientContext";
 
 const ResultsCard = ({sharedMolecules}) => {
@@ -47,7 +45,6 @@ const ResultsCard = ({sharedMolecules}) => {
     return (
         <div style={{
             // backgroundColor: 'orange',
-            // padding: '2%',
         }}>
             <div style={{
                 display: 'flex',
@@ -155,9 +152,6 @@ const ResultsCard = ({sharedMolecules}) => {
                         <p style={{fontSize: '0.8em', marginBottom: '10px'}}>
                             <strong>{ingredient2MoleculeCount}</strong> Flavor Molecules Found
                             In <strong>{ingredient2.alias.replace(/\b\w/g, (char) => char.toUpperCase())}</strong></p>
-                        {/*<p style={{fontSize: '0.8em', marginBottom: '10px'}}>*/}
-                        {/*    <strong>{ingredient1MoleculeCount + ingredient2MoleculeCount}</strong> Total Flavor*/}
-                        {/*    Molecules</p>*/}
                         <p style={{fontSize: '0.8em', marginBottom: '10px'}}><strong>{intersectionSize}</strong> Flavor
                             Molecules Are Shared</p>
                         {/*<p style={{fontSize: '.75em'}}>Similar</p>*/}
@@ -196,10 +190,7 @@ const getMoleculesCount = ({ingredient}) => {
         .replace(/}/g, ']')
         .replace(/'/g, '"');
 
-    // Parse the array
     const moleculesSet = new Set(JSON.parse(moleculesArray));
-
-    // Get the size of the set
     return moleculesSet.size;
 }
 

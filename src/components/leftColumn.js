@@ -5,13 +5,10 @@ import FiltersCard from "./cards/filtersCard";
 import React, {useState} from "react";
 import {useIngredientContext} from "../stateManager/IngredientContext";
 
-
 const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedFilters, selectedFilters}) => {
 
     const [showTooltip, setShowTooltip] = useState(false);
     const {selectedIngredients, unselectIngredient} = useIngredientContext();
-
-
     const handleShowSelectedIngredients = () => {
         if (!selectedIngredients || !selectedIngredients[0] || !selectedIngredients[1]) {
 
@@ -67,8 +64,6 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                     flexDirection: 'row',
                     // backgroundColor: 'purple'
                 }}>
-
-                    {/* First div */}
                     <div style={{
                         position: 'relative',
                         height: '75px',
@@ -118,8 +113,6 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                             </div>
                         )}
                     </div>
-
-                    {/* Second div */}
                     <div style={{
                         position: 'relative',
                         height: '75px',
@@ -169,10 +162,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                             </div>
                         )}
                     </div>
-
                 </div>
-
-
                 <div style={{
                     position: 'relative',
                     padding: '1%',
@@ -225,7 +215,6 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
             </div>
             <div style={{
                 // backgroundColor: 'red',
-                // padding: '2%',
                 paddingLeft: '2%',
                 paddingRight: '2%',
                 paddingTop: '2%',

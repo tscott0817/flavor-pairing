@@ -8,15 +8,14 @@ import {
     mainAppColor,
 } from "../../colors";
 import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
-import {buttonBackgroundColor} from "../../colors";
-import flavordbData from "../../data/flavordb.json"; // Replace with the correct path
-import moleculesData from "../../data/molecules.json"; // Replace with the correct path
+import flavordbData from "../../data/flavordb.json";
+import moleculesData from "../../data/molecules.json";
 
 const SingleIngredientFlavorCard = ({entity_id}) => {
     const [flavorData, setFlavorData] = useState(null);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const chartContainerRef = useRef(null);
-    const [showAllFlavors, setShowAllFlavors] = useState(false); // New state for the checkbox
+    const [showAllFlavors, setShowAllFlavors] = useState(false);
     console.log("Flavor Card");
 
     useEffect(() => {
@@ -40,10 +39,8 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
         return <div>No radar data available.</div>;
     }
 
-    // Count the occurrences of each flavor
     const flavorCounts = countFlavorProfiles(flavorData);
 
-    // Convert the counts into an array of objects for sorting
     const flavorListData = Object.entries(flavorCounts).map(
         ([flavorProfile, count]) => ({
             flavorProfile,
@@ -199,7 +196,6 @@ const countFlavorProfiles = (flavorProfiles) => {
     const flavorCounts = {};
 
     flavorProfiles.forEach((item) => {
-        // Assuming each item in flavorProfiles is a string representation of a set
         const profilesArray = item.replace(/[{}']/g, '').split(',').map(profile => profile.trim());
 
         profilesArray.forEach((profile) => {

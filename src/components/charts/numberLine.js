@@ -37,13 +37,12 @@ const NumberLine = ({percentage}) => {
                 enableGridY={false}
                 colors={['#2c3e50', '#e74c3c']}
                 lineWidth={3}
-                // pointSize={12}
                 // pointColor={{theme: 'background'}}
                 pointBorderWidth={3}
                 // pointBorderColor={{from: 'serieColor'}}
                 enablePoints={true}
                 useMesh={true}
-                pointSize={10} // Adjust the size of the points as needed
+                pointSize={10}
                 pointColor={{from: 'color'}}
                 pointBorderColor={{from: 'color', modifiers: [['darker', 0.0]]}}
                 theme={{

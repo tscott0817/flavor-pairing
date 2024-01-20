@@ -58,8 +58,6 @@ const NavBar = ({setSearchQuery}) => {
                         width: '20px',
                     }}/>
                 </div>
-
-                {/* Search input */}
                 <input
                     type="text"
                     placeholder="Search for ingredients..."
@@ -80,8 +78,6 @@ const NavBar = ({setSearchQuery}) => {
                         color: 'rgba(50, 50, 50, 0.8)',
                     }}
                 />
-
-                {/* 'X' button */}
                 <button
                     style={{
                         display: 'flex',

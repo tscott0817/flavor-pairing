@@ -1,5 +1,3 @@
-import React, {useEffect} from "react";
-
 
 const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
     const categories = [
@@ -47,15 +45,8 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
                 style={{
                     display: 'flex',
                     // backgroundColor: 'green',
-                    // Set a max height for the red div
                     height: '100%',
                     position: 'relative',
-                    // maxHeight: '250px',
-                    // padding: '2%',
-                    // marginTop: '200px',
-                    // margin: '2%',
-                    // Enable vertical scrolling if content exceeds maxHeight
-                    // overflowY: 'auto',
                     zIndex: 1,
                 }}
             >
@@ -89,7 +80,6 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
                         </li>
                     ))}
                 </ul>
-                {/*<div style={{backgroundColor: 'chartreuse', width: '10px', height: '100px'}}></div>*/}
             </div>
     );
 };

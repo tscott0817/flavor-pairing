@@ -16,7 +16,7 @@ const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
                 height: '100%',
                 backgroundColor: thumbNailColor,
                 display: 'flex',
-                flexDirection: 'column', // To stack text and image vertically
+                flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: '8px',

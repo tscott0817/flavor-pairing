@@ -6,7 +6,6 @@ import IngredientPage from "../pages/ingredientPage";
 import CompareIngredientsPage from "../pages/compareIngredientsPage";
 import React, {useCallback, useEffect, useState} from "react";
 
-
 const MainLayout = ({searchQuery}) => {
     const [selectedIngredientRef, setSelectedIngredientRef] = useState(null);  // Pretending this is like a pointer
     const [selectedFilters, setSelectedFilters] = useState([]);
@@ -17,7 +16,7 @@ const MainLayout = ({searchQuery}) => {
     const handleDisplayIngredient = useCallback((displayIngredient) => {
         setDisplayIngredient(displayIngredient);
     }, [setDisplayIngredient]);
-    
+
     const handleSetComparisonVisible = useCallback((value) => {
         setComparisonVisible(value);
     }, [setComparisonVisible]);

@@ -3,6 +3,8 @@ import {ResponsiveRadar} from "@nivo/radar";
 import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
 import {buttonBackgroundColor, sectionItemColor} from "../../colors";
 
+
+// TODO: Unsure if implementing Fullscreen
 const SharedIngredientFlavorCard = ({sharedMolecules}) => {
     console.log("Shared Flavor Card")
     const [isFullScreen, setIsFullScreen] = useState(false);

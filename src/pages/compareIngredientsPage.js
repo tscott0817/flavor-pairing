@@ -36,8 +36,6 @@ const CompareIngredientsPage = () => {
             } catch (error) {
                 console.error("Error fetching shared molecules:", error);
             }
-
-            // Trigger fade-in effect
             setFadeIn(true);
         };
 
@@ -50,14 +48,10 @@ const CompareIngredientsPage = () => {
             backgroundColor: pageColor,
             // backgroundColor: 'blue',
             width: '100%',
-            // minWidth: '900px', // TODO: Make this a proportion of the users screen size instead of hardcoding
             height: '100%',
             margin: '0 auto',
-            // padding: '20px',
             paddingLeft: '20px',
             paddingRight: '20px',
-            // paddingLeft: '1%',
-            // padingRight: '1%',
             borderRadius: '8px',
             // border: '1px solid #000',
             // boxShadow: '0 0 8px rgba(0, 0, 0, 0.5)',
@@ -84,13 +78,10 @@ const CompareIngredientsPage = () => {
                 transition: 'opacity .5s ease-in-out',
                 width: '100%',
                 height: '100%',
-                // marginTop: '1%',
                 // backgroundColor: 'yellow',
                 overflowY: 'auto',
-                // padding: '1%',
                 paddingLeft: '1%',
                 paddingRight: '1%',
-                // paddingTop: '2%',
                 paddingBottom: '10%',
                 overflow: 'auto',
             }}>

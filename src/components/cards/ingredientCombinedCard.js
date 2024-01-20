@@ -4,7 +4,6 @@ import {RxSlash} from 'react-icons/rx';
 import {FaPlus} from 'react-icons/fa';
 import {useIngredientContext} from "../../stateManager/IngredientContext";
 
-
 const IngredientCombinedCard = () => {
     const {selectedIngredients, unselectIngredient} = useIngredientContext();
     const ingredient1 = selectedIngredients[0];
@@ -14,11 +13,8 @@ const IngredientCombinedCard = () => {
             display: 'flex',
             // backgroundColor: 'red',
             borderRadius: '8px',
-            // padding: '1%',
             justifyContent: 'center',
             alignItems: 'center',
-            // backgroundColor: 'yellow',
-            // marginBottom: '20px',
             // border: '1px solid #000',
             // boxSizing: 'border-box',
             // boxShadow: '0 0 8px rgba(0, 0, 0, 0.5)'
@@ -29,10 +25,8 @@ const IngredientCombinedCard = () => {
                 width: '25%',
                 height: '100%',
                 borderRadius: '8px',
-                // margin: '1%',
                 marginTop: '1%',
                 marginBottom: '1%',
-                // overflow: 'auto',
                 fontSize: '1em',
                 // border: '1px solid #000',
                 // boxSizing: 'border-box',
@@ -55,7 +49,6 @@ const IngredientCombinedCard = () => {
                 fontSize: '1em',
                 fontWeight: 'bold',
             }}>
-                {/*<RxSlash style={{height: '100%', fontSize: '100px'}}/>*/}
                 <FaPlus style={{
                     height: '100%',
                     fontSize: '25px'
@@ -66,7 +59,6 @@ const IngredientCombinedCard = () => {
                 // backgroundColor: 'red',
                 width: '25%',
                 borderRadius: '8px',
-                // margin: '1%',
                 marginTop: '1%',
                 marginBottom: '1%',
                 // overflow: 'auto',
