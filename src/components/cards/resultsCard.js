@@ -3,14 +3,13 @@ import {ResponsiveRadialBar} from '@nivo/radial-bar';
 import {windowColor, pageColor, pageSectionColor, sectionItemColor, mainAppColor, randomTempColor2} from "../../colors";
 import NumberLine from "../charts/numberLine";
 import {FaArrowRight} from "react-icons/fa";
+import {useIngredientContext} from "../../stateManager/IngredientContext";
 
-
-// TODO: This component suffers from "Prop drilling"
-//  - Meaning that ingredient1, and ingredient 2 are not used in this component
-//  - but are passed from the parent component, through this one, and into IngredientCard.
-//  - Causes too tight of a coupling between these 4 components
-const ResultsCard = ({ingredient1, ingredient2, sharedMolecules}) => {
+const ResultsCard = ({sharedMolecules}) => {
     console.log("Results Card");
+    const {selectedIngredients, unselectIngredient} = useIngredientContext();
+    const ingredient1 = selectedIngredients[0];
+    const ingredient2 = selectedIngredients[1];
     const ingredient1MoleculeCount = getMoleculesCount({ingredient: ingredient1});
     const ingredient2MoleculeCount = getMoleculesCount({ingredient: ingredient2});
     const moleculesCount = ingredient1MoleculeCount + ingredient2MoleculeCount;

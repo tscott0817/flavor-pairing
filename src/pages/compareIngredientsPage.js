@@ -7,22 +7,19 @@ import {FaArrowDown, FaArrowUp, FaArrowRight} from "react-icons/fa";
 import CollapsibleComponent from "../components/collapsibleComponent";
 import SharedIngredientFlavorCard from "../components/cards/sharedIngredientFlavorCard";
 import moleculesData from "../data/molecules.json";
+import {useIngredientContext} from "../stateManager/IngredientContext";
 
-// TODO: Prop drilling with ingredient1 and ingredient2
-//  - It goes from App.js -> Here -> ResultsCard -> IngredientCard
-//  - Need to use CONTEXT instead to make the ingredients global values
-const CompareIngredientsPage = ({ingredient1, ingredient2}) => {
+const CompareIngredientsPage = () => {
     const [sharedMolecules, setSharedMolecules] = useState([]);
     const [fadeIn, setFadeIn] = useState(false);
     const [isMoleculeCardCollapsed, setMoleculeCardCollapsed] = useState(true);
     const [isFlavorCardCollapsed, setFlavorCardCollapsed] = useState(true);
+    const {selectedIngredients, unselectIngredient} = useIngredientContext();
+    const ingredient1 = selectedIngredients[0];
+    const ingredient2 = selectedIngredients[1];
 
     useEffect(() => {
         const fetchData = async () => {
-            // Use the 'entityID' directly from the data
-            const entityID1 = ingredient1.entityID || '';
-            const entityID2 = ingredient2.entityID || '';
-
             try {
 
                 // Use the entityID to get the molecules for each ingredient
@@ -75,7 +72,7 @@ const CompareIngredientsPage = ({ingredient1, ingredient2}) => {
             <div style={{
                 // backgroundColor: 'red',
             }}>
-                <IngredientCombinedCard ingredient1={ingredient1} ingredient2={ingredient2}/>
+                <IngredientCombinedCard />
                 <hr
                     className="separator"
                     style={{
@@ -100,14 +97,14 @@ const CompareIngredientsPage = ({ingredient1, ingredient2}) => {
                 paddingBottom: '10%',
                 overflow: 'auto',
             }}>
-                <ResultsCard ingredient1={ingredient1} ingredient2={ingredient2} sharedMolecules={sharedMolecules}/>
+                <ResultsCard sharedMolecules={sharedMolecules}/>
                 <CollapsibleComponent
                     title="Shared Molecules"
                     isCollapsed={isMoleculeCardCollapsed}
                     onToggle={() => setMoleculeCardCollapsed(!isMoleculeCardCollapsed)}
                 >
                     {!isMoleculeCardCollapsed && (
-                        <SharedMoleculesCardSingle moleculeData={sharedMolecules}/>
+                        <SharedMoleculesCardSingle sharedMolecules={sharedMolecules}/>
                     )}
                 </CollapsibleComponent>
                 <CollapsibleComponent

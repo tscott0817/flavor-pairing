@@ -2,9 +2,13 @@ import IngredientCard from './ingredientCard';
 import {pageSectionColor, randomTempColor2, sectionItemColor} from "../../colors";
 import {RxSlash} from 'react-icons/rx';
 import {FaPlus} from 'react-icons/fa';
+import {useIngredientContext} from "../../stateManager/IngredientContext";
 
 
-const IngredientCombinedCard = ({ingredient1, ingredient2}) => {
+const IngredientCombinedCard = () => {
+    const {selectedIngredients, unselectIngredient} = useIngredientContext();
+    const ingredient1 = selectedIngredients[0];
+    const ingredient2 = selectedIngredients[1];
     return (
         <div style={{
             display: 'flex',

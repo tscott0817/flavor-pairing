@@ -1,6 +1,6 @@
 import {createContext, useContext, useReducer} from 'react';
 
-const IngredientContext = createContext();
+const IngredientContext = createContext(undefined);
 
 const ingredientReducer = (state, action) => {
     switch (action.type) {

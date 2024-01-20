@@ -6,7 +6,7 @@ import {buttonColor, pageSectionColor, sectionItemColor} from "../../colors";
 
 // [1] = molecule ID, [1] = molecule name, [2] = common name
 // const SharedMoleculesCardSingle = ({ingredientName, moleculeData}) => {
-const SharedMoleculesCardSingle = ({moleculeData}) => {
+const SharedMoleculesCardSingle = ({sharedMolecules}) => {
     console.log('Shared Molecules Card');
 
     const [selectedMolecule, setSelectedMolecule] = useState(null);
@@ -56,7 +56,7 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
             console.error(error);
         }
     };
-    if (moleculeData === null) {
+    if (sharedMolecules === null) {
         return <div>No molecule data available.</div>;
     }
 
@@ -130,8 +130,8 @@ const SharedMoleculesCardSingle = ({moleculeData}) => {
                     // borderRight: '1px solid #232b2b',
                     // paddingBottom: '50px',
                 }}>
-                    {moleculeData.length > 0 ? (
-                        moleculeData.map((detail, index) => (
+                    {sharedMolecules.length > 0 ? (
+                        sharedMolecules.map((detail, index) => (
                             <div key={index} onClick={() => handleMoleculeClick(detail)}
                                  style={{cursor: 'pointer', marginBottom: '10px', textAlign: 'center'}}>
                                 <p>{detail.commonName}</p>
