@@ -3,7 +3,7 @@ import {IoSearchOutline} from "react-icons/io5";
 import {TbLetterX} from "react-icons/tb";
 import React from "react";
 
-const NavBar = ({setSearchQuery}) => {
+const NavBar = ({searchQuery, setSearchQuery}) => {
 
     const handleSearchInputChange = event => {
         setSearchQuery(event.target.value);
@@ -61,7 +61,7 @@ const NavBar = ({setSearchQuery}) => {
                 <input
                     type="text"
                     placeholder="Search for ingredients..."
-                    // value={searchQuery}
+                    value={searchQuery}
                     onChange={handleSearchInputChange}
                     style={{
                         border: 'none',

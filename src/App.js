@@ -10,10 +10,10 @@ function App() {
 
     return (
         <div className="App" style={{display: 'flex', flexDirection: 'column', backgroundColor: mainAppColor}}>
-            <NavBar setSearchQuery={setSearchQuery}/>
+            <NavBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
             <MainLayout searchQuery={searchQuery}/>
         </div>
     );
-}
+};
 
 export default App;
