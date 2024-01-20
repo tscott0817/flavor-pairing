@@ -3,7 +3,6 @@ import {
     thumbNailColor,
     thumbNailColorText
 } from "../../colors";
-import {useEffect, useState} from "react";
 
 const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
     // const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient_id}.jpg`;

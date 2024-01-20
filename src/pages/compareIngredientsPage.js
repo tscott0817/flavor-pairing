@@ -3,7 +3,6 @@ import SharedMoleculesCardSingle from "../components/cards/sharedMoleculeCardSin
 import IngredientCombinedCard from "../components/cards/ingredientCombinedCard";
 import ResultsCard from "../components/cards/resultsCard";
 import {windowColor, pageColor, pageSectionColor, sectionItemColor, mainAppColor} from "../colors";
-import {FaArrowDown, FaArrowUp, FaArrowRight} from "react-icons/fa";
 import CollapsibleComponent from "../components/collapsibleComponent";
 import SharedIngredientFlavorCard from "../components/cards/sharedIngredientFlavorCard";
 import moleculesData from "../data/molecules.json";
@@ -21,8 +20,6 @@ const CompareIngredientsPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-
-                // Use the entityID to get the molecules for each ingredient
                 const ingredient1Molecules = ingredient1.molecules.match(/\{([^}]+)\}/)?.[1].replace(/'/g, '');
                 const ingredient2Molecules = ingredient2.molecules.match(/\{([^}]+)\}/)?.[1].replace(/'/g, '');
 

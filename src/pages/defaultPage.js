@@ -19,11 +19,8 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
     console.log('DefaultPage rendered');
     const [flavors, setFlavors] = useState([]);
     const containerRef = useRef(null);
-    const [isHovered, setIsHovered] = useState(null);
     const {selectedIngredients, selectIngredient, unselectIngredient} = useIngredientContext();
     const [isButtonHovered, setIsButtonHovered] = useState(false);
-    const [forceUpdate, setForceUpdate] = useState(false);
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,7 +37,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
         }).catch(error => {
             console.error('Error in useEffect:', error);
         });
-    }, [selectedFilters, forceUpdate]);
+    }, [selectedFilters]);
 
     const handleThumbnailClick = (ingredient) => {
         if (!isButtonHovered) {
@@ -49,7 +46,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
         }
     };
 
-    // TODO: Transition on both in and out
+    // Observe to animate thumbnails
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -67,8 +64,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
         );
 
         const elements = document.querySelectorAll('.thumbnail');
-
-        const rowMap = new Map(); // Map to track row indices and their cumulative width
+        const rowMap = new Map();
 
         elements.forEach((element, index) => {
             observer.observe(element);
@@ -91,19 +87,17 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
             element.addEventListener('mouseover', () => {
                 element.style.transition = 'transform 0.2s';
                 element.style.transform = 'scale(1.05) rotate(-2deg)';
-                setIsHovered(index);
             });
             element.addEventListener('mouseout', () => {
                 element.style.transition = 'transform 0.1s';
                 element.style.transform = 'scale(1) rotate(0deg)';
-                setIsHovered(null);
             });
         });
 
         return () => {
             observer.disconnect();
         };
-    }, [flavors, searchQuery, selectedFilters]); // Include [flavors] and [searchQuery] in the dependency array
+    }, [flavors, searchQuery, selectedFilters]);
 
 
     // Reset styles when search is cleared
@@ -113,7 +107,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
             element.style.opacity = 1;
             element.style.transform = 'translateX(0)';
         });
-    }, [searchQuery]); // Include [searchQuery] in the dependency array
+    }, [searchQuery]);
 
     const filteredFlavors = flavors.filter((flavor) => {
         const matchesSearch = flavor.alias.toLowerCase().includes(searchQuery.toLowerCase());
@@ -122,7 +116,6 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
         return matchesSearch && matchesFilter;
     });
 
-    // set ingredient to current ingredient based on context
     const handleAddToComparison = (ingredient) => {
         if (!selectedIngredients.includes(ingredient)) {
             selectIngredient(ingredient);
@@ -185,14 +178,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                                 ingredient={flavor}
                                 ingredient_name={flavor.alias}
                                 ingredient_id={flavor.entityID}
-                                clickable={!isButtonHovered} // Pass clickable prop to IngredientThumbnail
                             />
-                            {/*<IngredientThumbnailMemoized*/}
-                            {/*    ingredient={flavor}*/}
-                            {/*    ingredient_name={flavor.alias}*/}
-                            {/*    ingredient_id={flavor.entityID}*/}
-                            {/*    clickable={!isButtonHovered}*/}
-                            {/*/>*/}
                             <div
                                 style={{
                                     // backgroundColor: 'red',
