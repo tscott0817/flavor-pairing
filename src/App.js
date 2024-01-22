@@ -14,6 +14,6 @@ function App() {
             <MainLayout searchQuery={searchQuery}/>
         </div>
     );
-};
+}
 
 export default App;

@@ -211,7 +211,6 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
             </div>
         </div>
     );
-
 };
 
 export default DefaultPage;
