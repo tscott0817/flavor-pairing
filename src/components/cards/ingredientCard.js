@@ -5,29 +5,28 @@ const IngredientCard = ({ingredient}) => {
     const [ingredientData, setIngredientData] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const fetchIngredientData = useCallback(async () => {
-        if (ingredient) {
-            const entity_id = ingredient.entityID;
-
-            try {
-                // Find the flavor information for the given entity_id
-                const flavorData = flavordb.find(item => item.entityID === entity_id);
-
-                if (flavorData) {
-                    setIngredientData(flavorData);
-                } else {
-                    setErrorMessage('Ingredient not found');
-                }
-            } catch (error) {
-                console.error('Error fetching or parsing data:', error);
-                setErrorMessage('Error fetching data');
-            }
-        }
-    }, [ingredient]);
-
     useEffect(() => {
-        fetchIngredientData();
-    }, [ingredient, fetchIngredientData]);
+        const fetchData = async () => {
+            if (ingredient) {
+                const entity_id = ingredient.entityID;
+
+                try {
+                    const flavorData = flavordb.find(item => item.entityID === entity_id);
+
+                    if (flavorData) {
+                        setIngredientData(flavorData);
+                    } else {
+                        setErrorMessage('Ingredient not found');
+                    }
+                } catch (error) {
+                    console.error('Error fetching or parsing data:', error);
+                    setErrorMessage('Error fetching data');
+                }
+            }
+        };
+
+        fetchData();
+    }, [ingredient]);
 
     return (
         <div>

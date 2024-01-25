@@ -3,14 +3,15 @@ import {IoSearchOutline} from "react-icons/io5";
 import {TbLetterX} from "react-icons/tb";
 import React from "react";
 
-const NavBar = ({searchQuery, setSearchQuery}) => {
+const NavBar = ({searchQuery, handleSearchQueryChange}) => {
 
     const handleSearchInputChange = event => {
-        setSearchQuery(event.target.value);
+        console.log("navbar")
+        handleSearchQueryChange(event.target.value);
     };
 
     const eraseInputText = () => {
-        setSearchQuery('');
+        handleSearchQueryChange('');
     }
 
     return (
