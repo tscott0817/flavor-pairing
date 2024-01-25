@@ -179,7 +179,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                             whiteSpace: 'pre-line',
                             width: '90%',
                             marginTop: '5%',
-                            marginBottom: '5%',
+                            marginBottom: '3%',
                             marginLeft: '5%',
                             padding: '10px',
                             backgroundColor: buttonColor,

@@ -16,7 +16,7 @@ const CollapsibleComponent = ({ title, children, isCollapsed, onToggle }) => {
                 style={{
                     cursor: 'pointer',
                     borderBottom: '1px solid #ccc', // Light gray border
-                    padding: '8px 16px',
+                    padding: '6px 16px',
                     marginBottom: '10px',
                     display: 'flex',
                     alignItems: 'center',
