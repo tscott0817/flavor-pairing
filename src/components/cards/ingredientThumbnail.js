@@ -21,9 +21,9 @@ const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
                 alignItems: 'center',
                 borderRadius: '8px',
                 boxSizing: 'border-box',
-                paddingLeft: '3%',
-                paddingRight: '3%',
-                paddingTop: '3%',
+                // paddingLeft: '3%',
+                // paddingRight: '3%',
+                // paddingTop: '3%',
                 boxShadow: defaultPageNeonColor,
             }}
         >
@@ -58,8 +58,9 @@ const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
                     marginTop: '3%',
                     // backgroundColor: randomTempColor,
                     // fontFamily: 'Crimson Text, serif', fontStyle: 'italic', fontWeight: 'bold',
-                    fontFamily: 'Lora, serif',
-                    fontStyle: 'italic',
+                    // fontFamily: 'Lora, serif',
+                    fontFamily: 'Roboto, sans-serif',
+                    // fontStyle: 'italic',
                     fontSize: font_size || '1.2em',
                     color: thumbNailColorText,
                 }}

@@ -135,7 +135,8 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                                     <button
                                         onClick={() => handleRemoveIngredient(1)}
                                         style={{
-                                            backgroundColor: buttonBackgroundColor,
+                                            // backgroundColor: buttonBackgroundColor,
+                                            // backgroundColor: 'red',
                                             border: 'none',
                                             cursor: 'pointer'
                                         }}>
@@ -186,6 +187,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                             border: 'none',
                             borderRadius: '5px',
                             cursor: 'pointer',
+                            fontFamily: 'Roboto, sans-serif'
                         }}>
                         <FaRegChartBar style={{marginRight: '10px'}}/> Compare Ingredients
 
@@ -209,6 +211,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                 <div style={{
                     // backgroundColor: 'blue',
                     // borderBottom: '1px solid #999'
+                    fontFamily: 'Roboto, sans-serif'
                 }}>
                     <h3>Categories</h3>
                 </div>

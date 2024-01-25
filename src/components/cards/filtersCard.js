@@ -50,7 +50,7 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
                     zIndex: 1,
                 }}
             >
-                <ul style={{textAlign: 'left', listStyleType: 'none', padding: 0, fontSize: '15px'}}>
+                <ul style={{textAlign: 'left', listStyleType: 'none', padding: 0, fontSize: '15px', fontFamily: 'Roboto, sans-serif'}}>
                     {column1.map((category) => (
                         <li key={category}>
                             <label>
@@ -65,7 +65,7 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
                         </li>
                     ))}
                 </ul>
-                <ul style={{textAlign: 'left', listStyleType: 'none', padding: 0, fontSize: '15px'}}>
+                <ul style={{textAlign: 'left', listStyleType: 'none', padding: 0, fontSize: '15px', fontFamily: 'Roboto, sans-serif'}}>
                     {column2.map((category) => (
                         <li key={category}>
                             <label>
