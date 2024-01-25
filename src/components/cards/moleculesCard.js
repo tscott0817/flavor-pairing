@@ -96,6 +96,7 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                             width: '95%',
                             textAlign: 'center',
                             // backgroundColor: 'red'
+                            color: '#333'
                         }}
                     >
                         Molecules
@@ -259,6 +260,7 @@ const MoleculesCard = ({ingredientName, moleculeData}) => {
                         style={{
                             position: 'relative',
                             top: '50%',
+                            color: '#333',
                         }}
                     >
                         Click on a molecule to view details

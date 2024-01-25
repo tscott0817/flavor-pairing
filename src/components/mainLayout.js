@@ -9,7 +9,7 @@ import React, {useCallback, useEffect, useState} from "react";
 const MainLayout = ({searchQuery}) => {
     const [selectedIngredientRef, setSelectedIngredientRef] = useState(null);  // Pretending this is like a pointer
     const [selectedFilters, setSelectedFilters] = useState([]);
-    const [leftColumnVisible, setLeftColumnVisible] = useState(false);
+    const [leftColumnVisible, setLeftColumnVisible] = useState(true);
     const [comparisonVisible, setComparisonVisible] = useState(false);
     const [displayIngredient, setDisplayIngredient] = useState(false);
 
@@ -79,7 +79,6 @@ const MainLayout = ({searchQuery}) => {
                  flex: 1,
                  flexDirection: 'column',
              }}>
-
             <div style={{
                 // backgroundColor: 'red',
                 height: '100%',

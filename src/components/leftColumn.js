@@ -135,7 +135,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                                     <button
                                         onClick={() => handleRemoveIngredient(1)}
                                         style={{
-                                            // backgroundColor: buttonBackgroundColor,
+                                            backgroundColor: buttonBackgroundColor,
                                             // backgroundColor: 'red',
                                             border: 'none',
                                             cursor: 'pointer'

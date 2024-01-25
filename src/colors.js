@@ -20,6 +20,7 @@ export const buttonBackgroundColor = 'rgba(50, 50, 50, 0)';
 export const selectionColor = 'rgba(50, 50, 50, 0.5)';
 export const buttonColor = '#0a5bab';
 
+
 // Dark Mode Blues
 // TODO: PRODUCTION COLORS
 // export const navBarColor = '#15202b';

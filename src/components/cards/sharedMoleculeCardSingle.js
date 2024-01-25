@@ -65,7 +65,6 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
         >
             <div
                 style={{
-                    // fontFamily: 'Roboto, sans-serif',
                     // backgroundColor: 'pink',
                     minWidth: '250px',
                     maxWidth: '20vw',
@@ -96,6 +95,7 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                             width: '95%',
                             // marginBottom: '10px',
                             textAlign: 'center',
+                            color: '#333'
                             // backgroundColor: 'red'
                         }}
                     >
@@ -107,6 +107,7 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                     overflow: 'auto',
                     height: '370px',
                     padding: '5%',
+                    fontFamily: 'Roboto, sans-serif'
                     // borderRight: '1px solid #232b2b',
                 }}>
                     {sharedMolecules.length > 0 ? (
@@ -123,7 +124,6 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
             </div>
             <div
                 style={{
-                    // fontFamily: "Roboto, sans-serif",
                     // backgroundColor: sectionItemColor,
                     // backgroundColor: 'red',
                     minWidth: "25vw",
@@ -259,6 +259,7 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                         style={{
                             position: 'relative',
                             top: '50%',
+                            color: '#333'
                         }}
                     >
                         Click on a molecule to view details
