@@ -76,13 +76,12 @@ const MainLayout = ({searchQuery}) => {
                  position: 'relative',
                  top: '3%',
                  // backgroundColor: 'maroon',
-                 backgroundColor: buttonBackgroundColor,
                  flex: 1,
                  flexDirection: 'column',
              }}>
 
             <div style={{
-                backgroundColor: buttonBackgroundColor,
+                // backgroundColor: 'red',
                 height: '100%',
                 width: '3%',
                 marginLeft: leftColumnVisible ? '225px' : '0',
@@ -134,7 +133,7 @@ const MainLayout = ({searchQuery}) => {
                     transform: 'translate(-50%, -50%)',
                     width: '110%',  // 110% because some weird whitespace shows on window resize
                     height: '110%',
-                    // backgroundColor: 'red',
+                    backgroundColor: ingredientBackgroundColor,
                     zIndex: 1,
                     display: 'flex',
                     flexDirection: 'column',
@@ -148,7 +147,6 @@ const MainLayout = ({searchQuery}) => {
                          }
                      }}>
                     <div style={{
-                        // backgroundColor: 'red',
                         width: '65%',
                         minWidth: '900px',
                         height: '85%',

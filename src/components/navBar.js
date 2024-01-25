@@ -1,9 +1,10 @@
 import {navBarColor, searchBarColor} from "../colors";
 import {IoSearchOutline} from "react-icons/io5";
 import {TbLetterX} from "react-icons/tb";
-import React from "react";
+import React, {useState} from "react";
 
 const NavBar = ({searchQuery, handleSearchQueryChange}) => {
+    const [isHovered, setHovered] = useState(false);
 
     const handleSearchInputChange = event => {
         console.log("navbar")
@@ -88,8 +89,10 @@ const NavBar = ({searchQuery, handleSearchQueryChange}) => {
                         cursor: 'pointer',
                         marginLeft: '4px',
                         marginRight: '4px',
+                        position: 'relative',
                     }}
-                    onClick={() => eraseInputText()}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
                 >
                     <TbLetterX
                         style={{
@@ -98,6 +101,35 @@ const NavBar = ({searchQuery, handleSearchQueryChange}) => {
                             color: '#555',
                         }}
                     />
+                    {isHovered && (
+                        <div
+                            style={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                width: '25px',
+                                height: '25px',
+                                borderRadius: '50%',
+                                backgroundColor: 'rgba(25, 25, 25, 0.6)',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                color: '#fff',
+                                fontSize: '16px',
+                                cursor: 'pointer',
+                            }}
+                            onClick={() => eraseInputText()}
+                        >
+                            <TbLetterX
+                                style={{
+                                    width: '20px',
+                                    height: '20px',
+                                    color: '#fff',
+                                }}
+                            />
+                        </div>
+                    )}
                 </button>
             </div>
         </div>
