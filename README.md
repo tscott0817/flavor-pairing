@@ -12,7 +12,7 @@ https://www.flavorpear.net/
 - Search through molecules and flavor profiles to see how the combination will affect your dish.
 
 ## Links 
-Inspire by the Good Mythical Morning Podcast: https://youtu.be/eRTDGLTuLj8?si=uez5401khV4v79r0
-Ingredient data from: https://cosylab.iiitd.edu.in/flavordb/
-Molecule data from: https://pubchem.ncbi.nlm.nih.gov/
+- Inspire by the Good Mythical Morning Podcast: https://youtu.be/eRTDGLTuLj8?si=uez5401khV4v79r0
+- Ingredient data from: https://cosylab.iiitd.edu.in/flavordb/
+- Molecule data from: https://pubchem.ncbi.nlm.nih.gov/
 
