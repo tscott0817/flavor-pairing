@@ -39,7 +39,7 @@ const ResultsCard = ({sharedMolecules}) => {
     } else if (jaccardFinalScore >= 75 && jaccardFinalScore < 100) {
         resultText = 'These ingredients are very similar, but may be good in small amounts';
     } else {
-        resultText = "These ingredients are either too similar or there is a lack of data";
+        resultText = "There is a lack of differentiating data between these ingredients";
     }
 
     return (
