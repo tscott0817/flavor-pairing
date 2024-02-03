@@ -142,7 +142,11 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                         padding: '20px',
                     }}>
                         {selectedFilters.length === 0 ? (
-                            <p>No results found for "{searchQuery}"</p>
+                            <div style={{
+                                marginTop: '40vh'
+                            }}>
+                                <p>No results found for "{searchQuery}"</p>
+                            </div>
                         ) : (
                             <div style={{
                                 marginTop: '40vh'
