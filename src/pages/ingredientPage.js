@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useIngredientContext} from "../stateManager/IngredientContext";
-import {buttonColor, pageColor, randomTempColor} from "../colors";
+import {buttonColor, buttonMinusColor, buttonPlusColor, pageColor, randomTempColor} from "../colors";
 import CollapsibleComponent from '../components/collapsibleComponent';
 import MoleculesCard from "../components/cards/moleculesCard";
 import SimilarIngredientsCard from "../components/cards/similarIngredientsCard";
-import {FaPlus} from 'react-icons/fa';
+import {FaMinus, FaPlus} from 'react-icons/fa';
 import SingleIngredientFlavorCard from "../components/cards/singleIngredientFlavorCard";
 import flavordb from "../data/flavordb.json";
 import moleculesData from "../data/molecules.json";
@@ -23,7 +23,9 @@ const IngredientPage = ({ingredient}) => {
     const [fadeIn, setFadeIn] = useState(false);
 
     const handleAddToComparison = () => {
-        if (!selectedIngredients.includes(ingredient)) {
+        if (selectedIngredients.includes(ingredient)) {
+            unselectIngredient(ingredient);
+        } else {
             selectIngredient(ingredient);
         }
     };
@@ -188,13 +190,14 @@ const IngredientPage = ({ingredient}) => {
                                     width: '40px',
                                     height: '40px',
                                     borderRadius: '50%',
-                                    backgroundColor: buttonColor,
+                                    backgroundColor: selectedIngredients.includes(ingredient) ? buttonMinusColor : buttonPlusColor,
                                     color: 'white',
                                     border: 'none',
                                     cursor: 'pointer',
                                 }}
                             >
-                                <FaPlus/>
+                                {selectedIngredients.includes(ingredient) ? <FaMinus/> : <FaPlus/>}
+                                {/*<FaPlus/>*/}
                             </button>
                         </div>
                     </div>
