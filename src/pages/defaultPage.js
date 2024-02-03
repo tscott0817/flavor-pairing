@@ -2,15 +2,12 @@ import React, {useEffect, useState, useRef, memo} from "react";
 import IngredientThumbnail from "../components/cards/ingredientThumbnail";
 import {useIngredientContext} from "../stateManager/IngredientContext";
 import {
-    buttonColor,
-    defaultPageColor, defaultPageNeonColor,
-    mainAppColor,
-    pageColor,
-    pageSectionColor,
-    randomTempColor,
-    sectionItemColor
+    buttonPlusColor,
+    buttonCheckColor,
+    defaultPageColor,
+    pageColor, buttonMinusColor,
 } from "../colors";
-import {FaPlus} from "react-icons/fa";
+import {FaPlus, FaCheck, FaTimes, FaMinus} from "react-icons/fa";
 import flavordb from "../data/flavordb.json";
 
 const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQuery, selectedFilters}) => {
@@ -19,6 +16,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
     const containerRef = useRef(null);
     const {selectedIngredients, selectIngredient, unselectIngredient} = useIngredientContext();
     const [isButtonHovered, setIsButtonHovered] = useState(false);
+    const [hoveredButton, setHoveredButton] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -114,7 +112,9 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
     });
 
     const handleAddToComparison = (ingredient) => {
-        if (!selectedIngredients.includes(ingredient)) {
+        if (selectedIngredients.includes(ingredient)) {
+            unselectIngredient(ingredient);
+        } else {
             selectIngredient(ingredient);
         }
     };
@@ -155,7 +155,6 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                 ) : (
                     filteredFlavors.map((flavor) => (
                         <div
-                            // key={flavor.index}
                             key={flavor.entityID}
                             className="thumbnail"
                             style={{
@@ -185,8 +184,14 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                                 }}
                             >
                                 <button
-                                    onMouseEnter={() => setIsButtonHovered(true)}
-                                    onMouseLeave={() => setIsButtonHovered(false)}
+                                    onMouseEnter={() => {
+                                        setHoveredButton(flavor.entityID);
+                                        setIsButtonHovered(true);
+                                    }}
+                                    onMouseLeave={() => {
+                                        setHoveredButton(null);
+                                        setIsButtonHovered(false);
+                                    }}
                                     onClick={() => handleAddToComparison(flavor)}
                                     style={{
                                         margin: '1%',
@@ -196,14 +201,44 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                                         width: '25px',
                                         height: '25px',
                                         borderRadius: '50%',
-                                        backgroundColor: buttonColor,
+                                        backgroundColor: selectedIngredients.includes(flavor) ? buttonMinusColor : buttonPlusColor,
+                                        // backgroundColor: selectedIngredients.includes(flavor) ? (hoveredButton === flavor.entityID ? buttonMinusColor : buttonCheckColor) : buttonPlusColor,
                                         color: 'white',
                                         border: 'none',
                                         cursor: 'pointer',
                                     }}
                                 >
-                                    <FaPlus/>
+                                    {selectedIngredients.includes(flavor) ? <FaMinus/> : <FaPlus/>}
+                                    {/*{selectedIngredients.includes(flavor) && hoveredButton === flavor.entityID ? (*/}
+                                    {/*    <FaMinus/>*/}
+                                    {/*) : (*/}
+                                    {/*    selectedIngredients.includes(flavor) ? <FaCheck/> : <FaPlus/>*/}
+                                    {/*)}*/}
                                 </button>
+                                {/*<button*/}
+                                {/*    onMouseEnter={() => setIsButtonHovered(true)}*/}
+                                {/*    onMouseLeave={() => setIsButtonHovered(false)}*/}
+                                {/*    onClick={() => handleAddToComparison(flavor)}*/}
+                                {/*    style={{*/}
+                                {/*        margin: '1%',*/}
+                                {/*        display: 'flex',*/}
+                                {/*        alignItems: 'center',*/}
+                                {/*        justifyContent: 'center',*/}
+                                {/*        width: '25px',*/}
+                                {/*        height: '25px',*/}
+                                {/*        borderRadius: '50%',*/}
+                                {/*        backgroundColor: selectedIngredients.includes(flavor) ? buttonCheckColor : buttonPlusColor,*/}
+                                {/*        color: 'white',*/}
+                                {/*        border: 'none',*/}
+                                {/*        cursor: 'pointer',*/}
+                                {/*    }}*/}
+                                {/*>*/}
+                                {/*    {selectedIngredients.includes(flavor) && isButtonHovered ? (*/}
+                                {/*        <FaTimes/>*/}
+                                {/*    ) : (*/}
+                                {/*        selectedIngredients.includes(flavor) ? <FaCheck/> : <FaPlus/>*/}
+                                {/*    )}*/}
+                                {/*</button>*/}
                             </div>
                         </div>
                     ))

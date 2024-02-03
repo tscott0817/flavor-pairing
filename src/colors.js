@@ -1,4 +1,3 @@
-// TODO: PRODUCTION COLORS
 // Light Mode
 export const navBarColor = '#f4f3f2';
 export const searchBarColor = '#ffffff';
@@ -19,10 +18,12 @@ export const buttonColorArrow = 'rgba(50, 50, 50, 0.6)';
 export const buttonBackgroundColor = 'rgba(50, 50, 50, 0)';
 export const selectionColor = 'rgba(50, 50, 50, 0.5)';
 export const buttonColor = '#0a5bab';
+export const buttonPlusColor = '#0a5bab';
+export const buttonCheckColor = '#228b22';
+export const buttonMinusColor = '#db404a';
 
 
-// Dark Mode Blues
-// TODO: PRODUCTION COLORS
+// Dark Mode
 // export const navBarColor = '#15202b';
 // export const searchBarColor = '#22303c';
 // export const thumbNailColor = '#15202b';

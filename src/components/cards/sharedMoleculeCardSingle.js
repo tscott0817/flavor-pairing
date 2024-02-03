@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {buttonColor, pageSectionColor, sectionItemColor} from "../../colors";
 
 const SharedMoleculesCardSingle = ({sharedMolecules}) => {
@@ -8,41 +8,55 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
     const [moleculeInfo, setMoleculeInfo] = useState(null);
     const [moleculeImage, setMoleculeImage] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleMoleculeClick = async (selected) => {
-        try {
-            const infoUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selected.pubchemID}/json`;
-            const infoResponse = await fetch(infoUrl);
-            const infoData = await infoResponse.json();
+    useEffect(() => {
+        const fetchData = async () => {
+            if (selectedMolecule) {
+                setIsLoading(true);
+                try {
+                    const infoUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selectedMolecule.pubchemID}/json`;
+                    const infoResponse = await fetch(infoUrl);
+                    const infoData = await infoResponse.json();
 
-            if (infoResponse.status === 200) {
-                const properties = infoData['PC_Compounds'][0].props;
+                    if (infoResponse.status === 200) {
+                        const properties = infoData['PC_Compounds'][0].props;
 
-                const moleculeInfo = {
-                    'PubChemID': selected.pubchemID,
-                    'Properties': {}
-                };
+                        const moleculeInfo = {
+                            'PubChemID': selectedMolecule.pubchemID,
+                            'Properties': {}
+                        };
 
-                properties.forEach(prop => {
-                    moleculeInfo.Properties[prop['urn']['label']] = prop['value'];
-                });
-                setMoleculeInfo(moleculeInfo);
+                        properties.forEach(prop => {
+                            moleculeInfo.Properties[prop['urn']['label']] = prop['value'];
+                        });
+                        setMoleculeInfo(moleculeInfo);
 
-                const imageUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selected.pubchemID}/PNG`;
-                setMoleculeImage(imageUrl);
+                        const imageUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${selectedMolecule.pubchemID}/PNG`;
+                        setMoleculeImage(imageUrl);
 
-                setIsVisible(false);
-                setTimeout(() => {
-                    setSelectedMolecule(selected);
-                    setIsVisible(true);
-                }, 500);
-            } else {
-                console.error(`Error retrieving data for PubChem ID ${selected.pubchemID}`);
+                        setIsVisible(false);
+                        setTimeout(() => {
+                            setIsVisible(true);
+                        }, 500);
+                    } else {
+                        console.error(`Error retrieving data for PubChem ID ${selectedMolecule.pubchemID}`);
+                    }
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    setIsLoading(false);
+                }
             }
-        } catch (error) {
-            console.error(error);
-        }
+        };
+
+        fetchData();
+    }, [selectedMolecule]);
+
+    const handleMoleculeClick = (selected) => {
+        setSelectedMolecule(selected);
     };
+
     if (sharedMolecules === null) {
         return <div>No molecule data available.</div>;
     }
@@ -143,7 +157,7 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                     // boxSizing: "border-box",
                 }}
             >
-                {selectedMolecule ? (
+                {moleculeInfo && selectedMolecule ? (
                     <div>
                         <h2
                             style={{
@@ -262,7 +276,7 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                             color: '#333'
                         }}
                     >
-                        Click on a molecule to view details
+                        {isLoading ? <p>Loading...</p> : <p>Click on a molecule to view details</p>}
                     </h2>
                 )}
             </div>

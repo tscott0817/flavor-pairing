@@ -218,7 +218,7 @@ const IngredientPage = ({ingredient}) => {
                             onToggle={() => setMoleculeCardCollapsed(!isMoleculeCardCollapsed)}
                         >
                             {!isMoleculeCardCollapsed && (
-                                <MoleculesCard ingredientName={"Temp"} moleculeData={allMolecules}/>
+                                <MoleculesCard moleculeData={allMolecules}/>
                             )}
                         </CollapsibleComponent>
                         <CollapsibleComponent
