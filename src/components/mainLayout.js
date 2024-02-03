@@ -75,7 +75,7 @@ const MainLayout = ({searchQuery}) => {
                  flexGrow: 1,
                  position: 'relative',
                  top: '3%',
-                 // backgroundColor: 'maroon',
+                 backgroundColor: 'transparent',
                  flex: 1,
                  flexDirection: 'column',
              }}>
@@ -83,7 +83,7 @@ const MainLayout = ({searchQuery}) => {
                 // backgroundColor: 'red',
                 height: '100%',
                 width: '3%',
-                marginLeft: leftColumnVisible ? '225px' : '0',
+                marginLeft: leftColumnVisible ? '220px' : '0',
                 position: 'fixed',
                 zIndex: 1,
                 transition: 'margin-left 0.2s ease-in-out',
@@ -113,7 +113,7 @@ const MainLayout = ({searchQuery}) => {
 
             <div className="main-content" style={{
                 flex: '1',
-                // backgroundColor: 'red',
+                backgroundColor: 'transparent',
                 marginLeft: leftColumnVisible ? '250px' : '25px',
                 marginTop: '60px',
                 overflow: 'auto',
@@ -151,6 +151,7 @@ const MainLayout = ({searchQuery}) => {
                         height: '85%',
                         minHeight: '85%',
                         position: 'relative',
+                        backgroundColor: 'transparent',
                     }}>
                         <FaArrowLeft
                             onClick={() => setDisplayIngredient(false)}
@@ -199,6 +200,7 @@ const MainLayout = ({searchQuery}) => {
                             height: '85%',
                             minWidth: '900px',
                             position: 'relative',
+                            backgroundColor: 'transparent',
                         }}
                     >
                         <FaArrowLeft

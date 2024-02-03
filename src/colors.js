@@ -1,4 +1,5 @@
 // Light Mode
+export const defaultColor = '#f4f3f2';
 export const navBarColor = '#f4f3f2';
 export const searchBarColor = '#ffffff';
 export const thumbNailColor = '#f4f3f2';

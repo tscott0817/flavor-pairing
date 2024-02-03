@@ -4,6 +4,9 @@ import IngredientThumbnail from "./cards/ingredientThumbnail";
 import FiltersCard from "./cards/filtersCard";
 import React, {useState} from "react";
 import {useIngredientContext} from "../stateManager/IngredientContext";
+import { FaPlus } from 'react-icons/fa';
+import {CiCirclePlus} from "react-icons/ci";
+
 
 const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedFilters, selectedFilters}) => {
 
@@ -44,20 +47,27 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
             display: 'flex',
             flexDirection: 'column',
             position: 'fixed',
-            // backgroundColor: 'pink',
+            backgroundColor: 'transparent',
             width: '225px',
             height: '100vh',
             boxSizing: 'border-box',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+            // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
             transition: 'transform 0.2s ease-in-out',
             transform: leftColumnVisible ? 'translateX(0)' : 'translateX(-225px)',
         }}>
             <div style={{
                 // backgroundColor: 'orange',
-                width: '100%',
-                marginTop: '75px',
+                width: '96%',
+                marginLeft: '2%',
+                marginTop: '68px',
                 position: 'absolute',
+                paddingTop: '5%',
                 zIndex: 2,
+                overflow: 'visible',
+                fontFamily: 'Roboto, sans-serif',
+                border: '2px solid #ccc',
+                borderRadius: '10px',
+                boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)',
             }}>
                 <div style={{
                     display: 'flex',
@@ -72,6 +82,20 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                         borderRadius: '8px',
                         marginLeft: '25px',
                     }}>
+                        <div style={{
+                            position: 'absolute',
+                            top: '0',
+                            left: '0',
+                            width: '100%',
+                            height: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            zIndex: 2,
+                            fontSize: '40px',
+                        }}>
+                            <CiCirclePlus />
+                        </div>
                         {selectedIngredients.length > 0 && (
                             <div style={{
                                 position: 'relative',
@@ -121,6 +145,20 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                         borderRadius: '8px',
                         marginLeft: '35px',
                     }}>
+                        <div style={{
+                            position: 'absolute',
+                            top: '0',
+                            left: '0',
+                            width: '100%',
+                            height: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            zIndex: 2,
+                            fontSize: '40px',
+                        }}>
+                            <CiCirclePlus />
+                        </div>
                         {selectedIngredients.length > 1 && (
                             <div style={{
                                 position: 'relative',
@@ -202,18 +240,11 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                             padding: '8px',
                             borderRadius: '5px',
                             boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
-                            zIndex: 1,
+                            zIndex: 2,
                         }}>
                             Please Select 2 Ingredients
                         </div>
                     )}
-                </div>
-                <div style={{
-                    // backgroundColor: 'blue',
-                    // borderBottom: '1px solid #999'
-                    fontFamily: 'Roboto, sans-serif'
-                }}>
-                    <h3>Categories</h3>
                 </div>
             </div>
             <div style={{
@@ -221,10 +252,10 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                 paddingLeft: '2%',
                 paddingRight: '2%',
                 paddingTop: '2%',
-                borderTop: '1px solid #999',
-                marginTop: '240px',
+                // borderTop: '1px solid #999',
+                marginTop: '212px',
                 marginBottom: 'auto',
-                overflow: 'auto', // Add this line to enable scrolling
+                overflow: 'auto',
             }}>
                 <FiltersCard selectedFilters={selectedFilters} handleFilterSelect={handleFilterSelect}/>
             </div>
