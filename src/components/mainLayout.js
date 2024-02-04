@@ -118,7 +118,7 @@ const MainLayout = ({searchQuery}) => {
             <div className="main-content" style={{
                 flex: '1',
                 marginLeft: leftColumnVisible ? '250px' : '25px',
-                marginTop: '60px',
+                marginTop: '65px',
                 overflow: 'auto',
                 transition: 'margin-left 0.2s ease-in-out',
             }}>

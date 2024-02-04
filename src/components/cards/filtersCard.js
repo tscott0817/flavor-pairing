@@ -83,7 +83,6 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
                     ))}
                 </ul>
             </div>
-
         </div>
     );
 };
