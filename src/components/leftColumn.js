@@ -58,6 +58,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
             <div style={{
                 // backgroundColor: 'orange',
                 width: '96%',
+                height: '160px',
                 marginLeft: '2%',
                 marginTop: '68px',
                 position: 'absolute',
@@ -253,9 +254,9 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                 paddingRight: '2%',
                 paddingTop: '2%',
                 // borderTop: '1px solid #999',
-                marginTop: '212px',
+                marginTop: '100%',
                 marginBottom: 'auto',
-                overflow: 'auto',
+                overflow: 'hidden',
             }}>
                 <FiltersCard selectedFilters={selectedFilters} handleFilterSelect={handleFilterSelect}/>
             </div>
