@@ -2,11 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import {ResponsiveBar} from "@nivo/bar";
 import {ResponsiveRadar} from "@nivo/radar";
 import {
-    windowColor,
-    pageColor,
-    pageSectionColor,
     sectionItemColor,
-    mainAppColor,
 } from "../../colors";
 import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
 import flavordbData from "../../data/flavordb.json";
