@@ -1,4 +1,4 @@
-import {defaultColor} from "../../colors";
+import {defaultColor} from "../../stateManager/lightMode";
 
 const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
     const categories = [

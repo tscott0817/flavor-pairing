@@ -1,0 +1,25 @@
+// Dark Mode
+export const defaultColor = '#1a1a1a';
+export const navBarColor = '#1a1a1a';
+export const searchBarColor = '#333333';
+export const thumbNailColor = '#1a1a1a';
+export const thumbNailColorText = '#f4f3f2';
+export const outlineColor = '#f4f3f2';
+export const ingredientBackgroundColor = 'rgba(55, 55, 55, 0.9)';
+export const windowColor = '#1a1a1a';
+export const mainAppColor = '#1a1a1a';
+export const defaultPageColor = '#1a1a1a';
+export const defaultPageNeonColor = '0 0 8px rgba(255, 255, 255, 0.4)';
+export const pageColor = '#1a1a1a';
+export const pageSectionColor = '#1a1a1a';
+export const sectionItemColor = '#1a1a1a';
+export const randomTempColor = '#669dd4'; // Adjust as needed
+export const leftColumnColor = '#1a1a1a';
+export const buttonColorArrow = 'rgba(255, 255, 255, 0.6)';
+export const buttonBackgroundColor = 'rgba(255, 255, 255, 0)';
+export const selectionColor = 'rgba(255, 255, 255, 0.5)';
+export const buttonColor = '#0a5bab'; // Adjust as needed
+export const buttonPlusColor = '#0a5bab'; // Adjust as needed
+export const buttonCheckColor = '#228b22';
+export const buttonMinusColor = '#eb5761';
+export const popupColor = '#ffcc00';

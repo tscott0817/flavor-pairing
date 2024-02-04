@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useIngredientContext} from "../stateManager/IngredientContext";
-import {buttonColor, buttonMinusColor, buttonPlusColor, pageColor, randomTempColor} from "../colors";
+import {buttonColor, buttonMinusColor, buttonPlusColor, pageColor, randomTempColor} from "../stateManager/lightMode";
 import CollapsibleComponent from '../components/collapsibleComponent';
 import MoleculesCard from "../components/cards/moleculesCard";
 import SimilarIngredientsCard from "../components/cards/similarIngredientsCard";

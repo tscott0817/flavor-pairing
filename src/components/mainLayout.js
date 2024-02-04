@@ -1,10 +1,13 @@
-import {buttonBackgroundColor, buttonColorArrow, ingredientBackgroundColor} from "../colors";
+import {buttonBackgroundColor, buttonColorArrow, ingredientBackgroundColor} from "../stateManager/lightMode";
 import {FaArrowLeft, FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import LeftColumn from "./leftColumn";
 import DefaultPage from "../pages/defaultPage";
 import IngredientPage from "../pages/ingredientPage";
 import CompareIngredientsPage from "../pages/compareIngredientsPage";
 import React, {useCallback, useEffect, useState} from "react";
+import * as lightColors from "../stateManager/lightMode";
+import * as darkColors from "../stateManager/darkMode";
+import {useThemeContext} from "../stateManager/ThemeContext";
 
 const MainLayout = ({searchQuery}) => {
     const [selectedIngredientRef, setSelectedIngredientRef] = useState(null);  // Pretending this is like a pointer
@@ -12,6 +15,7 @@ const MainLayout = ({searchQuery}) => {
     const [leftColumnVisible, setLeftColumnVisible] = useState(true);
     const [comparisonVisible, setComparisonVisible] = useState(false);
     const [displayIngredient, setDisplayIngredient] = useState(false);
+    const { theme } = useThemeContext();
 
     const handleDisplayIngredient = useCallback((displayIngredient) => {
         setDisplayIngredient(displayIngredient);
@@ -75,7 +79,7 @@ const MainLayout = ({searchQuery}) => {
                  flexGrow: 1,
                  position: 'relative',
                  top: '3%',
-                 backgroundColor: 'transparent',
+                 backgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
                  flex: 1,
                  flexDirection: 'column',
              }}>
@@ -113,7 +117,6 @@ const MainLayout = ({searchQuery}) => {
 
             <div className="main-content" style={{
                 flex: '1',
-                backgroundColor: 'transparent',
                 marginLeft: leftColumnVisible ? '250px' : '25px',
                 marginTop: '60px',
                 overflow: 'auto',
@@ -132,7 +135,7 @@ const MainLayout = ({searchQuery}) => {
                     transform: 'translate(-50%, -50%)',
                     width: '110%',  // 110% because some weird whitespace shows on window resize
                     height: '110%',
-                    backgroundColor: ingredientBackgroundColor,
+                    backgroundColor: theme === lightColors ? lightColors.ingredientBackgroundColor : darkColors.ingredientBackgroundColor,
                     zIndex: 1,
                     display: 'flex',
                     flexDirection: 'column',
@@ -151,7 +154,6 @@ const MainLayout = ({searchQuery}) => {
                         height: '85%',
                         minHeight: '85%',
                         position: 'relative',
-                        backgroundColor: 'transparent',
                     }}>
                         <FaArrowLeft
                             onClick={() => setDisplayIngredient(false)}
@@ -180,7 +182,7 @@ const MainLayout = ({searchQuery}) => {
                         transform: 'translate(-50%, -50%)',
                         width: '110%',
                         height: '110%',
-                        backgroundColor: ingredientBackgroundColor,
+                        backgroundColor: theme === lightColors ? lightColors.ingredientBackgroundColor : darkColors.ingredientBackgroundColor,
                         zIndex: 1,
                         display: 'flex',
                         flexDirection: 'column',

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import SharedMoleculesCardSingle from "../components/cards/sharedMoleculeCardSingle";
 import IngredientCombinedCard from "../components/cards/ingredientCombinedCard";
 import ResultsCard from "../components/cards/resultsCard";
-import {windowColor, pageColor, pageSectionColor, sectionItemColor, mainAppColor} from "../colors";
+import {windowColor, pageColor, pageSectionColor, sectionItemColor, mainAppColor} from "../stateManager/lightMode";
 import CollapsibleComponent from "../components/collapsibleComponent";
 import SharedIngredientFlavorCard from "../components/cards/sharedIngredientFlavorCard";
 import moleculesData from "../data/molecules.json";

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveRadar } from "@nivo/radar";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
-import { buttonBackgroundColor, sectionItemColor } from "../../colors";
+import { buttonBackgroundColor, sectionItemColor } from "../../stateManager/lightMode";
 
 const SharedIngredientFlavorCard = ({ sharedMolecules }) => {
     const [showBarChart, setShowBarChart] = useState(true);

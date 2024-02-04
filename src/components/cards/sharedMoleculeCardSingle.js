@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {buttonColor, pageSectionColor, sectionItemColor} from "../../colors";
+import {buttonColor, pageSectionColor, sectionItemColor} from "../../stateManager/lightMode";
 
 const SharedMoleculesCardSingle = ({sharedMolecules}) => {
     console.log('Shared Molecules Card');
