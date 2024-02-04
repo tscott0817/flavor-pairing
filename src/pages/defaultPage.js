@@ -187,8 +187,8 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                                 style={{
                                     // backgroundColor: 'red',
                                     position: 'absolute',
-                                    right: 9,
-                                    bottom: 7,
+                                    right: 5,
+                                    bottom: 5,
                                 }}
                             >
                                 <button
@@ -206,8 +206,8 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        width: '25px',
-                                        height: '25px',
+                                        width: '30px',
+                                        height: '30px',
                                         borderRadius: '50%',
                                         backgroundColor: selectedIngredients.includes(flavor) ? buttonMinusColor : buttonPlusColor,
                                         // backgroundColor: selectedIngredients.includes(flavor) ? (hoveredButton === flavor.entityID ? buttonMinusColor : buttonCheckColor) : buttonPlusColor,

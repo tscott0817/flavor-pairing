@@ -4,6 +4,7 @@ import { TbLetterX } from "react-icons/tb";
 import { useThemeContext } from '../stateManager/ThemeContext';
 import * as lightColors from "../stateManager/lightMode";
 import * as darkColors from "../stateManager/darkMode";
+import {FaSun, FaMoon} from "react-icons/fa";
 
 const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
     const [isHovered, setHovered] = useState(false);
@@ -29,7 +30,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                 justifyContent: 'space-between',
                 position: 'fixed',
                 zIndex: 1,
-                boxShadow: '0 0 8px rgba(0, 0, 0, 0.3)',
+                boxShadow: theme === lightColors ? lightColors.glowColorMedium : darkColors.glowColorMedium,
                 padding: '0 10px',
             }}
         >
@@ -46,8 +47,9 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                     // padding: '8px',
                     paddingLeft: '8px',
                     paddingRight: '8px',
-                    boxShadow: '0 0 8px rgba(0, 0, 0, 0.2)',
-                    margin: 'auto',
+                    boxShadow: theme === lightColors ? lightColors.glowColorThin : darkColors.glowColorThin,
+                    // margin: 'auto',
+                    marginLeft: '35%',
                 }}
             >
                 {/* Eyeglass search icon */}
@@ -135,10 +137,13 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                     )}
                 </button>
             </div>
-            {/*<div>*/}
-            {/*    <button onClick={toggleTheme}>Toggle Theme</button>*/}
-            {/*    <p>Current Theme: {theme === lightColors ? 'Light' : 'Dark'}</p>*/}
-            {/*</div>*/}
+            <div style={{cursor: 'pointer', marginRight: '1%'}}>
+                {theme === lightColors ? (
+                    <FaMoon onClick={toggleTheme} style={{fontSize: '22px', transform: 'scaleX(-1)'}}/>
+                ) : (
+                    <FaSun onClick={toggleTheme} style={{filter: 'invert(100%)', fontSize: '24px'}}/>
+                )}
+            </div>
         </div>
     )
 }

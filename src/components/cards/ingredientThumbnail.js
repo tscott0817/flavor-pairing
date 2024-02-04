@@ -1,20 +1,19 @@
-import {
-    defaultPageNeonColor,
-    thumbNailColor,
-    thumbNailColorText
-} from "../../stateManager/lightMode";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
     // const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient_id}.jpg`;
     const imageURL = `/images/${ingredient_id}.jpg`;
     const capitalizeWords = (str) => str.replace(/\b\w/g, (char) => char.toUpperCase());
+    const {theme} = useThemeContext();
 
     return (
         <div
             style={{
                 width: '100%',
                 height: '100%',
-                backgroundColor: thumbNailColor,
+                backgroundColor: theme === lightColors ? lightColors.componentColor : darkColors.componentColor,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -24,7 +23,7 @@ const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
                 // paddingLeft: '3%',
                 // paddingRight: '3%',
                 // paddingTop: '3%',
-                boxShadow: defaultPageNeonColor,
+                boxShadow: theme === lightColors ? lightColors.glowColorThick : darkColors.glowColorThick,
             }}
         >
             <div
@@ -55,14 +54,15 @@ const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
                 style={{
                     padding: '1%',
                     textAlign: 'center',
-                    marginTop: '3%',
-                    // backgroundColor: randomTempColor,
+                    marginTop: '2%',
+                    marginBottom: '2%',
+                    // backgroundColor: 'green',
                     // fontFamily: 'Crimson Text, serif', fontStyle: 'italic', fontWeight: 'bold',
                     // fontFamily: 'Lora, serif',
                     fontFamily: 'Roboto, sans-serif',
                     // fontStyle: 'italic',
                     fontSize: font_size || '1.2em',
-                    color: thumbNailColorText,
+                    color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                 }}
             >
                 {capitalizeWords(ingredient_name)}

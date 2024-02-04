@@ -61,7 +61,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
             transform: leftColumnVisible ? 'translateX(0)' : 'translateX(-225px)',
         }}>
             <div style={{
-                // backgroundColor: 'orange',
+                backgroundColor: theme === lightColors ? lightColors.componentColor : darkColors.componentColor,
                 width: '96%',
                 height: '160px',
                 marginLeft: '2%',
@@ -71,7 +71,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                 zIndex: 2,
                 overflow: 'visible',
                 fontFamily: 'Roboto, sans-serif',
-                border: '2px solid #ccc',
+                border: theme === lightColors ? '2px solid #ccc' : 'none',
                 borderRadius: '10px',
                 boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)',
             }}>

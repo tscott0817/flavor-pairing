@@ -1,4 +1,6 @@
-import {defaultColor} from "../../stateManager/lightMode";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
     const categories = [
@@ -11,6 +13,7 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
 
     const column1 = categories.slice(0, Math.ceil(categories.length / 2));
     const column2 = categories.slice(Math.ceil(categories.length / 2));
+    const {theme} = useThemeContext();
 
     return (
         <div
@@ -27,9 +30,10 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
                 paddingBottom: '5%',
                 marginTop: '5px',
                 fontFamily: 'Roboto, sans-serif',
-                border: '2px solid #ccc',
+                border: theme === lightColors ? '2px solid #ccc' : 'none',
                 borderRadius: '10px',
                 boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)',
+                backgroundColor: theme === lightColors ? lightColors.navBarColor : darkColors.navBarColor,
             }}
         >
             <div style={{
@@ -39,19 +43,20 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
                 fontWeight: 'bold',
                 position: 'sticky',
                 top: '0',
-                backgroundColor: defaultColor,
+                backgroundColor: theme === lightColors ? lightColors.componentColor : darkColors.componentColor,
                 borderBottom: '2px solid #ccc',
-                zIndex: 2
+                zIndex: 2,
+                color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
             }}>
                 Categories
             </div>
-            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between', color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,}}>
                 <ul style={{
                     textAlign: 'left',
                     listStyleType: 'none',
                     padding: 0,
                     fontSize: '15px',
-                    marginRight: '10px'
+                    marginRight: '10px',
                 }}>
                     {column1.map((category) => (
                         <li key={category} style={{marginBottom: '10px'}}>
