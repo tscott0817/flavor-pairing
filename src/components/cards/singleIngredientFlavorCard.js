@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
+import {ResponsiveBar} from "@nivo/bar";
 import {ResponsiveRadar} from "@nivo/radar";
 import {
     windowColor,
@@ -14,6 +15,7 @@ import moleculesData from "../../data/molecules.json";
 const SingleIngredientFlavorCard = ({entity_id}) => {
     const [flavorData, setFlavorData] = useState(null);
     const [isFullScreen, setIsFullScreen] = useState(false);
+    const [showBarChart, setShowBarChart] = useState(true); // State to toggle between bar chart and radar chart
     const chartContainerRef = useRef(null);
     const [showAllFlavors, setShowAllFlavors] = useState(false);
     console.log("Flavor Card");
@@ -21,10 +23,18 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     useEffect(() => {
         const fetchData = () => {
             try {
-                const entityData = flavordbData.find((item) => item.entityID === entity_id);
-                const moleculeNames = entityData.molecules.match(/\{([^}]+)\}/)?.[1].replace(/'/g, '');
-                const moleculeData = moleculesData.filter((item) => moleculeNames.includes(item.pubchemID.toString()));
-                const flavorProfiles = moleculeData.map((item) => item.flavorProfile);
+                const entityData = flavordbData.find(
+                    (item) => item.entityID === entity_id
+                );
+                const moleculeNames = entityData.molecules
+                    .match(/\{([^}]+)\}/)?.[1]
+                    .replace(/'/g, "");
+                const moleculeData = moleculesData.filter((item) =>
+                    moleculeNames.includes(item.pubchemID.toString())
+                );
+                const flavorProfiles = moleculeData.map(
+                    (item) => item.flavorProfile
+                );
 
                 setFlavorData(flavorProfiles);
             } catch (error) {
@@ -36,7 +46,7 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     }, [entity_id]);
 
     if (!flavorData) {
-        return <div>No radar data available.</div>;
+        return <div>No data available.</div>;
     }
 
     const flavorCounts = countFlavorProfiles(flavorData);
@@ -50,42 +60,15 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
 
     flavorListData.sort((a, b) => b.count - a.count);
 
-    // TODO: Not sure I even like having this (especially since i think it is browser specific)
-    const toggleFullScreen = () => {
-        const chartContainer = chartContainerRef.current;
-
-        if (chartContainer) {
-            if (!isFullScreen) {
-                if (chartContainer.requestFullscreen) {
-                    chartContainer.requestFullscreen();
-                } else if (chartContainer.mozRequestFullScreen) {
-                    chartContainer.mozRequestFullScreen();
-                } else if (chartContainer.webkitRequestFullscreen) {
-                    chartContainer.webkitRequestFullscreen();
-                } else if (chartContainer.msRequestFullscreen) {
-                    chartContainer.msRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            }
-
-            setIsFullScreen(!isFullScreen);
-        }
-    };
-
     const toggleShowAllFlavors = () => {
         setShowAllFlavors(!showAllFlavors);
     };
 
-    const getRadarChartData = () => {
+    const toggleChart = () => {
+        setShowBarChart(!showBarChart);
+    };
+
+    const getChartData = () => {
         const flavorCounts = countFlavorProfiles(flavorData);
         const flavorListData = Object.entries(flavorCounts).map(
             ([flavorProfile, count]) => ({
@@ -102,7 +85,7 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                 Occurrences: count,
             }));
         } else {
-            const topFlavors = flavorListData.slice(0, 25);
+            const topFlavors = flavorListData.slice(0, 20);
             return topFlavors.map(({flavorProfile, count}) => ({
                 flavor: flavorProfile,
                 Occurrences: count,
@@ -111,7 +94,44 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     };
 
     return (
-        <div style={{display: "flex", borderRadius: "8px", justifyContent: "center", alignItems: "center"}}>
+        <div style={{display: "flex", flexDirection: "column"}}>
+            <div style={{textAlign: "center", marginTop: "10px", display: "flex", flexDirection: "column"}}>
+                <button onClick={toggleChart} style={{
+                    width: '20%',
+                    marginLeft: '80%',
+                    marginBottom: '10px',
+                    cursor: 'pointer',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontFamily: 'Roboto, sans-serif',
+                }}>
+                    <span style={{
+                        color: '#555',
+                        fontWeight: 'bold',
+                        textTransform: 'uppercase',
+                        transition: 'color 0.3s ease'
+                    }}>
+                        {showBarChart ? 'Switch to Radar Chart' : 'Switch to Bar Chart'}
+                    </span>
+                </button>
+                <button onClick={toggleShowAllFlavors} style={{
+                    width: '20%',
+                    marginLeft: '80%',
+                    cursor: 'pointer',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontFamily: 'Roboto, sans-serif',
+                }}>
+                    <span style={{
+                        color: '#555',
+                        fontWeight: 'bold',
+                        textTransform: 'uppercase',
+                        transition: 'color 0.3s ease'
+                    }}>
+                        {showAllFlavors ? 'Show Top 20 Flavors' : 'Show All Flavors'}
+                    </span>
+                </button>
+            </div>
             <div
                 ref={chartContainerRef}
                 style={{
@@ -119,74 +139,65 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                     minWidth: "25vw",
                     width: "100%",
                     height: "50vh",
-                    marginBottom: '10px',
                     borderRadius: "8px",
                     backgroundColor: sectionItemColor,
-                    overflow: 'visible',
+                    overflow: "visible",
                 }}
             >
-                {/*<button*/}
-                {/*    onClick={toggleFullScreen}*/}
-                {/*    style={{*/}
-                {/*        position: "absolute",*/}
-                {/*        top: "15px",*/}
-                {/*        left: "20px",*/}
-                {/*        zIndex: 1,*/}
-                {/*        borderRadius: "8px",*/}
-                {/*        background: buttonBackgroundColor,*/}
-                {/*        border: "none",*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    {isFullScreen ? (*/}
-                {/*        <MdFullscreenExit size={30}/>*/}
-                {/*    ) : (*/}
-                {/*        <MdFullscreen size={30}/>*/}
-                {/*    )}*/}
-                {/*</button>*/}
-                <div style={{
-                    position: "absolute",
-                    top: 20,
-                    right: 25,
-                    zIndex: 1,
-                    display: "flex",
-                    alignItems: "center"
-                }}>
-                    <input
-                        type="checkbox"
-                        id="showAllFlavorsCheckbox"
-                        checked={showAllFlavors}
-                        onChange={toggleShowAllFlavors}
-                        style={{
-                            width: "15px",
-                            height: "15px",
-                            borderRadius: "4px",
-                            background: 'lightgrey',
-                            border: "none",
-                            cursor: 'pointer',
-                            marginRight: '8px',
+                {showBarChart ? (
+                    <ResponsiveBar
+                        data={getChartData()}
+                        keys={["Occurrences"]}
+                        indexBy="flavor"
+                        margin={{top: 60, right: 80, bottom: 60, left: 80}}
+                        // colors={["#FF5733", "#33FF57", "#5733FF", "#33B8FF"]}
+                        // colors={{scheme: 'nivo'}}
+                        colors={'#f47560'}
+                        borderColor={{from: "color"}}
+                        axisBottom={{
+                            tickSize: 5,
+                            tickPadding: 5,
+                            tickRotation: 45,
+                            // legend: "Flavors",
+                            legendPosition: "middle",
+                            legendOffset: 40,
+
                         }}
+                        axisLeft={{
+                            tickSize: 5,
+                            tickPadding: 5,
+                            tickRotation: 0,
+                            // legend: "Occurrences",
+                            legendPosition: "middle",
+                            legendOffset: -50,
+                        }}
+                        labelSkipWidth={12}
+                        labelSkipHeight={12}
+                        labelTextColor={{
+                            from: "color",
+                            modifiers: [["darker", 1.6]],
+                        }}
+                        animate={true}
+                        motionStiffness={90}
+                        motionDamping={15}
                     />
-                    <label htmlFor="showAllFlavorsCheckbox" style={{
-                        cursor: 'pointer',
-                        fontSize: '.8em',
-                    }}>
-                        Show All Flavors
-                    </label>
-                </div>
-                <ResponsiveRadar
-                    data={getRadarChartData()}
-                    keys={["Occurrences"]}
-                    indexBy="flavor"
-                    margin={{top: 60, right: 80, bottom: 60, left: 80}}
-                    borderColor={{from: "color"}}
-                    gridLabelOffset={36}
-                    dotSize={10}
-                    dotColor={{theme: "background"}}
-                    dotBorderWidth={2}
-                    colors={["#FF5733", "#33FF57", "#5733FF", "#33B8FF"]}
-                    blendMode="multiply"
-                    motionConfig="wobbly"
-                />
+                ) : (
+                    <ResponsiveRadar
+                        data={getChartData()}
+                        keys={["Occurrences"]}
+                        indexBy="flavor"
+                        margin={{top: 60, right: 80, bottom: 60, left: 80}}
+                        borderColor={{from: "color"}}
+                        gridLabelOffset={36}
+                        dotSize={10}
+                        dotColor={{theme: "background"}}
+                        dotBorderWidth={2}
+                        colors={["#FF5733", "#33FF57", "#5733FF", "#33B8FF"]}
+                        blendMode="multiply"
+                        motionConfig="wobbly"
+                        animate={true}
+                    />
+                )}
             </div>
         </div>
     );
@@ -196,7 +207,10 @@ const countFlavorProfiles = (flavorProfiles) => {
     const flavorCounts = {};
 
     flavorProfiles.forEach((item) => {
-        const profilesArray = item.replace(/[{}']/g, '').split(',').map(profile => profile.trim());
+        const profilesArray = item
+            .replace(/[{}']/g, "")
+            .split(",")
+            .map((profile) => profile.trim());
 
         profilesArray.forEach((profile) => {
             if (flavorCounts[profile]) {

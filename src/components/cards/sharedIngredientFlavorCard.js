@@ -1,82 +1,23 @@
-import React, {useState, useRef, useEffect} from "react";
-import {ResponsiveRadar} from "@nivo/radar";
-import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
-import {buttonBackgroundColor, sectionItemColor} from "../../colors";
+import React, { useState, useRef } from "react";
+import { ResponsiveBar } from "@nivo/bar";
+import { ResponsiveRadar } from "@nivo/radar";
+import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
+import { buttonBackgroundColor, sectionItemColor } from "../../colors";
 
-
-// TODO: Unsure if implementing Fullscreen
-const SharedIngredientFlavorCard = ({sharedMolecules}) => {
-    console.log("Shared Flavor Card")
-    const [isFullScreen, setIsFullScreen] = useState(false);
+const SharedIngredientFlavorCard = ({ sharedMolecules }) => {
+    const [showBarChart, setShowBarChart] = useState(true);
     const [showTop25, setShowTop25] = useState(true);
     const chartContainerRef = useRef(null);
-
-    useEffect(() => {
-        const chartContainer = chartContainerRef.current;
-
-        const handleFullScreenChange = () => {
-            setIsFullScreen(!!(document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement));
-        };
-
-        document.addEventListener('fullscreenchange', handleFullScreenChange);
-        document.addEventListener('mozfullscreenchange', handleFullScreenChange);
-        document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
-        document.addEventListener('msfullscreenchange', handleFullScreenChange);
-
-        return () => {
-            document.removeEventListener('fullscreenchange', handleFullScreenChange);
-            document.removeEventListener('mozfullscreenchange', handleFullScreenChange);
-            document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
-            document.removeEventListener('msfullscreenchange', handleFullScreenChange);
-        };
-    }, []);
-
-    const toggleFullScreen = () => {
-        const chartContainer = chartContainerRef.current;
-
-        if (chartContainer) {
-            if (!isFullScreen) {
-                if (chartContainer.requestFullscreen) {
-                    chartContainer.requestFullscreen();
-                } else if (chartContainer.mozRequestFullScreen) {
-                    chartContainer.mozRequestFullScreen();
-                } else if (chartContainer.webkitRequestFullscreen) {
-                    chartContainer.webkitRequestFullscreen();
-                } else if (chartContainer.msRequestFullscreen) {
-                    chartContainer.msRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
-            }
-
-            setIsFullScreen(!isFullScreen);
-        }
-    };
 
     const toggleShowTop25 = () => {
         setShowTop25(!showTop25);
     };
 
-    const getAllFlavors = () => {
-        return sharedMolecules
-            .flatMap((molecule) => {
-                // Use regex to extract flavors from the string representation of a set
-                const flavorMatches = molecule.flavorProfile.match(/'([^']*)'/g);
-
-                // Check if there are matches and return the array of flavors
-                return flavorMatches ? flavorMatches.map((match) => match.replace(/'/g, '').trim()) : [];
-            });
+    const toggleChart = () => {
+        setShowBarChart(!showBarChart);
     };
 
-    const getRadarChartData = () => {
+    const getChartData = () => {
         const allFlavorProfiles = getAllFlavors();
 
         const flavorCounts = allFlavorProfiles.reduce((acc, flavor) => {
@@ -84,7 +25,7 @@ const SharedIngredientFlavorCard = ({sharedMolecules}) => {
             return acc;
         }, {});
 
-        const flavorArray = Object.entries(flavorCounts).map(([flavor, count]) => ({flavor, count}));
+        const flavorArray = Object.entries(flavorCounts).map(([flavor, count]) => ({ flavor, count }));
 
         // Sort the flavor array first by count (descending), then alphabetically
         flavorArray.sort((a, b) => {
@@ -97,10 +38,52 @@ const SharedIngredientFlavorCard = ({sharedMolecules}) => {
         return showTop25 ? flavorArray.slice(0, 25) : flavorArray;
     };
 
-    const radarChartData = getRadarChartData();
+    const getAllFlavors = () => {
+        return sharedMolecules.flatMap((molecule) => {
+            const flavorMatches = molecule.flavorProfile.match(/'([^']*)'/g);
+            return flavorMatches ? flavorMatches.map((match) => match.replace(/'/g, '').trim()) : [];
+        });
+    };
 
     return (
-        <div>
+        <div style={{ display: "flex", flexDirection: "column"}}>
+            <div style={{textAlign: "center", marginTop: "10px", display: "flex", flexDirection: "column"}}>
+                <button onClick={toggleChart} style={{
+                    width: '20%',
+                    marginLeft: '80%',
+                    marginBottom: '10px',
+                    cursor: 'pointer',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontFamily: 'Roboto, sans-serif',
+                }}>
+                    <span style={{
+                        color: '#555',
+                        fontWeight: 'bold',
+                        textTransform: 'uppercase',
+                        transition: 'color 0.3s ease'
+                    }}>
+                        {showBarChart ? 'Switch to Radar Chart' : 'Switch to Bar Chart'}
+                    </span>
+                </button>
+                <button onClick={toggleShowTop25} style={{
+                    width: '20%',
+                    marginLeft: '80%',
+                    cursor: 'pointer',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    fontFamily: 'Roboto, sans-serif',
+                }}>
+                    <span style={{
+                        color: '#555',
+                        fontWeight: 'bold',
+                        textTransform: 'uppercase',
+                        transition: 'color 0.3s ease'
+                    }}>
+                        {showTop25 ? 'Show All Flavors' : 'Show Top 20 Flavors'}
+                    </span>
+                </button>
+            </div>
             <div
                 ref={chartContainerRef}
                 style={{
@@ -108,77 +91,60 @@ const SharedIngredientFlavorCard = ({sharedMolecules}) => {
                     minWidth: "25vw",
                     width: "100%",
                     height: "50vh",
-                    marginBottom: '10px',
                     borderRadius: "8px",
                     backgroundColor: sectionItemColor,
-                    overflow: 'visible',
+                    overflow: "visible",
                 }}
             >
-                {/*<button*/}
-                {/*    onClick={toggleFullScreen}*/}
-                {/*    style={{*/}
-                {/*        position: "absolute",*/}
-                {/*        top: 10,*/}
-                {/*        left: 10,*/}
-                {/*        zIndex: 1,*/}
-                {/*        borderRadius: "8px",*/}
-                {/*        background: buttonBackgroundColor,*/}
-                {/*        border: "none",*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    {isFullScreen ? (*/}
-                {/*        <MdFullscreenExit size={30}/>*/}
-                {/*    ) : (*/}
-                {/*        <MdFullscreen size={30}/>*/}
-                {/*    )}*/}
-                {/*</button>*/}
-                <div style={{
-                    position: "absolute",
-                    top: 20,
-                    right: 25,
-                    zIndex: 1,
-                    display: "flex",
-                    alignItems: "center"
-                }}>
-                    <input
-                        type="checkbox"
-                        id="showAllFlavorsCheckbox"
-                        checked={!showTop25}
-                        onChange={toggleShowTop25}
-                        style={{
-                            width: "15px",
-                            height: "15px",
-                            borderRadius: "4px",
-                            background: 'lightgrey',
-                            border: "none",
-                            cursor: 'pointer',
-                            marginRight: '8px',
+                {showBarChart ? (
+                    <ResponsiveBar
+                        data={getChartData()}
+                        keys={["count"]}
+                        indexBy="flavor"
+                        margin={{top: 60, right: 80, bottom: 60, left: 80}}
+                        // colors={["#FF5733", "#33FF57", "#5733FF", "#33B8FF"]}
+                        colors={'#f47560'}
+                        borderColor={{from: "color"}}
+                        axisBottom={{
+                            tickSize: 5,
+                            tickPadding: 5,
+                            tickRotation: 45,
+                            // legend: "Flavors",
+                            legendPosition: "middle",
+                            legendOffset: 40,
                         }}
+                        axisLeft={{
+                            tickSize: 5,
+                            tickPadding: 5,
+                            tickRotation: 0,
+                            // legend: "Occurrences",
+                            legendPosition: "middle",
+                            legendOffset: -50,
+                        }}
+                        labelSkipWidth={12}
+                        labelSkipHeight={12}
+                        labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
+                        animate={true}
+                        motionStiffness={90}
+                        motionDamping={15}
                     />
-                    <label htmlFor="showAllFlavorsCheckbox" style={{
-                        cursor: 'pointer',
-                        fontSize: '.8em',
-                    }}>
-                        Show All Flavors
-                    </label>
-                </div>
-                <ResponsiveRadar
-                    data={radarChartData.map(({flavor, count}) => ({
-                        flavor,
-                        Occurrences: count,
-                    }))}
-                    keys={["Occurrences"]}
-                    indexBy="flavor"
-                    margin={{top: 60, right: 80, bottom: 60, left: 80}}
-                    borderColor={{from: "color"}}
-                    gridLabelOffset={36}
-                    dotSize={10}
-                    dotColor={{theme: "background"}}
-                    dotBorderWidth={2}
-                    colors={["#FF5733", "#33FF57", "#5733FF", "#33B8FF"]}
-                    blendMode="multiply"
-                    motionConfig="wobbly"
-                />
+                ) : (
+                    <ResponsiveRadar
+                        data={getChartData()}
+                        keys={["count"]}
+                        indexBy="flavor"
+                        margin={{ top: 60, right: 80, bottom: 60, left: 80 }}
+                        borderColor={{ from: "color" }}
+                        gridLabelOffset={36}
+                        dotSize={10}
+                        dotColor={{ theme: "background" }}
+                        dotBorderWidth={2}
+                        colors={["#FF5733", "#33FF57", "#5733FF", "#33B8FF"]}
+                        blendMode="multiply"
+                        motionConfig="wobbly"
+                        animate={true}
+                    />
+                )}
             </div>
         </div>
     );

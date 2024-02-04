@@ -21,7 +21,7 @@ export const selectionColor = 'rgba(50, 50, 50, 0.5)';
 export const buttonColor = '#0a5bab';
 export const buttonPlusColor = '#0a5bab';
 export const buttonCheckColor = '#228b22';
-export const buttonMinusColor = '#db404a';
+export const buttonMinusColor = '#eb5761';
 
 
 // Dark Mode

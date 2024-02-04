@@ -82,7 +82,7 @@ const CompareIngredientsPage = () => {
                 overflowY: 'auto',
                 paddingLeft: '1%',
                 paddingRight: '1%',
-                paddingBottom: '10%',
+                paddingBottom: '12%',
                 overflow: 'auto',
             }}>
                 <ResultsCard sharedMolecules={sharedMolecules}/>
