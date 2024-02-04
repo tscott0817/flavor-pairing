@@ -96,7 +96,7 @@ const MainLayout = ({searchQuery}) => {
                         style={{
                             height: '30px',
                             width: '30px',
-                            marginTop: '51vh',
+                            marginTop: '52vh',
                             marginRight: '100%',
                             left: 0,
                             backgroundColor: buttonBackgroundColor,
