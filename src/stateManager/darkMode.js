@@ -1,10 +1,12 @@
 // Dark Mode
 export const defaultColor = '#202124';
 export const navBarColor = '#121212';
-export const searchBarColor = '#333333';
+export const searchBarColor = '#2A2A2A';
 // export const thumbNailColor = '#121212';
 export const componentColor = '#121212';
-export const textMedHeavy = '#FFFFF0';
+export const textMedLight = '#FFFFFF';
+// export const textMedHeavy = '#FFFFF0';
+export const textMedHeavy = 'rgba(255, 255, 245, 0.9)';
 export const outlineColor = '#f4f3f2';
 export const ingredientBackgroundColor = 'rgba(55, 55, 55, 0.9)';
 export const windowColor = '#202124';
@@ -18,7 +20,7 @@ export const randomTempColor = '#669dd4'; // Adjust as needed
 export const leftColumnColor = '#202124';
 export const buttonColorArrow = 'rgba(255, 255, 255, 0.6)';
 export const buttonBackgroundColor = 'rgba(255, 255, 255, 0)';
-export const selectionColor = 'rgba(255, 255, 255, 0.5)';
+export const selectionColor = 'rgba(255, 255, 255, 0.35)';
 export const buttonColor = '#2557a7';
 export const buttonPlusColor = '#2557a7';
 export const buttonCheckColor = '#228b22';

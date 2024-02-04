@@ -102,7 +102,7 @@ const MainLayout = ({searchQuery}) => {
                             backgroundColor: buttonBackgroundColor,
                             borderRadius: '50px',
                             border: 'none',
-                            color: buttonColorArrow,
+                            color: theme === lightColors ? lightColors.buttonColorArrow : darkColors.buttonColorArrow,
                             cursor: 'pointer',
                         }}>
                     {leftColumnVisible ? <FaChevronLeft size={'20px'}/> : <FaChevronRight size={'20px'}/>}

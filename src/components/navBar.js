@@ -41,7 +41,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                     borderRadius: '25px',
                     overflow: 'hidden',
                     backgroundColor: theme === lightColors ? lightColors.searchBarColor : darkColors.searchBarColor,
-                    height: '75%',
+                    height: '70%',
                     width: '30%',
                     minWidth: '400px',
                     // padding: '8px',
@@ -60,7 +60,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                     marginLeft: '4px',
                 }}>
                     <IoSearchOutline style={{
-                        color: '#333',
+                        color: theme === lightColors ? '#333' : darkColors.textMedLight,
                         height: '20px',
                         width: '20px',
                     }}/>
@@ -82,7 +82,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                         borderRadius: '8px',
                         backgroundColor: theme === lightColors ? lightColors.searchBarColor : darkColors.searchBarColor,
                         fontSize: '16px',
-                        color: 'rgba(50, 50, 50, 0.8)',
+                        color: theme === lightColors ? 'rgba(50, 50, 50, 0.8)' : darkColors.textMedLight,
                     }}
                 />
                 <button
@@ -103,7 +103,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                         style={{
                             width: '20px',
                             height: '20px',
-                            color: '#555',
+                            color: theme === lightColors ? '#555' : darkColors.textMedLight,
                         }}
                     />
                     {isHovered && (
@@ -116,7 +116,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                                 width: '25px',
                                 height: '25px',
                                 borderRadius: '50%',
-                                backgroundColor: 'rgba(25, 25, 25, 0.6)',
+                                backgroundColor: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
@@ -130,7 +130,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                                 style={{
                                     width: '20px',
                                     height: '20px',
-                                    color: '#fff',
+                                    color: theme === lightColors ? '#fff' : lightColors.textMedLight,
                                 }}
                             />
                         </div>
@@ -139,9 +139,9 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
             </div>
             <div style={{cursor: 'pointer', marginRight: '1%'}}>
                 {theme === lightColors ? (
-                    <FaMoon onClick={toggleTheme} style={{fontSize: '22px', transform: 'scaleX(-1)'}}/>
+                    <FaMoon onClick={toggleTheme} style={{color: lightColors.textMedHeavy, fontSize: '22px', transform: 'scaleX(-1)'}}/>
                 ) : (
-                    <FaSun onClick={toggleTheme} style={{filter: 'invert(100%)', fontSize: '24px'}}/>
+                    <FaSun onClick={toggleTheme} style={{color: darkColors.textMedHeavy, fontSize: '24px'}}/>
                 )}
             </div>
         </div>

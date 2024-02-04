@@ -105,7 +105,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                         {selectedIngredients.length > 0 && (
                             <div style={{
                                 position: 'relative',
-                                height: '100%',
+                                height: '105%',
                             }}>
                                 <div style={{
                                     position: 'relative',
@@ -117,6 +117,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                                         onClick={() => handleRemoveIngredient(0)}
                                         style={{
                                             backgroundColor: theme === lightColors ? lightColors.buttonBackgroundColor : darkColors.buttonBackgroundColor,
+                                            color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                                             border: 'none',
                                             cursor: 'pointer'
                                         }}>
@@ -168,7 +169,8 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                         {selectedIngredients.length > 1 && (
                             <div style={{
                                 position: 'relative',
-                                height: '100%',
+                                height: '105%',
+                                overflow: 'visible'
                             }}>
                                 <div style={{
                                     position: 'relative',
@@ -180,7 +182,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                                         onClick={() => handleRemoveIngredient(1)}
                                         style={{
                                             backgroundColor: theme === lightColors ? lightColors.buttonBackgroundColor : darkColors.buttonBackgroundColor,
-                                            // backgroundColor: 'red',
+                                            color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                                             border: 'none',
                                             cursor: 'pointer'
                                         }}>
