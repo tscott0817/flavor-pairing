@@ -1,10 +1,13 @@
-import {navBarColor, searchBarColor} from "../colors";
-import {IoSearchOutline} from "react-icons/io5";
-import {TbLetterX} from "react-icons/tb";
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { IoSearchOutline } from "react-icons/io5";
+import { TbLetterX } from "react-icons/tb";
+import { useThemeContext } from '../stateManager/ThemeContext';
+import * as lightColors from "../stateManager/lightMode";
+import * as darkColors from "../stateManager/darkMode";
 
-const NavBar = ({searchQuery, handleSearchQueryChange}) => {
+const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
     const [isHovered, setHovered] = useState(false);
+    const { theme, toggleTheme } = useThemeContext();
 
     const handleSearchInputChange = event => {
         console.log("navbar")
@@ -18,7 +21,7 @@ const NavBar = ({searchQuery, handleSearchQueryChange}) => {
     return (
         <div
             style={{
-                backgroundColor: navBarColor,
+                backgroundColor: theme === lightColors ? lightColors.navBarColor : darkColors.navBarColor,
                 width: '100%',
                 height: '60px',
                 display: 'flex',
@@ -36,7 +39,7 @@ const NavBar = ({searchQuery, handleSearchQueryChange}) => {
                     alignItems: 'center',
                     borderRadius: '25px',
                     overflow: 'hidden',
-                    backgroundColor: searchBarColor,
+                    backgroundColor: theme === lightColors ? lightColors.searchBarColor : darkColors.searchBarColor,
                     height: '75%',
                     width: '30%',
                     minWidth: '400px',
@@ -75,7 +78,7 @@ const NavBar = ({searchQuery, handleSearchQueryChange}) => {
                         // borderLeft: '1px solid #999',
                         // borderRight: '1px solid #999',
                         borderRadius: '8px',
-                        backgroundColor: searchBarColor,
+                        backgroundColor: theme === lightColors ? lightColors.searchBarColor : darkColors.searchBarColor,
                         fontSize: '16px',
                         color: 'rgba(50, 50, 50, 0.8)',
                     }}
@@ -132,6 +135,10 @@ const NavBar = ({searchQuery, handleSearchQueryChange}) => {
                     )}
                 </button>
             </div>
+            {/*<div>*/}
+            {/*    <button onClick={toggleTheme}>Toggle Theme</button>*/}
+            {/*    <p>Current Theme: {theme === lightColors ? 'Light' : 'Dark'}</p>*/}
+            {/*</div>*/}
         </div>
     )
 }

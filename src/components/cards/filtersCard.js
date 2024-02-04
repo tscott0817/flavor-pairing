@@ -1,4 +1,4 @@
-import {defaultColor} from "../../colors";
+import {defaultColor} from "../../stateManager/lightMode";
 
 const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
     const categories = [
@@ -27,9 +27,9 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
                 paddingBottom: '5%',
                 marginTop: '5px',
                 fontFamily: 'Roboto, sans-serif',
-                border: '2px solid #ccc', // border style
-                borderRadius: '10px', // border radius for sleek look
-                boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)', // box shadow for glowing effect
+                border: '2px solid #ccc',
+                borderRadius: '10px',
+                boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)',
             }}
         >
             <div style={{

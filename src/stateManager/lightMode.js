@@ -22,24 +22,4 @@ export const buttonColor = '#0a5bab';
 export const buttonPlusColor = '#0a5bab';
 export const buttonCheckColor = '#228b22';
 export const buttonMinusColor = '#eb5761';
-
-
-// Dark Mode
-// export const navBarColor = '#15202b';
-// export const searchBarColor = '#22303c';
-// export const thumbNailColor = '#15202b';
-// export const thumbNailColorText = '#f0f0f0';
-// export const ingredientBackgroundColor = 'rgba(55, 55, 55, 0.9)';
-// export const windowColor = '#f4f3f2';
-// export const mainAppColor = '#22303c';
-// export const defaultPageColor = '#22303c';
-// export const defaultPageNeonColor = '0 0 15px rgba(173, 216, 230, 0.3)';
-// export const pageColor = '#f4f3f2';
-// export const pageSectionColor = '#f4f3f2';
-// export const sectionItemColor = 'green';
-// export const randomTempColor = '#669dd4';
-// export const leftColumnColor = '#15202b';
-// export const buttonBackgroundColor = 'rgba(50, 50, 50, 0.5)';
-
-
-// Dark Mode Blacks
+export const popupColor = '#ffcc00';

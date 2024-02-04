@@ -1,5 +1,5 @@
 import IngredientCard from './ingredientCard';
-import {pageSectionColor, randomTempColor2, sectionItemColor} from "../../colors";
+import {pageSectionColor, randomTempColor2, sectionItemColor} from "../../stateManager/lightMode";
 import {RxSlash} from 'react-icons/rx';
 import {FaPlus} from 'react-icons/fa';
 import {useIngredientContext} from "../../stateManager/IngredientContext";

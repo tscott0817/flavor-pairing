@@ -3,7 +3,7 @@ import {ResponsiveBar} from "@nivo/bar";
 import {ResponsiveRadar} from "@nivo/radar";
 import {
     sectionItemColor,
-} from "../../colors";
+} from "../../stateManager/lightMode";
 import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
 import flavordbData from "../../data/flavordb.json";
 import moleculesData from "../../data/molecules.json";

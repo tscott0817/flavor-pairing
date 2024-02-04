@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {sectionItemColor} from "../../colors";
+import {sectionItemColor} from "../../stateManager/lightMode";
 
 
 const SimilarIngredientsCard = ({sharedMoleculeCounts}) => {

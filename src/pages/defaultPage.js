@@ -6,9 +6,12 @@ import {
     buttonCheckColor,
     defaultPageColor,
     pageColor, buttonMinusColor,
-} from "../colors";
+} from "../stateManager/lightMode";
 import {FaPlus, FaCheck, FaTimes, FaMinus} from "react-icons/fa";
 import flavordb from "../data/flavordb.json";
+import {useThemeContext} from "../stateManager/ThemeContext";
+import * as lightColors from "../stateManager/lightMode";
+import * as darkColors from "../stateManager/darkMode";
 
 const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQuery, selectedFilters}) => {
     console.log('DefaultPage rendered');
@@ -17,6 +20,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
     const {selectedIngredients, selectIngredient, unselectIngredient} = useIngredientContext();
     const [isButtonHovered, setIsButtonHovered] = useState(false);
     const [hoveredButton, setHoveredButton] = useState(null);
+    const { theme } = useThemeContext();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -121,7 +125,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
 
     return (
         <div style={{
-            backgroundColor: pageColor,
+            backgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
             minWidth: '800px'
         }}>
             <div
@@ -132,7 +136,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                     display: 'flex',
                     flexWrap: 'wrap',
                     padding: '1%',
-                    backgroundColor: defaultPageColor,
+                    backgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
                 }}
             >
                 {searchQuery && filteredFlavors.length === 0 ? (

@@ -2,7 +2,7 @@ import {
     defaultPageNeonColor,
     thumbNailColor,
     thumbNailColorText
-} from "../../colors";
+} from "../../stateManager/lightMode";
 
 const IngredientThumbnail = ({ingredient_name, ingredient_id, font_size}) => {
     // const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient_id}.jpg`;

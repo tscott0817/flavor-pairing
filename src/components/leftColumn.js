@@ -1,4 +1,3 @@
-import {buttonBackgroundColor, buttonColor, selectionColor} from "../colors";
 import {FaRegChartBar, FaTimes} from "react-icons/fa";
 import IngredientThumbnail from "./cards/ingredientThumbnail";
 import FiltersCard from "./cards/filtersCard";
@@ -6,12 +5,18 @@ import React, {useState} from "react";
 import {useIngredientContext} from "../stateManager/IngredientContext";
 import { FaPlus } from 'react-icons/fa';
 import {CiCirclePlus} from "react-icons/ci";
+import * as lightColors from "../stateManager/lightMode";
+import * as darkColors from "../stateManager/darkMode";
+import {useThemeContext} from "../stateManager/ThemeContext";
+
 
 
 const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedFilters, selectedFilters}) => {
 
     const [showTooltip, setShowTooltip] = useState(false);
     const {selectedIngredients, unselectIngredient} = useIngredientContext();
+    const { theme } = useThemeContext();
+
     const handleShowSelectedIngredients = () => {
         if (!selectedIngredients || !selectedIngredients[0] || !selectedIngredients[1]) {
 
@@ -47,7 +52,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
             display: 'flex',
             flexDirection: 'column',
             position: 'fixed',
-            backgroundColor: 'transparent',
+            backgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
             width: '225px',
             height: '100vh',
             boxSizing: 'border-box',
@@ -62,7 +67,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                 marginLeft: '2%',
                 marginTop: '68px',
                 position: 'absolute',
-                paddingTop: '5%',
+                paddingTop: '15px',
                 zIndex: 2,
                 overflow: 'visible',
                 fontFamily: 'Roboto, sans-serif',
@@ -79,7 +84,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                         position: 'relative',
                         height: '75px',
                         width: '30%',
-                        backgroundColor: selectionColor,
+                        backgroundColor: theme === lightColors ? lightColors.selectionColor : darkColors.selectionColor,
                         borderRadius: '8px',
                         marginLeft: '25px',
                     }}>
@@ -111,7 +116,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                                     <button
                                         onClick={() => handleRemoveIngredient(0)}
                                         style={{
-                                            backgroundColor: buttonBackgroundColor,
+                                            backgroundColor: theme === lightColors ? lightColors.buttonBackgroundColor : darkColors.buttonBackgroundColor,
                                             border: 'none',
                                             cursor: 'pointer'
                                         }}>
@@ -142,7 +147,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                         position: 'relative',
                         height: '75px',
                         width: '30%',
-                        backgroundColor: selectionColor,
+                        backgroundColor: theme === lightColors ? lightColors.selectionColor : darkColors.selectionColor,
                         borderRadius: '8px',
                         marginLeft: '35px',
                     }}>
@@ -174,7 +179,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                                     <button
                                         onClick={() => handleRemoveIngredient(1)}
                                         style={{
-                                            backgroundColor: buttonBackgroundColor,
+                                            backgroundColor: theme === lightColors ? lightColors.buttonBackgroundColor : darkColors.buttonBackgroundColor,
                                             // backgroundColor: 'red',
                                             border: 'none',
                                             cursor: 'pointer'
@@ -217,11 +222,11 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                             justifyContent: 'center',
                             whiteSpace: 'pre-line',
                             width: '90%',
-                            marginTop: '5%',
+                            marginTop: '7.5%',
                             marginBottom: '3%',
                             marginLeft: '5%',
                             padding: '10px',
-                            backgroundColor: buttonColor,
+                            backgroundColor: theme === lightColors ? lightColors.buttonColor : darkColors.buttonColor,
                             color: '#f4f3f2',
                             border: 'none',
                             borderRadius: '5px',
@@ -237,7 +242,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                             top: '100%',
                             left: '50%',
                             transform: 'translateX(-50%)',
-                            backgroundColor: '#ffcc00',
+                            backgroundColor: theme === lightColors ? lightColors.popupColor : darkColors.popupColor,
                             padding: '8px',
                             borderRadius: '5px',
                             boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',

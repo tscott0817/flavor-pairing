@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {buttonColor, sectionItemColor} from "../../colors";
+import {buttonColor, sectionItemColor} from "../../stateManager/lightMode";
 
 const MoleculesCard = ({moleculeData}) => {
     const [selectedMolecule, setSelectedMolecule] = useState(null);
