@@ -1,6 +1,6 @@
 html {
   text-align: center;
-  background-color: transparent;
+  /*background-color: #f4f3f2;*/
   height: 100vh;
   margin: 0; /* Remove default margin */
   overflow-x: hidden; /* Prevent horizontal scrollbar */

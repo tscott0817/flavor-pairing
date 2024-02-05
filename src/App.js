@@ -1,10 +1,7 @@
-import React, {useCallback, useState} from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.css';
-import {mainAppColor,} from "./stateManager/lightMode";
-import './animations.css';
-import NavBar from "./components/navBar";
-import MainLayout from "./components/mainLayout";
-import {ThemeProvider} from "./stateManager/ThemeContext";
+import ThemedApp from './themedApp';
+import { ThemeProvider } from "./stateManager/ThemeContext";
 
 function App() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -14,10 +11,9 @@ function App() {
     }, []);
 
     return (
-        <div className="App" style={{display: 'flex', flexDirection: 'column', backgroundColor: 'transparent'}}>
+        <div className="App" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
             <ThemeProvider>
-                <NavBar searchQuery={searchQuery} handleSearchQueryChange={handleSearchQueryChange}/>
-                <MainLayout searchQuery={searchQuery}/>
+                <ThemedApp searchQuery={searchQuery} handleSearchQueryChange={handleSearchQueryChange} />
             </ThemeProvider>
         </div>
     );

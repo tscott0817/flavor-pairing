@@ -78,7 +78,7 @@ const MainLayout = ({searchQuery}) => {
                  display: 'flex',
                  flexGrow: 1,
                  position: 'relative',
-                 top: '3%',
+                 // top: '3%',
                  backgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
                  flex: 1,
                  flexDirection: 'column',
@@ -119,7 +119,7 @@ const MainLayout = ({searchQuery}) => {
                 flex: '1',
                 marginLeft: leftColumnVisible ? '250px' : '25px',
                 marginTop: '65px',
-                overflow: 'auto',
+                // overflow: 'auto',
                 transition: 'margin-left 0.2s ease-in-out',
             }}>
                 <DefaultPage setSelectedIngredientRef={setSelectedIngredientRef}
