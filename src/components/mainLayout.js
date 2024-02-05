@@ -78,7 +78,6 @@ const MainLayout = ({searchQuery}) => {
                  display: 'flex',
                  flexGrow: 1,
                  position: 'relative',
-                 // top: '3%',
                  backgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
                  flex: 1,
                  flexDirection: 'column',
