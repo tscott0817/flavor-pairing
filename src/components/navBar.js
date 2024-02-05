@@ -39,6 +39,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                     display: 'flex',
                     alignItems: 'center',
                     borderRadius: '25px',
+                    // border: theme === lightColors ? 'none' : '1px solid #333',
                     overflow: 'hidden',
                     backgroundColor: theme === lightColors ? lightColors.searchBarColor : darkColors.searchBarColor,
                     height: '70%',
@@ -137,7 +138,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                     )}
                 </button>
             </div>
-            <div style={{cursor: 'pointer', marginRight: '1%'}}>
+            <div style={{cursor: 'pointer', marginRight: '4px'}}>
                 {theme === lightColors ? (
                     <FaMoon onClick={toggleTheme} style={{color: lightColors.textMedHeavy, fontSize: '22px', transform: 'scaleX(-1)'}}/>
                 ) : (

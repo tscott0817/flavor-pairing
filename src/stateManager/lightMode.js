@@ -28,3 +28,5 @@ export const popupColor = '#ffcc00';
 export const glowColorThin = '0 0 8px rgba(0, 0, 0, 0.2)';
 export const glowColorMedium = '0 0 8px rgba(0, 0, 0, 0.3)';
 export const glowColorThick = '0 0 8px rgba(0, 0, 0, 0.4)';
+export const ingredientPageGlow = '0 0 8px rgba(0, 0, 0, 0.4)';
+export const subTextColor = '#555';

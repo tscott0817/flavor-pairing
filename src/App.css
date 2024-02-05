@@ -1,6 +1,6 @@
 html {
   text-align: center;
-  background-color: #f4f3f2;
+  background-color: transparent;
   height: 100vh;
   margin: 0; /* Remove default margin */
   overflow-x: hidden; /* Prevent horizontal scrollbar */
@@ -8,7 +8,7 @@ html {
 
 .App {
   text-align: center;
-  background-color: #f4f3f2;
+  /*background-color: #f4f3f2;*/
   min-height: 100vh;
   height: 100%;
 }
@@ -32,7 +32,7 @@ html {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /*color: white;*/
 }
 
 .App-link {

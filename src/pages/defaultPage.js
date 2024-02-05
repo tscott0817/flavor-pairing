@@ -209,8 +209,9 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                                         width: '30px',
                                         height: '30px',
                                         borderRadius: '50%',
-                                        backgroundColor: selectedIngredients.includes(flavor) ? buttonMinusColor : buttonPlusColor,
-                                        // backgroundColor: selectedIngredients.includes(flavor) ? (hoveredButton === flavor.entityID ? buttonMinusColor : buttonCheckColor) : buttonPlusColor,
+                                        backgroundColor: selectedIngredients.includes(flavor)
+                                            ? (theme === lightColors ? lightColors.buttonMinusColor : darkColors.buttonMinusColor)
+                                            : (theme === lightColors ? lightColors.buttonPlusColor : darkColors.buttonPlusColor),                                       // backgroundColor: selectedIngredients.includes(flavor) ? (hoveredButton === flavor.entityID ? buttonMinusColor : buttonCheckColor) : buttonPlusColor,
                                         color: 'white',
                                         border: 'none',
                                         cursor: 'pointer',

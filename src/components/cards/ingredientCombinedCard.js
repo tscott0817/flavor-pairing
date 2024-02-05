@@ -3,11 +3,16 @@ import {pageSectionColor, randomTempColor2, sectionItemColor} from "../../stateM
 import {RxSlash} from 'react-icons/rx';
 import {FaPlus} from 'react-icons/fa';
 import {useIngredientContext} from "../../stateManager/IngredientContext";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const IngredientCombinedCard = () => {
     const {selectedIngredients, unselectIngredient} = useIngredientContext();
     const ingredient1 = selectedIngredients[0];
     const ingredient2 = selectedIngredients[1];
+    const {theme} = useThemeContext();
+
     return (
         <div style={{
             display: 'flex',
@@ -48,6 +53,7 @@ const IngredientCombinedCard = () => {
                 justifyContent: 'center',
                 fontSize: '1em',
                 fontWeight: 'bold',
+                color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
             }}>
                 <FaPlus style={{
                     height: '100%',

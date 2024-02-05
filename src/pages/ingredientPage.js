@@ -8,6 +8,9 @@ import {FaMinus, FaPlus} from 'react-icons/fa';
 import SingleIngredientFlavorCard from "../components/cards/singleIngredientFlavorCard";
 import flavordb from "../data/flavordb.json";
 import moleculesData from "../data/molecules.json";
+import { useThemeContext } from '../stateManager/ThemeContext';
+import * as lightColors from "../stateManager/lightMode";
+import * as darkColors from "../stateManager/darkMode";
 
 const IngredientPage = ({ingredient}) => {
     // const imageURL = `https://cosylab.iiitd.edu.in/flavordb/static/entities_images/${ingredient.entityID}.jpg`;
@@ -21,6 +24,7 @@ const IngredientPage = ({ingredient}) => {
     const [isFlavorCardCollapsed, setFlavorCardCollapsed] = useState(true);
     const [allMolecules, setAllMolecules] = useState(null);
     const [fadeIn, setFadeIn] = useState(false);
+    const {theme} = useThemeContext()
 
     const handleAddToComparison = () => {
         if (selectedIngredients.includes(ingredient)) {
@@ -83,7 +87,8 @@ const IngredientPage = ({ingredient}) => {
     return (
         <div style={{
             fontFamily: 'Roboto, sans-serif',
-            backgroundColor: pageColor,
+            backgroundColor: theme === lightColors ? lightColors.pageColor : darkColors.pageColor,
+            // boxShadow: theme === lightColors ? lightColors.glowColorThick : darkColors.glowColorThick,
             // backgroundColor: 'blue',
             width: '100%',
             height: '100%',
@@ -147,14 +152,14 @@ const IngredientPage = ({ingredient}) => {
                                 fontWeight: 'bold',
                                 fontSize: '1.5em',
                                 marginBottom: '5%',
+                                color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                                 // backgroundColor: 'yellow',
                             }}>
                                 {ingredientData.alias.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                             </div>
                             <div className="scientific-name" style={{
                                 fontSize: '0.8em',
-                                color: '#555',
-                                // backgroundColor: 'yellow',
+                                color: theme === lightColors ? lightColors.subTextColor : darkColors.subTextColor,
                             }}>
                                 {ingredientData.scientificName !== null
                                     ? ingredientData.scientificName.replace(/\b\w/g, (char) => char.toUpperCase())
@@ -163,8 +168,7 @@ const IngredientPage = ({ingredient}) => {
                             </div>
                             <div className="category" style={{
                                 fontSize: '0.8em',
-                                color: '#555',
-                                // backgroundColor: 'yellow',
+                                color: theme === lightColors ? lightColors.subTextColor : darkColors.subTextColor,
                             }}>
                                 {ingredientData.category !== null
                                     ? ingredientData.category.replace(/\b\w/g, (char) => char.toUpperCase())
@@ -190,7 +194,9 @@ const IngredientPage = ({ingredient}) => {
                                     width: '40px',
                                     height: '40px',
                                     borderRadius: '50%',
-                                    backgroundColor: selectedIngredients.includes(ingredient) ? buttonMinusColor : buttonPlusColor,
+                                    backgroundColor: selectedIngredients.includes(ingredient)
+                                        ? (theme === lightColors ? lightColors.buttonMinusColor : darkColors.buttonMinusColor)
+                                        : (theme === lightColors ? lightColors.buttonPlusColor : darkColors.buttonPlusColor),
                                     color: 'white',
                                     border: 'none',
                                     cursor: 'pointer',

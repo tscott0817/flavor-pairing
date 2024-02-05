@@ -2,9 +2,13 @@ import React from "react";
 import {ResponsiveRadialBar} from '@nivo/radial-bar';
 import NumberLine from "../charts/numberLine";
 import {useIngredientContext} from "../../stateManager/IngredientContext";
+import {useThemeContext} from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const ResultsCard = ({sharedMolecules}) => {
     console.log("Results Card");
+    const {theme} = useThemeContext();
     const {selectedIngredients, unselectIngredient} = useIngredientContext();
     const ingredient1 = selectedIngredients[0];
     const ingredient2 = selectedIngredients[1];
@@ -49,7 +53,7 @@ const ResultsCard = ({sharedMolecules}) => {
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
-                // backgroundColor: 'purple',
+                backgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
                 borderRadius: '8px',
                 padding: '2%',
                 width: '100%',
@@ -59,7 +63,7 @@ const ResultsCard = ({sharedMolecules}) => {
             }}>
                 {/*<h2 style={{fontSize: '1.25em', color: '#555'}}>Similarity Score</h2>*/}
                 <div style={{
-                    // backgroundColor: 'red',
+                    backgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
                     minWidth: '25vw',
                     width: '100%',
                     height: '100%',
@@ -135,7 +139,11 @@ const ResultsCard = ({sharedMolecules}) => {
                         colors={{scheme: 'nivo'}}
                     />
                     <div style={{position: 'absolute', top: '50%', transform: 'translateY(-50%)', color: '#777'}}>
-                        <p style={{fontSize: '1.25em'}}>{jaccardFinalScore}%</p>
+                        <p style={{
+                            fontSize: '1.25em',
+                            color: theme === lightColors ? lightColors.subTextColor : darkColors.textMedHeavy,
+                        }}
+                        >{jaccardFinalScore}%</p>
                         {/*<p style={{fontSize: '.75em'}}>Similar</p>*/}
                     </div>
                     <div style={{
@@ -143,8 +151,8 @@ const ResultsCard = ({sharedMolecules}) => {
                         top: 50,
                         left: 0,
                         transform: 'translateY(-50%)',
-                        color: '#777',
-                        textAlign: 'left'
+                        textAlign: 'left',
+                        color: theme === lightColors ? lightColors.subTextColor : darkColors.textMedHeavy,
                     }}>
                         <p style={{fontSize: '0.8em', marginBottom: '10px'}}>
                             <strong>{ingredient1MoleculeCount}</strong> Flavor Molecules Found
@@ -174,7 +182,7 @@ const ResultsCard = ({sharedMolecules}) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                color: '#555',
+                color: theme === lightColors ? lightColors.subTextColor : darkColors.textMedHeavy,
             }}>
                 <h2 style={{fontSize: '1.5em'}}>{resultText}</h2>
                 <NumberLine percentage={jaccardFinalScore}/>

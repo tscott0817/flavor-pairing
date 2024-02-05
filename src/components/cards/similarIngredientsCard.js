@@ -1,9 +1,14 @@
 import React, {useState} from "react";
 import {sectionItemColor} from "../../stateManager/lightMode";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 
 const SimilarIngredientsCard = ({sharedMoleculeCounts}) => {
     console.log("Similar Ingredients Card");
+    const {theme} = useThemeContext();
+
     return (
         <div
             style={{
@@ -18,7 +23,8 @@ const SimilarIngredientsCard = ({sharedMoleculeCounts}) => {
         >
             <div
                 style={{
-                    backgroundColor: sectionItemColor,
+                    BackgroundColor: theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor,
+                    color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                     minWidth: "25vw",
                     width: "100%",
                     minHeight: '400px',

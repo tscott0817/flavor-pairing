@@ -154,6 +154,8 @@ const MainLayout = ({searchQuery}) => {
                         height: '85%',
                         minHeight: '85%',
                         position: 'relative',
+                        borderRadius: '8px',
+                        boxShadow: theme === lightColors ? 'none' : darkColors.ingredientPageGlow,
                     }}>
                         <FaArrowLeft
                             onClick={() => setDisplayIngredient(false)}
@@ -163,7 +165,7 @@ const MainLayout = ({searchQuery}) => {
                                 left: 10,
                                 cursor: 'pointer',
                                 fontSize: '24px',
-                                color: buttonColorArrow,
+                                color: theme === lightColors ? lightColors.buttonColorArrow : darkColors.buttonColorArrow,
                                 zIndex: 2,
                             }}
                         />
@@ -202,7 +204,8 @@ const MainLayout = ({searchQuery}) => {
                             height: '85%',
                             minWidth: '900px',
                             position: 'relative',
-                            backgroundColor: 'transparent',
+                            borderRadius: '8px',
+                            boxShadow: theme === lightColors ? 'none' : darkColors.ingredientPageGlow,
                         }}
                     >
                         <FaArrowLeft
@@ -213,7 +216,7 @@ const MainLayout = ({searchQuery}) => {
                                 left: 10,
                                 cursor: 'pointer',
                                 fontSize: '24px',
-                                color: buttonColorArrow,
+                                color: theme === lightColors ? lightColors.buttonColorArrow : darkColors.buttonColorArrow,
                                 zIndex: 2,
                             }}
                         />

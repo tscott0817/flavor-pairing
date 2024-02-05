@@ -1,7 +1,15 @@
 import React from 'react';
 import {ResponsiveLine} from '@nivo/line';
+import {useThemeContext} from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const NumberLine = ({percentage}) => {
+    const {theme} = useThemeContext();
+
+    const lineColors = theme === lightColors ? ['#2c3e50', '#e74c3c'] : [darkColors.textMedHeavy, '#e74c3c'];
+    const textColor = theme === lineColors ? lightColors.subTextColor : darkColors.subTextColor;
+
     const data = [
         {
             id: 'line',
@@ -35,7 +43,7 @@ const NumberLine = ({percentage}) => {
                 axisLeft={null}
                 enableGridX={false}
                 enableGridY={false}
-                colors={['#2c3e50', '#e74c3c']}
+                colors={lineColors}
                 lineWidth={3}
                 // pointColor={{theme: 'background'}}
                 pointBorderWidth={3}

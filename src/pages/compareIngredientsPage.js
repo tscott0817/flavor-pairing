@@ -7,6 +7,9 @@ import CollapsibleComponent from "../components/collapsibleComponent";
 import SharedIngredientFlavorCard from "../components/cards/sharedIngredientFlavorCard";
 import moleculesData from "../data/molecules.json";
 import {useIngredientContext} from "../stateManager/IngredientContext";
+import { useThemeContext } from '../stateManager/ThemeContext';
+import * as lightColors from "../stateManager/lightMode";
+import * as darkColors from "../stateManager/darkMode";
 
 const CompareIngredientsPage = () => {
     const [sharedMolecules, setSharedMolecules] = useState([]);
@@ -16,6 +19,7 @@ const CompareIngredientsPage = () => {
     const {selectedIngredients, unselectIngredient} = useIngredientContext();
     const ingredient1 = selectedIngredients[0];
     const ingredient2 = selectedIngredients[1];
+    const {theme} = useThemeContext();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,7 +49,7 @@ const CompareIngredientsPage = () => {
     return (
         <div style={{
             fontFamily: 'Roboto, sans-serif',
-            backgroundColor: pageColor,
+            backgroundColor: theme === lightColors ? lightColors.pageColor : darkColors.pageColor,
             // backgroundColor: 'blue',
             width: '100%',
             height: '100%',

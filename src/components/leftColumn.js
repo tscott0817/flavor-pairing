@@ -229,7 +229,7 @@ const LeftColumn = ({leftColumnVisible, handleSetComparisonVisible, setSelectedF
                             marginLeft: '5%',
                             padding: '10px',
                             backgroundColor: theme === lightColors ? lightColors.buttonColor : darkColors.buttonColor,
-                            color: '#f4f3f2',
+                            color: darkColors.textMedLight,
                             border: 'none',
                             borderRadius: '5px',
                             cursor: 'pointer',

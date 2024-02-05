@@ -1,9 +1,13 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import flavordb from "../../data/flavordb.json";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const IngredientCard = ({ingredient}) => {
     const [ingredientData, setIngredientData] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
+    const {theme} = useThemeContext();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,7 +47,7 @@ const IngredientCard = ({ingredient}) => {
                                 fontWeight: 'bold',
                                 fontSize: '1.5em',
                                 marginBottom: '10px',
-                                color: '#333'
+                                color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                             }}
                         >
                             {ingredientData.alias
@@ -58,7 +62,7 @@ const IngredientCard = ({ingredient}) => {
                             className="scientific-name"
                             style={{
                                 fontSize: '0.8em',
-                                color: '#555'
+                                color: theme === lightColors ? lightColors.subTextColor : darkColors.subTextColor,
                             }}
                         >
                             {ingredientData.scientificName ? ingredientData.scientificName.replace(/\b\w/g, (char) => char.toUpperCase()) : "NA"}
@@ -68,7 +72,7 @@ const IngredientCard = ({ingredient}) => {
                             style={{
                                 // fontSize: '0.8vw',
                                 fontSize: '0.8em',
-                                color: '#555'
+                                color: theme === lightColors ? lightColors.subTextColor : darkColors.subTextColor,
                             }}
                         >
                             {ingredientData.category.replace(/\b\w/g, (char) => char.toUpperCase())}

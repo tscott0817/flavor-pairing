@@ -9,7 +9,6 @@ import {ThemeProvider} from "./stateManager/ThemeContext";
 function App() {
     const [searchQuery, setSearchQuery] = useState('');
 
-    // TODO: Not sure I really need callback in this instance
     const handleSearchQueryChange = useCallback((newSearchQuery) => {
         setSearchQuery(() => newSearchQuery);
     }, []);

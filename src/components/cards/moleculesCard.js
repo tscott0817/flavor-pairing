@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {buttonColor, sectionItemColor} from "../../stateManager/lightMode";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const MoleculesCard = ({moleculeData}) => {
     const [selectedMolecule, setSelectedMolecule] = useState(null);
@@ -7,6 +10,7 @@ const MoleculesCard = ({moleculeData}) => {
     const [moleculeImage, setMoleculeImage] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const {theme} = useThemeContext();
     console.log("Molecules Card");
 
     useEffect(() => {
@@ -108,7 +112,7 @@ const MoleculesCard = ({moleculeData}) => {
                             width: '95%',
                             textAlign: 'center',
                             // backgroundColor: 'red'
-                            color: '#333'
+                            color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                         }}
                     >
                         Molecules
@@ -124,7 +128,12 @@ const MoleculesCard = ({moleculeData}) => {
                     {moleculeData.molecules.length > 0 ? (
                         moleculeData.molecules.map((detail, index) => (
                             <div key={index} onClick={() => handleMoleculeClick(detail)}
-                                 style={{cursor: 'pointer', marginBottom: '10px', textAlign: 'center'}}>
+                                 style={{
+                                     cursor: 'pointer',
+                                     marginBottom: '10px',
+                                     textAlign: 'center',
+                                     color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                                 }}>
                                 <p>{detail.commonName}</p>
                             </div>
                         ))
@@ -156,7 +165,9 @@ const MoleculesCard = ({moleculeData}) => {
                 }}
             >
                 {moleculeInfo && selectedMolecule ? (
-                    <div>
+                    <div style={{
+                        color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                    }}>
                         <h2
                             style={{
                                 borderBottom: "1px solid #999",
@@ -272,7 +283,8 @@ const MoleculesCard = ({moleculeData}) => {
                         style={{
                             position: 'relative',
                             top: '50%',
-                            color: '#333',
+                            // color: '#333',
+                            color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                         }}
                     >
                         {isLoading ? <p>Loading...</p> : <p>Click on a molecule to view details</p>}
