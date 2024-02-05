@@ -34,5 +34,5 @@ export const glowColorMedium = '0 0 8px rgba(200, 200, 200, 0.0)';
 export const glowColorThick = '0 0 8px rgba(174, 214, 241, 0.0)';
 
 // export const ingredientPageGlow = '0 0 8px rgba(174, 214, 241, 0.4)';
-export const ingredientPageGlow = '0 0 8px rgba(0, 0, 0, 0.8)';
+export const ingredientPageGlow = '0 0 8px rgba(0, 0, 0, 0.6)';
 export const subTextColor = 'rgba(255, 255, 245, 0.7)';
