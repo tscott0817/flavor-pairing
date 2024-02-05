@@ -3,11 +3,15 @@ import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveRadar } from "@nivo/radar";
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md";
 import { buttonBackgroundColor, sectionItemColor } from "../../stateManager/lightMode";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const SharedIngredientFlavorCard = ({ sharedMolecules }) => {
     const [showBarChart, setShowBarChart] = useState(true);
     const [showTop25, setShowTop25] = useState(true);
     const chartContainerRef = useRef(null);
+    const {theme} = useThemeContext();
 
     const toggleShowTop25 = () => {
         setShowTop25(!showTop25);
@@ -58,7 +62,7 @@ const SharedIngredientFlavorCard = ({ sharedMolecules }) => {
                     fontFamily: 'Roboto, sans-serif',
                 }}>
                     <span style={{
-                        color: '#555',
+                        color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                         fontWeight: 'bold',
                         textTransform: 'uppercase',
                         transition: 'color 0.3s ease'
@@ -75,7 +79,7 @@ const SharedIngredientFlavorCard = ({ sharedMolecules }) => {
                     fontFamily: 'Roboto, sans-serif',
                 }}>
                     <span style={{
-                        color: '#555',
+                        color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                         fontWeight: 'bold',
                         textTransform: 'uppercase',
                         transition: 'color 0.3s ease'
@@ -92,7 +96,7 @@ const SharedIngredientFlavorCard = ({ sharedMolecules }) => {
                     width: "100%",
                     height: "50vh",
                     borderRadius: "8px",
-                    backgroundColor: sectionItemColor,
+                    // backgroundColor: sectionItemColor,
                     overflow: "visible",
                 }}
             >
@@ -127,6 +131,18 @@ const SharedIngredientFlavorCard = ({ sharedMolecules }) => {
                         animate={true}
                         motionStiffness={90}
                         motionDamping={15}
+                        theme={{
+                            axis: {
+                                ticks: {
+                                    text: {
+                                        fontSize: 12,
+                                        fill: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                                        outlineWidth: 0,
+                                        outlineColor: "transparent"
+                                    }
+                                }
+                            }
+                        }}
                     />
                 ) : (
                     <ResponsiveRadar
@@ -143,6 +159,18 @@ const SharedIngredientFlavorCard = ({ sharedMolecules }) => {
                         blendMode="multiply"
                         motionConfig="wobbly"
                         animate={true}
+                        theme={{
+                            axis: {
+                                ticks: {
+                                    text: {
+                                        fontSize: 12,
+                                        fill: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                                        outlineWidth: 0,
+                                        outlineColor: "transparent"
+                                    }
+                                }
+                            }
+                        }}
                     />
                 )}
             </div>

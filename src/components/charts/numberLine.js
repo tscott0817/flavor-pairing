@@ -59,6 +59,16 @@ const NumberLine = ({percentage}) => {
                             display: 'none',
                         },
                     },
+                    axis: {
+                        ticks: {
+                            text: {
+                                fontSize: 12,
+                                fill: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                                outlineWidth: 0,
+                                outlineColor: "transparent"
+                            }
+                        }
+                    },
                 }}
             />
         </div>

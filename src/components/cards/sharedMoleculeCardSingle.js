@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {buttonColor, pageSectionColor, sectionItemColor} from "../../stateManager/lightMode";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const SharedMoleculesCardSingle = ({sharedMolecules}) => {
     console.log('Shared Molecules Card');
@@ -9,6 +12,7 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
     const [moleculeImage, setMoleculeImage] = useState(null);
     const [isVisible, setIsVisible] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const {theme} = useThemeContext();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -109,7 +113,7 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                             width: '95%',
                             // marginBottom: '10px',
                             textAlign: 'center',
-                            color: '#333'
+                            color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                             // backgroundColor: 'red'
                         }}
                     >
@@ -121,8 +125,9 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                     overflow: 'auto',
                     height: '370px',
                     padding: '5%',
-                    fontFamily: 'Roboto, sans-serif'
+                    fontFamily: 'Roboto, sans-serif',
                     // borderRight: '1px solid #232b2b',
+                    color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                 }}>
                     {sharedMolecules.length > 0 ? (
                         sharedMolecules.map((detail, index) => (
@@ -158,7 +163,9 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                 }}
             >
                 {moleculeInfo && selectedMolecule ? (
-                    <div>
+                    <div style={{
+                        color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                    }}>
                         <h2
                             style={{
                                 borderBottom: "1px solid #999",
@@ -273,7 +280,7 @@ const SharedMoleculesCardSingle = ({sharedMolecules}) => {
                         style={{
                             position: 'relative',
                             top: '50%',
-                            color: '#333'
+                            color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                         }}
                     >
                         {isLoading ? <p>Loading...</p> : <p>Click on a molecule to view details</p>}

@@ -7,6 +7,9 @@ import {
 import {MdFullscreen, MdFullscreenExit} from "react-icons/md";
 import flavordbData from "../../data/flavordb.json";
 import moleculesData from "../../data/molecules.json";
+import { useThemeContext } from '../../stateManager/ThemeContext';
+import * as lightColors from "../../stateManager/lightMode";
+import * as darkColors from "../../stateManager/darkMode";
 
 const SingleIngredientFlavorCard = ({entity_id}) => {
     const [flavorData, setFlavorData] = useState(null);
@@ -14,6 +17,7 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
     const [showBarChart, setShowBarChart] = useState(true); // State to toggle between bar chart and radar chart
     const chartContainerRef = useRef(null);
     const [showAllFlavors, setShowAllFlavors] = useState(false);
+    const {theme} = useThemeContext();
     console.log("Flavor Card");
 
     useEffect(() => {
@@ -102,7 +106,7 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                     fontFamily: 'Roboto, sans-serif',
                 }}>
                     <span style={{
-                        color: '#555',
+                        color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                         fontWeight: 'bold',
                         textTransform: 'uppercase',
                         transition: 'color 0.3s ease'
@@ -119,7 +123,7 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                     fontFamily: 'Roboto, sans-serif',
                 }}>
                     <span style={{
-                        color: '#555',
+                        color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                         fontWeight: 'bold',
                         textTransform: 'uppercase',
                         transition: 'color 0.3s ease'
@@ -136,7 +140,7 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                     width: "100%",
                     height: "50vh",
                     borderRadius: "8px",
-                    backgroundColor: sectionItemColor,
+                    // backgroundColor: sectionItemColor,
                     overflow: "visible",
                 }}
             >
@@ -157,7 +161,6 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                             // legend: "Flavors",
                             legendPosition: "middle",
                             legendOffset: 40,
-
                         }}
                         axisLeft={{
                             tickSize: 5,
@@ -176,6 +179,18 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                         animate={true}
                         motionStiffness={90}
                         motionDamping={15}
+                        theme={{
+                            axis: {
+                                ticks: {
+                                    text: {
+                                        fontSize: 12,
+                                        fill: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                                        outlineWidth: 0,
+                                        outlineColor: "transparent"
+                                    }
+                                }
+                            }
+                        }}
                     />
                 ) : (
                     <ResponsiveRadar
@@ -192,6 +207,18 @@ const SingleIngredientFlavorCard = ({entity_id}) => {
                         blendMode="multiply"
                         motionConfig="wobbly"
                         animate={true}
+                        theme={{
+                            axis: {
+                                ticks: {
+                                    text: {
+                                        fontSize: 12,
+                                        fill: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                                        outlineWidth: 0,
+                                        outlineColor: "transparent"
+                                    }
+                                }
+                            }
+                        }}
                     />
                 )}
             </div>

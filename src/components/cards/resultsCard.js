@@ -123,7 +123,7 @@ const ResultsCard = ({sharedMolecules}) => {
                                 itemDirection: 'right-to-left',
                                 itemWidth: 100,
                                 itemHeight: 18,
-                                itemTextColor: '#999',
+                                itemTextColor: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                                 symbolSize: 18,
                                 symbolShape: 'square',
                                 effects: [
@@ -137,6 +137,18 @@ const ResultsCard = ({sharedMolecules}) => {
                             }
                         ]}
                         colors={{scheme: 'nivo'}}
+                        theme={{
+                            axis: {
+                                ticks: {
+                                    text: {
+                                        fontSize: 12,
+                                        fill: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+                                        outlineWidth: 0,
+                                        outlineColor: "transparent"
+                                    }
+                                }
+                            }
+                        }}
                     />
                     <div style={{position: 'absolute', top: '50%', transform: 'translateY(-50%)', color: '#777'}}>
                         <p style={{

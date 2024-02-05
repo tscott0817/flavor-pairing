@@ -161,8 +161,8 @@ const MainLayout = ({searchQuery}) => {
                             onClick={() => setDisplayIngredient(false)}
                             style={{
                                 position: 'absolute',
-                                top: 10,
-                                left: 10,
+                                top: 15,
+                                left: 15,
                                 cursor: 'pointer',
                                 fontSize: '24px',
                                 color: theme === lightColors ? lightColors.buttonColorArrow : darkColors.buttonColorArrow,
@@ -212,8 +212,8 @@ const MainLayout = ({searchQuery}) => {
                             onClick={() => setComparisonVisible(false)}
                             style={{
                                 position: 'absolute',
-                                top: 10,
-                                left: 10,
+                                top: 15,
+                                left: 15,
                                 cursor: 'pointer',
                                 fontSize: '24px',
                                 color: theme === lightColors ? lightColors.buttonColorArrow : darkColors.buttonColorArrow,
