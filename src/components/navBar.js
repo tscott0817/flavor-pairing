@@ -42,7 +42,7 @@ const NavBar = ({ searchQuery, handleSearchQueryChange }) => {
                     // border: theme === lightColors ? 'none' : '1px solid #333',
                     overflow: 'hidden',
                     backgroundColor: theme === lightColors ? lightColors.searchBarColor : darkColors.searchBarColor,
-                    height: '70%',
+                    height: '65%',
                     width: '30%',
                     minWidth: '400px',
                     // padding: '8px',
