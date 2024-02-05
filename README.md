@@ -8,7 +8,7 @@ https://www.flavorpear.net/
 ## Usage
 
 - Select 2 ingredients and compare! 
-- View the similarity score based on the flavor molecules contained withing each ingredient. 
+- View the similarity score based on the flavor molecules contained within each ingredient. 
 - Search through molecules and flavor profiles to see how the combination will affect your dish.
 
 ## Links 
