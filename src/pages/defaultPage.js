@@ -144,6 +144,7 @@ const DefaultPage = ({setSelectedIngredientRef, handleDisplayIngredient, searchQ
                         textAlign: 'center',
                         width: '100%',
                         padding: '20px',
+                        color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
                     }}>
                         {selectedFilters.length === 0 ? (
                             <div style={{
