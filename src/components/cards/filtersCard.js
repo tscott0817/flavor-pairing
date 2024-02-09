@@ -11,15 +11,6 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
         "vegetable", "vegetable fruit", "vegetable root", "vegetable stem", "vegetable tuber"
     ];
 
-    // Make same list as above, but capitalize each word
-    // const categories = [
-    //     "Additive", "Bakery", "Berry", "Beverage", "Beverage Alcoholic", "Beverage Caffeinated",
-    //     "Cabbage", "Cereal", "Dairy", "Dish", "Essential Oil", "Fish", "Flower", "Fruit",
-    //     "Fruit Citrus", "Fruit Essence", "Fruit Berry", "Fungus", "Gourd", "Herb", "Legume",
-    //     "Maize", "Meat", "Nut", "Plant", "Plant Derivative", "Seafood", "Seed", "Spice",
-    //     "Vegetable", "Vegetable Fruit", "Vegetable Root", "Vegetable Stem", "Vegetable Tuber"
-    // ]
-
     const column1 = categories.slice(0, Math.ceil(categories.length / 2));
     const column2 = categories.slice(Math.ceil(categories.length / 2));
     const {theme} = useThemeContext();
