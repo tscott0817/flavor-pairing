@@ -8,7 +8,6 @@ import * as darkColors from "./stateManager/darkMode";
 const ThemedApp = () => {
     const { theme } = useThemeContext();
     const backgroundColor = theme === lightColors ? lightColors.mainAppColor : darkColors.mainAppColor;
-
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleSearchQueryChange = useCallback((newSearchQuery) => {
