@@ -1,15 +1,24 @@
-import { useThemeContext } from '../../stateManager/ThemeContext';
+import {useThemeContext} from '../../stateManager/ThemeContext';
 import * as lightColors from "../../stateManager/lightMode";
 import * as darkColors from "../../stateManager/darkMode";
 
 const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
+    // const categories = [
+    //     "additive", "bakery", "berry", "beverage", "beverage alcoholic", "beverage caffeinated",
+    //     "cabbage", "cereal", "dairy", "dish", "essential oil", "fish", "flower", "fruit",
+    //     "fruit citrus", "fruit essence", "fruit berry", "fungus", "gourd", "herb", "legume",
+    //     "maize", "meat", "nut", "plant", "plant derivative", "seafood", "seed", "spice",
+    //     "vegetable", "vegetable fruit", "vegetable root", "vegetable stem", "vegetable tuber"
+    // ];
+
+    // Make same list as above, but capitalize each word
     const categories = [
-        "additive", "bakery", "berry", "beverage", "beverage alcoholic", "beverage caffeinated",
-        "cabbage", "cereal", "dairy", "dish", "essential oil", "fish", "flower", "fruit",
-        "fruit citrus", "fruit essence", "fruit-berry", "fungus", "gourd", "herb", "legume",
-        "maize", "meat", "nut", "plant", "plant derivative", "seafood", "seed", "spice",
-        "vegetable", "vegetable fruit", "vegetable root", "vegetable stem", "vegetable tuber"
-    ];
+        "Additive", "Bakery", "Berry", "Beverage", "Beverage Alcoholic", "Beverage Caffeinated",
+        "Cabbage", "Cereal", "Dairy", "Dish", "Essential Oil", "Fish", "Flower", "Fruit",
+        "Fruit Citrus", "Fruit Essence", "Fruit Berry", "Fungus", "Gourd", "Herb", "Legume",
+        "Maize", "Meat", "Nut", "Plant", "Plant Derivative", "Seafood", "Seed", "Spice",
+        "Vegetable", "Vegetable Fruit", "Vegetable Root", "Vegetable Stem", "Vegetable Tuber"
+    ]
 
     const column1 = categories.slice(0, Math.ceil(categories.length / 2));
     const column2 = categories.slice(Math.ceil(categories.length / 2));
@@ -50,7 +59,11 @@ const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
             }}>
                 Categories
             </div>
-            <div style={{display: 'flex', justifyContent: 'space-between', color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,}}>
+            <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                color: theme === lightColors ? lightColors.textMedHeavy : darkColors.textMedHeavy,
+            }}>
                 <ul style={{
                     textAlign: 'left',
                     listStyleType: 'none',

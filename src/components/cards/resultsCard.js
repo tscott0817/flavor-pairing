@@ -35,7 +35,7 @@ const ResultsCard = ({sharedMolecules}) => {
     if (jaccardFinalScore <= 0) {
         resultText = 'These ingredients may contrast too much or there is a lack of data';
     } else if (jaccardFinalScore > 0 && jaccardFinalScore < 10) {
-        resultText = 'These ingredients may be good as accents flavors';
+        resultText = 'These ingredients may be good as accent flavors';
     } else if (jaccardFinalScore >= 10 && jaccardFinalScore < 25) {
         resultText = 'These ingredients may be good in small amounts';
     } else if (jaccardFinalScore >= 25 && jaccardFinalScore < 75) {
