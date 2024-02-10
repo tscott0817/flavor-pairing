@@ -3,6 +3,7 @@ import * as lightColors from "../../stateManager/lightMode";
 import * as darkColors from "../../stateManager/darkMode";
 
 const FiltersCard = ({selectedFilters, handleFilterSelect}) => {
+    // TODO: Just get this from data instead of hardcoding
     const categories = [
         "additive", "bakery", "berry", "beverage", "beverage alcoholic", "beverage caffeinated",
         "cabbage", "cereal", "dairy", "dish", "essential oil", "fish", "flower", "fruit",
