@@ -5,6 +5,8 @@ higher overlap in aromatic (volatile) compounds are more likely to create flavor
 ## Website
 https://www.flavorpear.net/
 
+![Flavor Pear](https://i.imgur.com/s0lUPoz.png)
+
 ## Usage
 
 - Select 2 ingredients and compare! 
